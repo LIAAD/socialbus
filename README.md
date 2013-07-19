@@ -1,4 +1,4 @@
 twitterecho
 ===========
 
-Data collector platform for Twitter networks
+Data collector platform for Twitter
