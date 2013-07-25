@@ -15,7 +15,7 @@ from pprint import pprint
 cmd_parser = OptionParser(version="%prog 0.1")
 cmd_parser.add_option("-D", "--dir", type="string", action="store", dest="directory", help="Base dir with json files")
 cmd_parser.add_option("-H", "--host", type="string", action="store", dest="mongo_host", help="Mongo host")
-cmd_parser.add_option("-D", "--database", type="string", action="store", dest="mongo_database", help="Mongo database")
+cmd_parser.add_option("-B", "--database", type="string", action="store", dest="mongo_database", help="Mongo database")
 cmd_parser.add_option("-P", "--port", type="string", action="store", dest="mongo_port", help="Mongo port")
 
 (cmd_options, cmd_args) = cmd_parser.parse_args()
