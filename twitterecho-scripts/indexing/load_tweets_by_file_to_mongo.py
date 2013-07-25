@@ -28,7 +28,7 @@ cmd_parser.add_option("-P", "--port", type="string", action="store", dest="mongo
 
 (cmd_options, cmd_args) = cmd_parser.parse_args()
 
-if not (cmd_options.file_content or cmd_options.mongo_host or cmd_options.solr_address or cmd_options.mongo_database):
+if not (cmd_options.file_content or cmd_options.mongo_host or cmd_options.mongo_database):
         cmd_parser.print_help()
         sys.exit(3)
 
