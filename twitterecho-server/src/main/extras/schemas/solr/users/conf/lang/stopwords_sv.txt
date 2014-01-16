@@ -9,7 +9,7 @@
  | word is at the start of a line.
 
  | This is a ranked list (commonest to rarest) of stopwords derived from
- | a large text sample.
+ | a large com.twitter.common.text sample.
 
  | Swedish stop words occasionally exhibit homonym clashes. For example
  |  så = so, but also seed. These are indicated clearly below.

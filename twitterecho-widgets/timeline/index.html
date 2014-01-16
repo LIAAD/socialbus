@@ -1,0 +1,147 @@
+
+<html>
+  <head>
+    <title>Twitterecho Timeline Plot</title>
+    <link rel='stylesheet' href='styles.css' type='text/css' />
+    
+    <style>
+        body {
+            background-color: #fff;
+            background-image: none;
+        }
+         
+        .label {
+            color: #666;
+            margin-top: 0.5em;
+            padding: 0.1em;
+            font-family: 'verdana', 'helvetica', sans serif;
+        }        
+        
+        .timeplot-grid-label {
+            color: #333;
+            font-family: 'verdana', 'helvetica', sans serif;
+            font-size: 9px !important;
+        }
+        
+        .sources {
+            font-size: 90%;
+        }
+
+        #menu ul {
+            /*padding:0px;*/
+            margin:0px;
+            background-color:#EDEDED;
+            list-style:none;
+        }
+
+        #menu ul li { display: inline; }
+
+        #menu ul li a {
+    padding: 2px 10px;
+    display: inline-block;
+ 
+    /* visual do link */
+    background-color:#EDEDED;
+    color: #333;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+}
+
+#menu ul li a:hover {
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    border-bottom:3px solid #EA0000;
+}
+    </style>
+    
+    <!-- For your own use, replace ../../api/timeplot-api.js with http://api.simile-widgets.org/timeplot/1.1/timeplot-api.js -->
+    <script src="http://api.simile-widgets.org/timeplot/1.1/timeplot-api.js"></script>
+
+
+    <script>
+        var timeplot1;
+
+        var color1 = new Timeplot.Color('#FFD176');
+        var color2 = new Timeplot.Color('#FFB43D');
+        var color3 = new Timeplot.Color('#EB800F');
+        var color4 = new Timeplot.Color('#964D1D');
+        var color5 = new Timeplot.Color('#66463E');
+        var gridColor  = new Timeplot.Color('#333333');
+        
+        function onLoad(datafile) {
+
+            var timeGeometry = new Timeplot.DefaultTimeGeometry({
+                gridColor: gridColor
+            });
+
+            var geometry1 = new Timeplot.DefaultValueGeometry({
+                min: 0
+            });
+
+            var eventSource1 = new Timeplot.DefaultEventSource();
+            var dataSource1 = new Timeplot.ColumnSource(eventSource1,1);
+
+            var plotInfo1 = [
+                Timeplot.createPlotInfo({
+                    id: "Tweets",
+                    dataSource: dataSource1,
+                    timeGeometry: timeGeometry,
+                    lineColor: color5,
+                    showValues: true
+                })
+            ];
+            
+            timeplot1 = Timeplot.create(document.getElementById("timeplot1"), plotInfo1);
+            timeplot1.loadText(datafile, ",", eventSource1);
+            
+            timeplot1.repaint();
+        }            
+        
+        var resizeTimerID = null;
+        function onResize() {
+            if (resizeTimerID == null) {
+                resizeTimerID = window.setTimeout(function() {
+                    resizeTimerID = null;
+                    if (timeplot1) timeplot1.repaint();
+                }, 0);
+            }
+        }
+    </script>
+  </head>
+  <body onload="onLoad('last_3_YEAR_by_DAY.txt');" onresize="onResize();">
+    <!-- <ul id="path">
+      <li><a href="#" title="Home">Twitterecho</a></li>
+      <li><a href="#">Widgets</a></li>
+      <li><span>Portugal: timeline plot</span></li>
+    </ul> -->
+
+    <div id="header">
+    	<h1>Portugal Twitter Stream</h1>
+    </div>
+
+    <div id="menu">
+
+        <ul >
+        <!-- Daily -->
+            <li ><a href="#" onclick="onLoad('last_3_YEAR_by_DAY.txt');">Last 3 years</a> </li>
+            <!-- <li ><a href="#" onclick="onLoad('2013_data.txt');">2013</a> </li> -->
+            <li ><a href="#" onclick="onLoad('last_12_MONTH_by_DAY.txt');">Last 12 months</a> </li>
+            <li ><a href="#" onclick="onLoad('last_5_DAY_by_HOUR.txt');">Last 5 days</a></li>
+            <li ><a href="#" onclick="onLoad('last_1_DAY_by_HOUR.txt');">Last 24 hours</a></li>
+        </ul>    
+        
+    </div>
+
+    <div id="content">
+        <!-- <div class="label"><span style="color: #66463E;">REST API</span> vs. <span style="color: #964D1D;">Search API</span> vs. <span style="color: #EB800F;">Streaming API</span></div> -->
+
+        <div class="label"><span style="color: #66463E;">Tweets</span> </div>
+
+        <div id="timeplot1" style="height: 300px" class="timeplot"></div>
+        <p class="sources">Source: <a href="http://dmir.inesc-id.pt/project/Reaction">Twitterecho</a></p>
+        <p class="note">
+        Move your mouse over the plots to obtain the individual values.</p> 
+    </div>
+    
+  </body>
+</html>

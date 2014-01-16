@@ -1,8 +1,8 @@
 package pt.sapo.labs.crawl.twitter.streaming;
 
-import org.apache.log4j.Logger;
-
-import twitter4j.StatusAdapter;
+import com.twitter.hbc.twitter4j.v3.handler.StatusStreamHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
@@ -11,7 +11,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public abstract class BaseStreamConsumer {
 
-	private static Logger logger = Logger.getLogger(BaseStreamConsumer.class);
+	private static Logger logger = LoggerFactory.getLogger(BaseStreamConsumer.class);
 	
 	public static String USER_STREAM = "user.stream";
 	public static String KEYWORD_STREAM = "keyword.stream";
@@ -20,7 +20,7 @@ public abstract class BaseStreamConsumer {
 	
 	protected TwitterStream twitterStream;
 	
-	protected StatusAdapter [] adapters;
+	protected StatusStreamHandler [] adapters;
 	
 	protected String oAuthConsumerToken;
 	protected String oAuthConsumerSecret;
@@ -79,7 +79,7 @@ public abstract class BaseStreamConsumer {
 
 		twitterStream = new TwitterStreamFactory(config).getInstance();
 		
-		for (StatusAdapter statusAdapter : adapters) {
+		for (StatusStreamHandler statusAdapter : adapters) {
 			logger.debug("setting adapter " + statusAdapter.getClass().getName());
 			
 			twitterStream.addListener(statusAdapter);
@@ -128,7 +128,7 @@ public abstract class BaseStreamConsumer {
 		//delegate = null;
 	}
 
-	public void setAdapters(StatusAdapter[] adapters) {
+	public void setAdapters(StatusStreamHandler[] adapters) {
 		// TODO Auto-generated method stub
 		this.adapters = adapters;
 	}

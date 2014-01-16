@@ -1,0 +1,4 @@
+android
+iphone
+windowsphone
+ios7

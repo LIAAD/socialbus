@@ -184,7 +184,7 @@
 #  e.g. ごらん, ご覧, 御覧, 頂戴
 #名詞-動詞非自立的
 #
-#  noun-quotation: text that cannot be segmented into words, proverbs, Chinese poetry, 
+#  noun-quotation: com.twitter.common.text that cannot be segmented into words, proverbs, Chinese poetry,
 #  dialects, English, etc. Currently, the only entry for 名詞 引用文字列 ("noun quotation") 
 #  is いわく ("iwaku").
 #名詞-引用文字列

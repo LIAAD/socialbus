@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to SocialEcho &mdash; SocialEcho 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialEcho 2.0 documentation" href="#" />
+    <link rel="next" title="Rationale" href="rationale.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+  
+  <div class=indexwrapper>
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="rationale.html" title="Rationale"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">None</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-socialecho">
+<h1>Welcome to SocialEcho<a class="headerlink" href="#welcome-to-socialecho" title="Permalink to this headline">¶</a></h1>
+<a class="floatingflask reference internal image-reference" href="_images/panther1.jpg"><img alt="SocialEcho: web development, one drop at a time" class="floatingflask" src="_images/panther1.jpg" style="height: 300px;" /></a>
+<p>Welcome to SocialEcho&#8217;s documentation.</p>
+<p>The project is being developed at the <a class="reference external" href="http://www.fe.up.pt/">Faculty of Engineering of the University of Porto</a>  , in the scope of the  <a class="reference external" href="http://dmir.inesc-id.pt/reaction/Reaction">REACTION</a> project, a computational journalism study in collaboration with  <a class="reference external" href="http://labs.sapo.pt">Sapo Labs</a> .</p>
+<p>SocialEcho aims to be a fault tolerant data collector for social networks. Currently it supports Twitter and in the near future it will support Facebook.</p>
+<p>The <em class="xref std std-ref">rationale</em> page explains what SocialEcho is and why it was built.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rationale.html">Rationale</a></li>
+</ul>
+</div>
+<div class="section" id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>SocialEcho comprises three packages. SocialEcho Server, SocialEcho Twitter Consumer and SocialEcho Twitter OAuth.</p>
+<p>SocialEcho Twitter Consumer are used to monitor and consume tweets from Twitter. Users can define which keywords or users they are interested in. Users can deploy as many consumers as wanted.</p>
+<p>When a consumer receives a tweet it sends the message to SocialEcho Server which is responsable for processing, extracting metadata, indexing, tokenizing and other computations.</p>
+<p>SocialEcho Twitter OAuth is a helper tool to create a file with Twitter user authorization token.</p>
+<p>This documatation has all the instructions to deploy you own SocialEcho instance.</p>
+</div>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/socialecho_architecture.png"><img alt="_images/socialecho_architecture.png" src="_images/socialecho_architecture.png" style="width: 550px;" /></a>
+</div>
+<div class="section" id="download-last-release">
+<h2>Download last release<a class="headerlink" href="#download-last-release" title="Permalink to this headline">¶</a></h2>
+<p>Release v0.5</p>
+<ul class="simple">
+<li><a class="reference external" href="http://goo.gl/HwX0f5">SocialEcho 0.5</a></li>
+</ul>
+</div>
+<div class="section" id="installation-s-guide">
+<h2>Installation&#8217;s guide<a class="headerlink" href="#installation-s-guide" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation_simple_mode.html">Quick start deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_simple_mode.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_simple_mode.html#downloading-and-installing">Downloading and Installing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation_serverclient_mode.html">Client-Server deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation_serverclient_mode.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation_serverclient_mode.html#downloading-and-installing">Downloading and Installing</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="user-s-guide">
+<h2>User&#8217;s Guide<a class="headerlink" href="#user-s-guide" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup_twitter_app.html">Setup Twitter authorized access</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup_twitter_app.html#registering-a-new-application-at-twitter">Registering a new application at Twitter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup_twitter_app.html#obtaining-twitter-access-tokens">Obtaining Twitter access tokens</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_line.html">Configuring Twitter Consumer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#collecting-tweets-from-sample-stream">Collecting tweets from sample stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#watching-logs">Watching logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#filtering-tweets-by-topic">Filtering tweets by topic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#filtering-tweets-by-users">Filtering tweets by users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_line.html#setting-up-alerts-when-fails">Setting up alerts when fails</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="command_line_server.html">Configuring Server</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="command_line_server.html#watching-logs">Watching logs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="webconsole.html">Web console</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="webconsole.html#features-include">Features include</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webconsole.html#screenshots">Screenshots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webconsole.html#getting-started">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webconsole.html#accessing-system-information-via-http-rest-api">Accessing system information via HTTP REST API</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="additional-notes">
+<h2>Additional Notes<a class="headerlink" href="#additional-notes" title="Permalink to this headline">¶</a></h2>
+<p>Design notes and legal information are here for the interested:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="license.html">About</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#publications">Publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#authors">Authors</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3>About SocialEcho</h3>
+<p>
+  SocialEcho is a toolkit for collecting and processing tweets.  You are currently
+  looking at the documentation of the development version.
+</p>
+<!-- <h3>Other Formats</h3>
+<p>
+  You can download the documentation in other formats as well:
+</p>
+<ul>
+  <li><a href="http://flask.pocoo.org/docs/flask-docs.pdf">as PDF</a>
+  <li><a href="http://flask.pocoo.org/docs/flask-docs.epub">as ePub</a>
+  <li><a href="http://flask.pocoo.org/docs/flask-docs.mobi">as .mobi</a>
+  <li><a href="http://flask.pocoo.org/docs/flask-docs.zip">as zipped HTML</a>
+</ul> -->
+<h3>Useful Links</h3>
+<ul>  
+  <li><a target="_blank" href="http://goo.gl/HwX0f5">Download last version</a></li>
+
+  <li><a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION Workshops</a></li>
+  <li><a target="_blank" href="http://robinson.fe.up.pt/~projects/twitter_crawler">SocialEcho 0.1 homepage</a></li>
+</ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </div>
+  
+  </body>
+</html>

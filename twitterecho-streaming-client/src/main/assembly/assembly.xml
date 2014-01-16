@@ -58,9 +58,19 @@
 		<fileSet>
 			<directory>src/main/resources</directory>
 			<outputDirectory>/conf</outputDirectory>
+
+            <includes>
+                <include>logback-smtp-client.xml</include>
+                <include>client.conf</include>
+
+                <include>examples/filter_by_topics.conf</include>
+                <include>examples/filter_by_users.conf</include>
+                <include>examples/my_community_filters.txt</include>
+                <include>examples/my_topic_filters.txt</include>
+            </includes>
 		</fileSet>
-		
-		<fileSet>
+
+        <fileSet>
 			<directory>src/main/logs</directory>
 			<outputDirectory>/logs</outputDirectory>
 		</fileSet>

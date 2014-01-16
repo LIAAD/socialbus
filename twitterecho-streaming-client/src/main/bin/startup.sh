@@ -44,7 +44,7 @@ while [ -h "$PRG" ] ; do
 done
  
 PRGDIR=`dirname "$PRG"`
-EXECUTABLE=twitterecho-streaming-client.sh
+EXECUTABLE=socialecho-twitter-consumer.sh
 
 # Check that target executable exists
 if $os400; then
@@ -62,5 +62,6 @@ else
   fi
 fi 
 
-TWITTERECHO_CONFIGFILE=${2}
-exec "$PRGDIR"/"$EXECUTABLE" start "$@" $TWITTERECHO_CONFIGFILE
+SOCIALECHO_OAUTH_FILE=${2}
+SOCIALECHO_FILTER_FILE=${3}
+exec "$PRGDIR"/"$EXECUTABLE" start "$@" $SOCIALECHO_OAUTH_FILE $SOCIALECHO_FILTER_FILE

@@ -10,7 +10,7 @@
 
 
  | The following is a ranked list (commonest to rarest) of stopwords
- | deriving from a large sample of text.
+ | deriving from a large sample of com.twitter.common.text.
 
  | Extra words have been added at the end.
 

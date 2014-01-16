@@ -1,0 +1,3 @@
+pt.sapo.labs.api.impl.adapters.ConsoleStatusAdapter
+pt.sapo.labs.api.impl.adapters.FileStatusAdapter
+pt.sapo.labs.api.impl.adapters.MessageBrokerStatusAdapter

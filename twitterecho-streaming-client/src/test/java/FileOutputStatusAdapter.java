@@ -1,8 +1,8 @@
+import junit.framework.TestCase;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import junit.framework.TestCase;
 
 
 public class FileOutputStatusAdapter extends TestCase {

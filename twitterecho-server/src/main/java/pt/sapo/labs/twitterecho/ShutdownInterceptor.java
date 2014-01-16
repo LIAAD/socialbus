@@ -1,10 +1,12 @@
 package pt.sapo.labs.twitterecho;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ShutdownInterceptor extends Thread {
 	
-	private static Logger logger = Logger.getLogger(ShutdownInterceptor.class);
+	private static Logger logger = LoggerFactory.getLogger(ShutdownInterceptor.class);
 	
 	private IApp app;
 

@@ -1,0 +1,29 @@
+[
+    {
+        topic_name : "portugal",
+        stream_type : "filter",
+        filter : {
+            type : "users",
+            file : "/Users/arian/Developer/work/twitterecho/svn/v0.3/twitterecho-streaming-client/src/main/resources/examples/top_5k_users.txt"
+        }
+    },
+    {
+        topic_name : "smartphones",
+        stream_type : "filter",
+        filter : {
+            type : "keywords",
+            file : "/Users/arian/Developer/work/twitterecho/svn/v0.3/twitterecho-streaming-client/src/main/resources/examples/my_topic_filters.txt"
+        }
+
+//        tokens : {
+//            app_consumer_key : "GJGALwtkuTDljV3eBDAYaQ",
+//            app_consumer_secret : "lGENO2QQVasMzalcpp6A3fAciNO1u0wA2ZihMpibyY0",
+//            token : "1507816758-GAaBK71z8mUCmsrhUMKCQQ9jovPgnHf53LFVm1F",
+//            token_secret : "vtGS7F0CjPiKMH3zOjr86D3fUMT2M6ce43U9r6YWtc"
+//        }
+
+    },
+    {
+        stream_type : "sample"
+    }
+]

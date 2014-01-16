@@ -1,0 +1,6 @@
+
+
+<Location /twitterecho-guide>
+                ProxyPass        http://192.168.102.195/socialecho-docs
+                ProxyPassReverse http://192.168.102.195/socialecho-docs
+        </Location>

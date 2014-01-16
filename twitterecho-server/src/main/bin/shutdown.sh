@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # -----------------------------------------------------------------------------
-# Stop script for the TwitterEcho Server
+# Stop script for the SocialEcho Server
 #
 # -----------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ while [ -h "$PRG" ] ; do
 done
  
 PRGDIR=`dirname "$PRG"`
-EXECUTABLE=twitterecho-server.sh
+EXECUTABLE=socialecho-server.sh
 
 # Check that target executable exists
 if [ ! -x "$PRGDIR"/"$EXECUTABLE" ]; then

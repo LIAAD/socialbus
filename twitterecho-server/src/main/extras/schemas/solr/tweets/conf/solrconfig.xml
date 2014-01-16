@@ -45,7 +45,7 @@
        adhere to.  Generally, you want to use the latest version to
        get all bug fixes and improvements. It is highly recommended
        that you fully re-index after changing this setting as it can
-       affect both how text is indexed and queried.
+       affect both how com.twitter.common.text is indexed and queried.
     -->
   <luceneMatchVersion>LUCENE_36</luceneMatchVersion>
 
@@ -513,7 +513,7 @@
          If true, stored fields that are not requested will be loaded
          lazily.  This can result in a significant speed improvement
          if the usual case is to not load all stored fields,
-         especially if the skipped fields are large compressed text
+         especially if the skipped fields are large compressed com.twitter.common.text
          fields.
     -->
     <enableLazyFieldLoading>true</enableLazyFieldLoading>
@@ -725,7 +725,7 @@
      <lst name="defaults">
        <str name="echoParams">explicit</str>
        <int name="rows">20</int>
-       <str name="df">text</str>
+       <str name="df">com.twitter.common.text</str>
 	   <str name="wt">json</str>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
@@ -802,19 +802,19 @@
        <str name="v.layout">layout</str>
        <str name="title">Solritas</str>
 
-       <str name="df">text</str>
+       <str name="df">com.twitter.common.text</str>
        <str name="defType">edismax</str>
        <str name="q.alt">*:*</str>
        <str name="rows">10</str>
        <str name="fl">*,score</str>
        <str name="mlt.qf">
-         text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
+         com.twitter.common.text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
        </str>
-       <str name="mlt.fl">text,features,name,sku,id,manu,cat</str>
+       <str name="mlt.fl">com.twitter.common.text,features,name,sku,id,manu,cat</str>
        <int name="mlt.count">3</int>
 
        <str name="qf">
-          text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
+          com.twitter.common.text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
        </str>
 
        <str name="facet">on</str>
@@ -843,7 +843,7 @@
 
        <!-- Highlighting defaults -->
        <str name="hl">on</str>
-       <str name="hl.fl">text features name</str>
+       <str name="hl.fl">com.twitter.common.text features name</str>
        <str name="f.name.hl.fragsize">0</str>
        <str name="f.name.hl.alternateField">name</str>
      </lst>
@@ -864,7 +864,7 @@
 
        Note: Since solr1.1 requestHandlers requires a valid content
        type header if posted in the body. For example, curl now
-       requires: -H 'Content-type:text/xml; charset=utf-8'
+       requires: -H 'Content-type:com.twitter.common.text/xml; charset=utf-8'
     -->
   <requestHandler name="/update" 
                   class="solr.XmlUpdateRequestHandler">
@@ -908,9 +908,9 @@
                   startup="lazy"
                   class="solr.extraction.ExtractingRequestHandler" >
     <lst name="defaults">
-      <!-- All the main content goes into "text"... if you need to return
-           the extracted text or do highlighting, use a stored field. -->
-      <str name="fmap.content">text</str>
+      <!-- All the main content goes into "com.twitter.common.text"... if you need to return
+           the extracted com.twitter.common.text or do highlighting, use a stored field. -->
+      <str name="fmap.content">com.twitter.common.text</str>
       <str name="lowernames">true</str>
       <str name="uprefix">ignored_</str>
 
@@ -939,8 +939,8 @@
        analysis.fieldname - field name whose analyzers are to be used
 
        analysis.fieldtype - field type whose analyzers are to be used
-       analysis.fieldvalue - text for index-time analysis
-       q (or analysis.q) - text for query time analysis
+       analysis.fieldvalue - com.twitter.common.text for index-time analysis
+       q (or analysis.q) - com.twitter.common.text for query time analysis
        analysis.showmatch (true|false) - When set to true and when
            query analysis is performed, the produced tokens of the
            field value analysis will be marked as "matched" for every
@@ -963,7 +963,7 @@
          <doc>
            <field name="id">1</field>
            <field name="name">The Name</field>
-           <field name="text">The Text Value</field>
+           <field name="com.twitter.common.text">The Text Value</field>
          </doc>
          <doc>...</doc>
          <doc>...</doc>
@@ -976,7 +976,7 @@
 
     Like the FieldAnalysisRequestHandler, this handler also supports
     query analysis by sending either an "analysis.query" or "q"
-    request parameter that holds the query text to be analyzed. It
+    request parameter that holds the query com.twitter.common.text to be analyzed. It
     also supports the "analysis.showmatch" parameter which when set to
     true, all field tokens that match the query tokens will be marked
     as a "match". 
@@ -1185,7 +1185,7 @@
     -->
   <requestHandler name="/spell" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
-      <str name="df">text</str>
+      <str name="df">com.twitter.common.text</str>
       <str name="spellcheck.onlyMorePopular">false</str>
       <str name="spellcheck.extendedResults">false</str>
       <str name="spellcheck.count">1</str>
@@ -1210,7 +1210,7 @@
     -->
   <requestHandler name="/tvrh" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
-      <str name="df">text</str>
+      <str name="df">com.twitter.common.text</str>
       <bool name="tv">true</bool>
     </lst>
     <arr name="last-components">
@@ -1314,10 +1314,10 @@
        <!-- produce sub clusters -->
        <bool name="carrot.outputSubClusters">false</bool>
        
-       <str name="df">text</str>
+       <str name="df">com.twitter.common.text</str>
        <str name="defType">edismax</str>
        <str name="qf">
-          text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
+          com.twitter.common.text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
        </str>
        <str name="q.alt">*:*</str>
        <str name="rows">10</str>
@@ -1365,7 +1365,7 @@
   <requestHandler name="/elevate" class="solr.SearchHandler" startup="lazy">
     <lst name="defaults">
       <str name="echoParams">explicit</str>
-      <str name="df">text</str>
+      <str name="df">com.twitter.common.text</str>
     </lst>
     <arr name="last-components">
       <str>elevator</str>
@@ -1517,14 +1517,14 @@
        This example update chain identifies the language of the incoming
        documents using the langid contrib. The detected language is
        written to field language_s. No field name mapping is done.
-       The fields used for detection are text, title, subject and description,
-       making this example suitable for detecting languages form full-text
+       The fields used for detection are com.twitter.common.text, title, subject and description,
+       making this example suitable for detecting languages form full-com.twitter.common.text
        rich documents injected via ExtractingRequestHandler.
        See more about langId at http://wiki.apache.org/solr/LanguageDetection
     -->
      <!-- <updateRequestProcessorChain name="langid">
 	<processor class="org.apache.solr.update.processor.LangDetectLanguageIdentifierUpdateProcessorFactory">
-                <str name="langid.fl">text</str>
+                <str name="langid.fl">com.twitter.common.text</str>
                 <str name="langid.langField">language_s</str>
                 <str name="langid.fallback">undefined</str>
         	<str name="langid.threshold">0.6</str>
@@ -1562,10 +1562,10 @@
 
   <queryResponseWriter name="json" class="solr.JSONResponseWriter">
      <!-- For the purposes of the tutorial, JSON responses are written as
-      plain text so that they are easy to read in *any* browser.
+      plain com.twitter.common.text so that they are easy to read in *any* browser.
       If you expect a MIME type of "application/json" just remove this override.
      -->
-    <str name="content-type">text/plain; charset=UTF-8</str>
+    <str name="content-type">com.twitter.common.text/plain; charset=UTF-8</str>
   </queryResponseWriter>
   
   <!--

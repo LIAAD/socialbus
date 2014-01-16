@@ -11,7 +11,7 @@
 # limitations under the License.
 
 #-----------------------------------------------------------------------
-#some test synonym mappings unlikely to appear in real input text
+#some test synonym mappings unlikely to appear in real input com.twitter.common.text
 aaafoo => aaabar
 bbbfoo => bbbfoo bbbbar
 cccfoo => cccbar cccbaz

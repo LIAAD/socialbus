@@ -7,12 +7,12 @@
 # in order to maximize ease-of-use.
 #
 # Entries are defined using the following CSV format:
-#  <text>,<token 1> ... <token n>,<reading 1> ... <reading n>,<part-of-speech tag>
+#  <com.twitter.common.text>,<token 1> ... <token n>,<reading 1> ... <reading n>,<part-of-speech tag>
 #
 # Notice that a single half-width space separates tokens and readings, and
 # that the number tokens and readings must match exactly.
 #
-# Also notice that multiple entries with the same <text> is undefined.
+# Also notice that multiple entries with the same <com.twitter.common.text> is undefined.
 #
 # Whitespace only lines are ignored.  Comments are not allowed on entry lines.
 #

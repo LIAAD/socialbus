@@ -9,7 +9,7 @@
  | word is at the start of a line.
 
  | This is a ranked list (commonest to rarest) of stopwords derived from
- | a large sample of Dutch text.
+ | a large sample of Dutch com.twitter.common.text.
 
  | Dutch stop words frequently exhibit homonym clashes. These are indicated
  | clearly below.

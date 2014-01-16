@@ -1,0 +1,77 @@
+Sapo Labs Deployment
+####################
+
+This section describes where each service is running at Sapo Labs, FEUP.
+
+Crawler
+--------------
+:server: 192.168.102.192
+:log: /var/log/twitterecho/stream_portugal.log
+:config: /var/twitterecho/develop/crawler/conf
+:cmd: /var/twitterecho/develop/crawler/start_portugal.sh
+
+Dashboard
+--------------
+:address: 192.168.102.195
+:port:	3030
+:url: http://192.168.102.195:3030/twitterechohd
+:user: reaction
+:pass: reaction@123
+:home: /mnt/hd1/env/twitterecho/ui/dashboard
+:cmd: /mnt/hd1/env/twitterecho/ui/dashboard/start_prod.sh
+
+Search Interface
+--------------
+:address: 192.168.102.195
+:port:	8080
+:url: http://192.168.102.195:8080/twittersearch
+:external: http://reaction.fe.up.pt/twittersearch
+:user: reaction
+:pass: reaction@123
+:cmd: service tomcat6 restart
+
+Mongo
+---------------------
+
+:replica 1: 192.168.102.190
+:replica 2: 192.168.102.192
+:replica 3: 192.168.102.195
+:port: 27018
+:database name: twitterecho
+:config: /mnt/hd1/env/mongodb
+
+RabbitMQ
+---------------------
+:server: 192.168.102.195
+:port: 55672
+:url: 192.168.102.195:55672
+:user: guest
+:pass: guest
+:cmd: server rabbitmq-server start
+
+Storm
+---------------------
+:server: 192.168.102.195
+:config: /mnt/hd1/env/storm
+:cmd: mvn clean compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=pt.feup.labs.reaction.twitterecho.RollingTwitterTrends
+
+Tomcat
+---------------------
+:server: 192.168.102.195
+:port: 8080
+:config: /etc/tomcat6/conf
+
+Apache Solr
+---------------------
+:server: 192.168.102.195
+:port: 9090
+:config: /mnt/hd1/env/solr
+:url: http://192.168.102.195:8080/portugal
+:external: http://reaction.fe.up.pt/portugal
+
+Hadoop
+---------------------
+:master: 192.168.102.192
+:slave: 192.168.102.190
+:slave: 192.168.102.195
+:url: http://192.168.102.195:50070

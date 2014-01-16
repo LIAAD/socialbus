@@ -9,7 +9,7 @@
  | word is at the start of a line.
 
  | this is a ranked list (commonest to rarest) of stopwords derived from
- | a large text sample.
+ | a large com.twitter.common.text sample.
 
  | letter `ё' is translated to `е'.
 

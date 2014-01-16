@@ -44,7 +44,7 @@ while [ -h "$PRG" ] ; do
 done
  
 PRGDIR=`dirname "$PRG"`
-EXECUTABLE=twitterecho-server.sh
+EXECUTABLE=socialecho-server.sh
 
 # Check that target executable exists
 if $os400; then

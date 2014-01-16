@@ -1,64 +1,89 @@
 package pt.sapo.labs.crawl.twitter;
 
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
+import au.com.bytecode.opencsv.CSVReader;
+import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
+import org.apache.commons.configuration.CompositeConfiguration;
+import org.apache.commons.configuration.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pt.sapo.labs.StreamFilterType;
+import pt.sapo.labs.api.services.StatusAdapter;
+import pt.sapo.labs.crawl.twitter.streaming.TokenManager;
+import pt.sapo.labs.utils.TwitterOAuthInfo;
 
-import org.apache.log4j.Logger;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ApplicationManager {
 
-	private static Logger logger = Logger.getLogger(ApplicationManager.class);	
+	private static Logger logger = LoggerFactory.getLogger(ApplicationManager.class);	
 	
 	public static int NUMBER_OF_USERS_PER_CONNECTION = 5000;
+
+
+	private List<TwitterOAuthInfo> accounts;
 	
-	private Properties properties;
-	private String[] accounts;
-	
-	public ApplicationManager(Properties props) {
-		this.properties = props;
+
+
+	public ApplicationManager(CompositeConfiguration config) {
+
+        this.activeTwitterStreamClients = new ArrayList<Twitter4jStatusClient>();
+		this.config = config;
+        this.config.setListDelimiter(';');
+
+        if((this.config.containsKey("filter.type")) &&
+            (
+                this.config.getString("filter.type").equalsIgnoreCase(StreamFilterType.KEYWORDS.toString())
+                || this.config.getString("filter.type").equalsIgnoreCase(StreamFilterType.USERS.toString())
+            )
+           ){
+            this.filterManager = new FilterManager(this.config.getString("filter.file"));
+        }else{
+            logger.info("No stream filter defined. Will use SampleStream instead.");
+        }
 	}
-	
-	public String getProperty(String name){
-		if(properties == null) return null;
-		
-		return (String) properties.get(name);
-	}
-	
-	public String getHomeDir(){
-		return (String) properties.get("home.dir");
-	}
-	
-	public String getMonitoredKeywords(){
-		return (String) properties.get("tracking.keywords");
-	}
-	
-	public String getMonitoredUsersFilePath(){
-		return (String) properties.get("tracking.users.file");
-	}
-	
-	public String getServerLookupEndPoint(){
-		return (String) properties.get("server.lookup.end.point");
-	}
-	
-	public String getOAuthConsumerKey(){
-		return (String) properties.get("application.consumer.key");
-	}
-	
-	public String getOAuthConsumerSecret(){
-		return (String) properties.get("application.consumer.secret");
-	}
-	
-	public String[] getTwitterAccounts(){
-		String twitterAccounts = (String) properties.get("twitter.tokens");
-		logger.debug("twitterAccounts : " +twitterAccounts);
-		String[] accounts = twitterAccounts.split(";");
-		
-		return accounts;
+
+	public List<TwitterOAuthInfo> getTwitterAccounts(){
+        this.config.setListDelimiter(';');
+
+//        List<Object> twitterAccounts = (List<Object>) this.config.getList("twitter.tokens");
+
+        List<TwitterOAuthInfo> twitterAccounts  = new ArrayList<TwitterOAuthInfo>();
+        try {
+            CSVReader reader = new CSVReader(new FileReader((String) config.getString("oauth.file.path")),',');
+
+            List<String[]> lines = reader.readAll();
+
+            for (String[] line : lines){
+                TwitterOAuthInfo twitterOAuthInfo = new TwitterOAuthInfo();
+
+                if(line.length >= 4){
+
+                    twitterOAuthInfo.setToken(line[0]);
+                    twitterOAuthInfo.setSecret(line[1]);
+
+                    twitterOAuthInfo.setConsumerKey(line[2]);
+                    twitterOAuthInfo.setConsumerSecret(line[3]);
+
+                    if(line.length == 5){
+                        twitterOAuthInfo.setScreenName(line[4]);
+                    }
+
+                    if(twitterOAuthInfo.isValid()){
+                        twitterAccounts.add(twitterOAuthInfo);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            logger.error("Failed to read oauth.file",e);
+        }
+
+        logger.info("Loaded " + twitterAccounts.size() + " accounts");
+
+        return twitterAccounts;
 	}
 
 	public int getMaxSupportedUsers() {
@@ -66,62 +91,37 @@ public class ApplicationManager {
 		if(accounts == null) 
 			accounts = getTwitterAccounts();
 		
-		logger.debug("accounts.length : " +accounts.length);
-		return accounts.length * NUMBER_OF_USERS_PER_CONNECTION;
+		logger.debug("accounts.length : " +accounts.size());
+		return accounts.size() * NUMBER_OF_USERS_PER_CONNECTION;
 	}
-	
-	public long [] loadStreamingUsers(int maxSupportedStreamingUsers) throws IOException{
-		logger.debug("Loading user ids");
-		
-		long [] userIds = new long[maxSupportedStreamingUsers];
-		
-		String filePathUsersId = this.getMonitoredUsersFilePath();
-		logger.debug(" maxSupportedStreamingUsers : " + maxSupportedStreamingUsers);
-		logger.debug(" monitored users file path : " + filePathUsersId);
-		if(filePathUsersId == null) {
-			logger.error("Please inform 'file.users' in the config file");
-			
-			return null;
-		}
-		
-		File file = new File(filePathUsersId);
-		FileInputStream fis = null;
-		BufferedInputStream bis = null;
-		DataInputStream dis = null;
 
-		try {
-			fis = new FileInputStream(file);
+    public void setAdapters(List<StatusAdapter> adapters) {
+        this.adapters = adapters;
+    }
 
-			// Here BufferedInputStream is added for fast reading.
-			bis = new BufferedInputStream(fis);
-			dis = new DataInputStream(bis);
+    public  List<StatusAdapter> getAdapters() {
+        return adapters;
+    }
 
-			// dis.available() returns 0 if the file does not have more lines.
-			int lineIndex = 0;
-			while (dis.available() != 0) {
-				if(lineIndex > maxSupportedStreamingUsers) break;
+    public List<Twitter4jStatusClient> getActiveTwitterStreamClients() {
+        return this.activeTwitterStreamClients;
+    }
 
-				// this statement reads the line from the file and print it to
-				// the console.
-				Long uid = Long.parseLong(dis.readLine());
-//				logger.debug(lineIndex +  " : "+ uid);
-				userIds[lineIndex++] = uid ;
-			}
+    public Configuration getConfig() {
+        return config;
+    }
 
-			// dispose all the resources after using them.
-			fis.close();
-			bis.close();
-			dis.close();
+    public FilterManager getFilterManager() {
+        return filterManager;
+    }
+
+    private TokenManager tokenManager;
+    private List<Twitter4jStatusClient> activeTwitterStreamClients;
+    private List<StatusAdapter> adapters;
+    private CompositeConfiguration config;
+    private FilterManager filterManager;
 
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			throw e;
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw e;
-		}
 
-		return userIds;
-	}
 }
+

@@ -1,19 +1,48 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
 	<groupId>pt.sapo.labs</groupId>
-	<artifactId>twitterecho</artifactId>
-	<version>0.3</version>
+	<artifactId>socialecho-parent</artifactId>
+	<version>0.5</version>
 	<packaging>pom</packaging>
     
-    <name>TwitterEcho Project</name>
+    <name>SocialEcho Project</name>
 
     <modules>
+        <module>twitterecho-core</module>
+        <module>twitterecho-oauth</module>
+        <!--<module>socialecho-webconsole</module>-->
+
         <module>twitterecho-server</module>
 		<module>twitterecho-streaming-client</module>
-    </modules>
+
+        <module>twitterecho-langdetection</module>
+
+        <!--<module>distribution</module>-->
+    <module>socialecho-facebook-client</module>
+
+    <module>socialecho-twitter-lookup</module>
+    <module>socialecho-facebook-lookup</module>
+    <module>socialecho-verbetes</module>
+  </modules>
+
+
+    <!--<build>-->
+        <!--<pluginManagement>-->
+            <!--<plugins>-->
+                <!--<plugin>-->
+                    <!--<artifactId>maven-assembly-plugin</artifactId>-->
+                    <!--<version>2.4</version>-->
+                    <!--<configuration>-->
+                        <!--<descriptors>-->
+                            <!--<descriptor>bin.xml</descriptor>-->
+                        <!--</descriptors>-->
+                    <!--</configuration>-->
+                <!--</plugin>-->
+            <!--</plugins>-->
+        <!--</pluginManagement>-->
+    <!--</build>-->
 
 </project>

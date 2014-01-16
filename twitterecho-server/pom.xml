@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pt.sapo.labs</groupId>
-	<artifactId>twitterecho-server</artifactId>
-	<version>0.3</version>
+	<artifactId>socialecho-server</artifactId>
+	<version>0.5</version>
 	<packaging>jar</packaging>
 
-	<name>TwitterEcho Server</name>
-	<url>http://reaction.fe.up.pt/twitterecho-guide/</url>
+	<name>SocialEcho Server</name>
+	<url>http://reaction.fe.up.pt/socialecho-guide/</url>
 
 	<licenses>
 		<license>
@@ -48,33 +48,192 @@
 			</snapshots> </repository> -->
 
 
+        <repository>
+            <id>Apache Snapshots </id>
+            <name>Apache Snapshots Repository</name>
+            <url>https://repository.apache.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>Apache Releases </id>
+            <name>Apache Releases Repository</name>
+            <url>https://repository.apache.org/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>Fusesource Snapshots</id>
+            <url>http://repo.fusesource.com/nexus/content/repositories/snapshots</url>
+        </repository>
+
 	</repositories>
 
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.apache.camel.version>2.11.0</org.apache.camel.version>
+        <org.springframework.amqp.version>1.1.4.RELEASE</org.springframework.amqp.version>
+        <org.springframework.retry.version>1.0.2.RELEASE</org.springframework.retry.version>
+        <!-- Apache Camel 2.11.x moved to Spring Framework 3.1.x -->
+        <org.springframework.version>3.1.4.RELEASE</org.springframework.version>
+        <ch.qos.logback.version>1.0.0</ch.qos.logback.version>
+    </properties>
+
 	<dependencies>
+        <dependency>
+            <groupId>pt.sapo.labs</groupId>
+            <artifactId>socialecho-core</artifactId>
+            <version>0.5</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.lucene</groupId>
+                    <artifactId>lucene-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.lucene</groupId>
+                    <artifactId>lucene-smartcn</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.lucene</groupId>
+                    <artifactId>lucene-analyzers</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.lucene</groupId>
+                    <artifactId>lucene-analyzers-common</artifactId>
+                </exclusion>
+            </exclusions>
 
-		<dependency>
-			<groupId>org.twitter4j</groupId>
-			<artifactId>twitter4j-async</artifactId>
-			<version>[2.2,)</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl104-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+        </dependency>
 
-		<dependency>
-			<groupId>org.twitter4j</groupId>
-			<artifactId>twitter4j-stream</artifactId>
-			<version>[2.2,)</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl104-over-slf4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+        <dependency>
+            <groupId>pt.sapo.labs</groupId>
+            <artifactId>socialecho-langdetection</artifactId>
+            <version>0.5</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <!--<version>2.11.1</version>-->
+            <version>2.12-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jetty</artifactId>
+            <version>2.12-SNAPSHOT</version>
+            <!-- use the same version as your Camel core version -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.xerial.snappy</groupId>
+            <artifactId>snappy-java</artifactId>
+            <version>1.0.5-M1</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.elasticsearch</groupId>-->
+            <!--<artifactId>elasticsearch</artifactId>-->
+            <!--&lt;!&ndash;<version>${elasticsearch-version}</version>&ndash;&gt;-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>0.90.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-elasticsearch</artifactId>
+            <version>2.12-SNAPSHOT</version>
+            <!-- use the same version as your Camel core version -->
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.camel</groupId>-->
+            <!--<artifactId>camel-amqp</artifactId>-->
+            <!--<version>2.11.1</version>-->
+            <!--&lt;!&ndash;<version>2.12-SNAPSHOT</version>&ndash;&gt;-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.camel</groupId>-->
+            <!--<artifactId>camel-jms</artifactId>-->
+            <!--<version>2.11.1</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.geronimo.specs</groupId>-->
+            <!--<artifactId>geronimo-jms_1.1_spec</artifactId>-->
+            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.bluelock</groupId>
+            <artifactId>camel-spring-amqp</artifactId>
+            <version>1.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-rabbitmq</artifactId>
+            <version>2.12-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.twitter</groupId>
+            <artifactId>hbc-core</artifactId>
+            <version>1.4.1-SNAPSHOT</version>
+        </dependency>
+
+		<!--<dependency>-->
+			<!--<groupId>org.twitter4j</groupId>-->
+			<!--<artifactId>twitter4j-async</artifactId>-->
+			<!--<version>[2.2,)</version>-->
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<groupId>org.slf4j</groupId>-->
+					<!--<artifactId>jcl104-over-slf4j</artifactId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
+		<!--</dependency>-->
+
+		<!--<dependency>-->
+			<!--<groupId>org.twitter4j</groupId>-->
+			<!--<artifactId>twitter4j-stream</artifactId>-->
+			<!--<version>[2.2,)</version>-->
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<groupId>org.slf4j</groupId>-->
+					<!--<artifactId>jcl104-over-slf4j</artifactId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>org.twitter4j</groupId>
@@ -101,47 +260,36 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-		</dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.codehaus.jackson</groupId>-->
+            <!--<artifactId>jackson-mapper-asl</artifactId>-->
+            <!--<version>1.9.5</version>-->
+        <!--</dependency>-->
 
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.5</version>
-		</dependency>
 
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
+        <!--<dependency>-->
+			<!--<groupId>commons-httpclient</groupId>-->
+			<!--<artifactId>commons-httpclient</artifactId>-->
+			<!--<version>3.1</version>-->
+		<!--</dependency>-->
 
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
-			<version>4.1.4</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.httpcomponents</groupId>-->
+			<!--<artifactId>httpcore</artifactId>-->
+			<!--<version>4.1.4</version>-->
+		<!--</dependency>-->
 
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.1.3</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.httpcomponents</groupId>-->
+			<!--<artifactId>httpclient</artifactId>-->
+			<!--<version>4.1.3</version>-->
+		<!--</dependency>-->
 
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpmime</artifactId>
-			<version>4.1.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.1</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.httpcomponents</groupId>-->
+			<!--<artifactId>httpmime</artifactId>-->
+			<!--<version>4.1.3</version>-->
+		<!--</dependency>-->
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -155,29 +303,8 @@
 			<version>3.2.7</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.4</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-jdk14</artifactId>
-			<version>1.6.4</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>log4j-over-slf4j</artifactId>
-			<version>1.6.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>2.10.1</version>
-		</dependency>
 
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -185,11 +312,19 @@
 			<version>2.3</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.rabbitmq</groupId>
-			<artifactId>amqp-client</artifactId>
-			<version>3.0.2</version>
-		</dependency>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <!--<version>3.1.4</version>-->
+            <!-- <version>3.0.2</version> -->
+			<version>3.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.4</version>
+        </dependency>
 
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
@@ -197,16 +332,8 @@
 			<version>1.1.1</version>
 		</dependency>
 
-	 	<dependency>
-               <artifactId>solr-solrj</artifactId>
-               <groupId>org.apache.solr</groupId>
-               <version>4.0.0</version>
-        </dependency>
-		
-		
-		
-		
-		<!-- twitter commons text -->
+
+		<!-- twitter commons com.twitter.common.text -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
@@ -218,44 +345,74 @@
 			<artifactId>jsr305</artifactId>
 			<version>2.0.1</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-analyzers-common</artifactId>
-			<version>4.3.0</version>
-		</dependency>
+
+
+        <!--<dependency>-->
+            <!--<groupId>org.mongodb</groupId>-->
+            <!--<artifactId>mongo-java-driver</artifactId>-->
+            <!--<version>2.10.1</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<artifactId>solr-solrj</artifactId>-->
+            <!--<groupId>org.apache.solr</groupId>-->
+            <!--<version>4.0.0</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-analyzers-common</artifactId>-->
+			<!--<version>4.3.0</version>-->
+		<!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.lucene</groupId>-->
+            <!--<artifactId>lucene-analyzers</artifactId>-->
+            <!--<version>3.6.2</version>-->
+        <!--</dependency>-->
+
+
+        <!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-smartcn</artifactId>-->
+			<!--<version>3.6.2</version>-->
+		<!--</dependency>-->
+		<!---->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.lucene</groupId>-->
+			<!--<artifactId>lucene-core</artifactId>-->
+			<!--<version>4.2.1</version>-->
+		<!--</dependency>-->
+
+
+		<!--<dependency>-->
+			<!--<groupId>com.twitter</groupId>-->
+			<!--<artifactId>twitter-com.twitter.common.text</artifactId>-->
+			<!--<version>1.6.1</version>-->
+		<!--</dependency>-->
             
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-smartcn</artifactId>
-			<version>3.6.2</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>4.0.0</version>
-		</dependency>
-            
-		<dependency>
-			<groupId>com.twitter</groupId>
-			<artifactId>twitter-text</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-            
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
-            
-		<dependency>
-			<groupId>com.cybozu.labs</groupId>
-			<artifactId>langdetect</artifactId>
-			<version>1.1-20120112</version>
-		</dependency>
-            	
-            	
+
+        <!--logger-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.0.13</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
+
+
+
 
 	</dependencies>
 
@@ -303,12 +460,22 @@
 
 		</plugins>
 
-		<finalName>twitterecho-server</finalName>
+		<finalName>socialecho-server</finalName>
 
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
+                <includes>
+                    <include>build.properties</include>
+                    <include>logback-smtp-server.xml</include>
+                    <include>index.html</include>
+                    <include>json2.js</include>
+                    <include>jquery-1.10.2.min.js</include>
+                    <include>jquery-1.10.2.min.map</include>
+
+
+                </includes>
 			</resource>
 		</resources>
 	</build>

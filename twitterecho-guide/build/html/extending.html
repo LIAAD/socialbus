@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Extending SocialEcho &mdash; SocialEcho 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">None</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="extending-socialecho">
+<h1>Extending SocialEcho<a class="headerlink" href="#extending-socialecho" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="java-serviceloader-api">
+<h2>Java ServiceLoader API<a class="headerlink" href="#java-serviceloader-api" title="Permalink to this headline">¶</a></h2>
+<p>Defining an API and developing the corresponding implementation has become an uber mainstream practice when developing large Java applications. Modularization is such an useful design principle, especially to avoid spaghetti code, for testing and debugging, and for re-implementation of old code.</p>
+<p>Many developers seek to separate API interfaces and abstract classes from their implementation in separate packages. Yet, this almost always leads to cycles between java packages (api refers to impl, and vice-versa). There has been many frameworks, such as OSGi, supporting modularization, but the documentation has not always been good and complete. Many developers have struggled with class loading issues too.</p>
+<p>Fortunately, Java has delivered the ServiceLoader (<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html">http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html</a>) utility since release 6. The example described in this post is available from Github in the Java-ServiceLoader directory. It is inspired from here.</p>
+<p>SocialEcho makes use of ServiceLoader API to extend new modules. This section shows how to define custom adapters to implement custom and creative ways for indexing tweets.</p>
+</div>
+<div class="section" id="defining-custom-adapters">
+<h2>Defining custom adapters<a class="headerlink" href="#defining-custom-adapters" title="Permalink to this headline">¶</a></h2>
+<p>SocialEcho already offers builtin modules for file and MongoDB indexing. But you may face diferent needs and in order to accomplish this is how you must implement your custom indexing specifications.</p>
+<p>For SocialEcho definition, <strong>Adapters</strong> handle each tweet message that comes into the system. You can define your own adapter to get messages to index to MySQL for example or even send it to a message-broker system. It is up to you.</p>
+<p>First thing you need is to create a java project and make sure you have <strong>twitterecho-core.jar</strong> into your classpath. You find it at <strong>lib/</strong> folder.
+Given our interface for adapters you can implement your own class. This is the interface:</p>
+<blockquote>
+<div><div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">pt</span><span class="o">.</span><span class="na">sapo</span><span class="o">.</span><span class="na">labs</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">services</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.twitter.hbc.twitter4j.v3.RawJsonStatusListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.twitter.hbc.twitter4j.v3.handler.StatusStreamHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.commons.configuration.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.simple.JSONObject</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Properties</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">StatusAdapter</span>
+        <span class="kd">extends</span> <span class="n">StatusStreamHandler</span><span class="o">,</span><span class="n">RawJsonStatusListener</span><span class="o">{</span>
+
+  <span class="n">Configuration</span> <span class="nf">getConfiguration</span><span class="o">();</span>
+  <span class="kt">void</span> <span class="nf">setConfiguration</span><span class="o">(</span><span class="n">Configuration</span> <span class="n">configuration</span><span class="o">);</span>
+
+  <span class="kt">void</span> <span class="nf">initialize</span><span class="o">();</span>
+  <span class="kt">void</span> <span class="nf">onStatus</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">jsonObject</span><span class="o">);</span>
+  <span class="kt">void</span> <span class="nf">onStatus</span><span class="o">(</span><span class="n">String</span> <span class="n">jsonString</span><span class="o">);</span>
+
+  <span class="kt">boolean</span> <span class="nf">isEnabled</span><span class="o">();</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now as an example this is an implementation to print tweets into the log:</p>
+<blockquote>
+<div><div class="highlight-java"><div class="highlight"><pre><span class="kn">package</span> <span class="n">pt</span><span class="o">.</span><span class="na">sapo</span><span class="o">.</span><span class="na">labs</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">impl</span><span class="o">.</span><span class="na">adapters</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.Status</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.User</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">twitter4j.internal.org.json.JSONObject</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ConsoleStatusAdapter</span> <span class="kd">extends</span> <span class="n">AbstractStatusAdapter</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">static</span> <span class="n">Logger</span> <span class="n">logger</span> <span class="o">=</span>
+        <span class="n">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="n">ConsoleStatusAdapter</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+  <span class="kd">private</span> <span class="n">String</span> <span class="n">topicName</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="nf">ConsoleStatusAdapter</span><span class="o">(){}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">initialize</span><span class="o">(){</span>
+   <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&quot;initializing file status adapter&quot;</span><span class="o">);</span>
+
+   <span class="k">this</span><span class="o">.</span><span class="na">topicName</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getConfiguration</span><span class="o">().</span><span class="na">getString</span><span class="o">(</span><span class="s">&quot;topic.name&quot;</span><span class="o">,</span><span class="s">&quot;sample&quot;</span><span class="o">);</span>
+
+   <span class="k">this</span><span class="o">.</span><span class="na">setEnabled</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+  <span class="o">}</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStatus</span><span class="o">(</span><span class="n">JSONObject</span> <span class="n">json</span><span class="o">)</span> <span class="o">{</span>
+
+   <span class="n">Status</span> <span class="n">status</span> <span class="o">=</span> <span class="n">parseJsonStatus</span><span class="o">(</span><span class="n">json</span><span class="o">);</span>
+
+   <span class="k">if</span><span class="o">(</span><span class="n">status</span> <span class="o">!=</span><span class="kc">null</span><span class="o">){</span>
+    <span class="o">++</span><span class="n">statusCount</span><span class="o">;</span>
+
+    <span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="na">getUser</span><span class="o">();</span>
+
+    <span class="n">String</span> <span class="n">messageHeader</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;New status (%d) for topic (%s)&quot;</span><span class="o">,</span>
+                        <span class="n">statusCount</span><span class="o">,</span><span class="k">this</span><span class="o">.</span><span class="na">topicName</span><span class="o">);</span>
+
+    <span class="n">String</span> <span class="n">messageBody</span> <span class="o">=</span> <span class="n">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">&quot;@%s : %s&quot;</span><span class="o">,</span>
+                        <span class="n">user</span><span class="o">.</span><span class="na">getScreenName</span><span class="o">(),</span><span class="n">status</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">messageHeader</span><span class="o">);</span>
+    <span class="n">logger</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="n">messageBody</span><span class="o">);</span>
+   <span class="o">}</span>
+
+   <span class="n">logger</span><span class="o">.</span><span class="na">trace</span><span class="o">(</span><span class="n">json</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Important: The implementation must have a public parameterless constructor.</p>
+<p>Next, we declare the implementation in a file having the fully qualified name of the API under the META-INF/services directory in the .jar:</p>
+<img alt="_images/meta_inf.png" src="_images/meta_inf.png" />
+<p>The file contains fully qualified name of the implementation. This would be the content in our example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pt</span><span class="o">.</span><span class="n">sapo</span><span class="o">.</span><span class="n">labs</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">impl</span><span class="o">.</span><span class="n">adapters</span><span class="o">.</span><span class="n">ConsoleStatusAdapter</span>
+</pre></div>
+</div>
+<p>Build your project in a jar and deploy it at SocialEcho <em>lib</em> folder and restart it.</p>
+<p>The service implementation is loaded at bootstrap.</p>
+<div class="section" id="defining-custom-processors">
+<h3>Defining custom processors<a class="headerlink" href="#defining-custom-processors" title="Permalink to this headline">¶</a></h3>
+<p><em>TODO</em></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" style="margin-top: -30px;" src="_static/bw_bird_small.jpg" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Extending SocialEcho</a><ul>
+<li><a class="reference internal" href="#java-serviceloader-api">Java ServiceLoader API</a></li>
+<li><a class="reference internal" href="#defining-custom-adapters">Defining custom adapters</a><ul>
+<li><a class="reference internal" href="#defining-custom-processors">Defining custom processors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

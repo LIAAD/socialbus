@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+<head>
+    <title>socialecho console</title>
+
+    <script src="json2.js" type="text/javascript"></script>
+    <script src="jquery-1.10.2.min.js" type="text/javascript"></script>
+
+    <script type='text/javascript'>
+
+        // Expose jQuery to the global object
+        window.jQuery = window.$ = jQuery;
+
+        if (!window.WebSocket) {
+        alert("WebSocket not supported by this browser");
+        }
+		
+		var hostname = window.location.hostname;
+		var ws_port = window.location.port;
+		var rest_port = 9191;
+
+        function startWebSocket(){
+            var room = {
+                join: function(name) {
+                    this._username=name;
+                    var location = "ws://" + hostname + ":" + ws_port +"/twitterecho";
+                    this._ws=new WebSocket(location);
+                    this._ws.onmessage=this._onmessage;
+                    this._ws.onclose=this._onclose;
+                },
+
+                _onmessage: function(m) {
+                    if (m.data){
+                        var _console=$('#console');
+
+                        var tweet = JSON.parse(m.data);
+                        var consoleText = "client: " + tweet.metadata.client + " | topic: " + tweet.metadata.topic + " | @" + tweet.user.screen_name + " says : " +tweet.text;
+
+                        var spanText = $( "<span/>", {
+                            text: consoleText,
+                            class : "text"
+                        });
+
+                        spanText.innerHTML = consoleText;
+
+                        spanText.appendTo(_console);
+                        $("<br/>", {}).appendTo( _console );
+
+                        _console.scrollTop(
+                                _console[0].scrollHeight - _console.height()
+                        );
+                    }
+                },
+
+                _onclose: function(m) {
+                    this._ws=null;
+                }
+
+            };
+
+            room.join("Testing");
+        }
+		
+        function getSysInfoStats(){
+            $.ajax({
+                type: 'GET',
+                url: "http://" + hostname + ":" + rest_port + "/api/sysinfo",
+                async: true,
+                jsonpCallback: 'jsonCallback',
+                contentType: "application/json",
+                dataType: 'jsonp',
+				
+                success: function(data) {
+                    console.log("sucesso");
+
+                    var sysinfo = data.sysinfo;
+                    var sys_version = data.version;
+                    var stats_overview = data.stats._global_;
+                    var stats_clients = data.stats.clients;
+                    var stats_topics = data.stats.topics;
+
+                    var sysinfo_items = [];
+                    var stats_overview_items = [];
+                    var stats_clients_items = [];
+                    var stats_topics_items = [];
+
+                    sysinfo_items.push("version : " + sys_version);
+
+                    $.each(sysinfo, function(key, val) {
+                        var str_value = key  + " : " + val;
+                        sysinfo_items.push(str_value);
+                        console.log(str_value);
+                    });
+
+                    $.each(stats_overview, function(key, val) {
+                        var str_value = key  + " : " + val;
+                        stats_overview_items.push(str_value);
+                        console.log(str_value);
+                    });
+
+                    stats_clients_items.push("<tr align=\"left\"><th>Client</th><th>Count</th><th>Running since</th><th>Last message</tr>");
+                    $.each(stats_clients, function(key, val) {
+                        var client_id = key;
+                        var client_count = val.count;
+                        var client_running_since = val.running_since;
+                        var client_last_message_at = val.last_message_at;
+
+                        var str_value = "<tr><td>" +client_id+ "</td><td>" +client_count+"</td><td>"+client_running_since+"</td><td>"+client_last_message_at+"</td></tr>";
+
+
+                        stats_clients_items.push(str_value);
+                        console.log(str_value);
+                    });
+
+                    stats_topics_items.push("<tr align=\"left\"><th>Topic</th><th>Count</th><th>Running since</th><th>Last message</tr>");
+                    $.each(stats_topics, function(key, val) {
+                        var _id = key;
+                        var _count = val.count;
+                        var _running_since = val.running_since;
+                        var _last_message_at = val.last_message_at;
+
+                        var str_value = "<tr><td>" +_id+ "</td><td>" +_count+"</td><td>"+_running_since+"</td><td>"+_last_message_at+"</td></tr>";
+
+                        stats_topics_items.push(str_value);
+                        console.log(str_value);
+                    });
+
+                    $("<h2/>", {text:"socialecho - " + sysinfo.host}).appendTo( $('#host_name'));
+
+                    $('#sysinfo').html(sysinfo_items.join('<br/>'));
+
+                    $('#stats_global').html(stats_overview_items.join('<br/>'));
+                    $('#clients_table').html(stats_clients_items.join(''));
+                    $('#topics_table').html(stats_topics_items.join(''));
+                },
+                error: function(e) {
+                    console.log(e.message);
+                }
+            });
+        }
+
+        $( document ).ready(function() {
+            console.log( 'ready!' );
+            getSysInfoStats();
+            startWebSocket();
+        });
+
+    </script>
+	
+    <style type='text/css'>
+
+        div { 
+			border: 0px solid black;
+        }
+
+        pre{
+            margin-top: -10px;
+            margin-bottom: -20px;
+        }
+
+        div#console { 
+			clear: both; 
+			width: 80em; 
+			height: 35ex; 
+			overflow: auto; 
+			background-color: #f0f0f0; 
+			padding: 4px; 
+			border: 1px solid black; 
+		}
+
+        body {
+            font-family: helvetica, arial, san-serif 
+		}
+		
+        table { 
+			border-collapse:collapse; 
+			border-color:#999; 
+			margin-top:.5em 
+		}
+		
+        th { 
+			background-color:#bbb; 
+			color:#000 
+		}
+        
+		td,th { 
+			padding:.25em 
+		}
+    </style>
+
+
+</head>
+<body>
+
+    <div id="host_name"></div>
+    <p>
+        <a href="http://localhost:9191/api/sysinfo">server status</a> |
+        <a href="http://localhost:9191/api/sysinfo">adapters</a> |
+        <a href="http://localhost:9191/api/sysinfo">preprocessors</a> |
+        <a href="#clients">clients</a> |
+        <a href="#topics">topics</a>
+    </p>
+	
+    <pre>
+        <div id="sysinfo"></div>
+    </pre>
+	
+    <hr>
+    <b>overview</b>
+    <pre>
+        <div id="stats_global"></div>
+    </pre>
+
+    <hr/>
+
+	<a id="clients">
+		<b>clients</b>
+	</a>
+	
+	<br/>
+	
+	<table border="1" cellpadding="2" cellspacing="0">
+	    <tbody id="clients_table"></tbody>
+	</table>
+
+	<br/>
+	
+	<a id="topics">
+		<b>topics</b>
+	</a>
+	
+	<br/>
+	
+	<table border="1" cellpadding="2" cellspacing="0">
+	    <tbody id="topics_table"></tbody>
+	</table>
+
+	<br/>
+
+	<a id="console_">
+		<b>Stream of messages</b>
+	</a>
+	
+	<br/>
+	
+	<div id='console'></div>
+
+</body>
+</html>

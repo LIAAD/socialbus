@@ -1,9 +1,9 @@
 package pt.sapo.labs.crawl.twitter.streaming;
 
-import java.util.Arrays;
-
 import twitter4j.FilterQuery;
 import twitter4j.TwitterException;
+
+import java.util.Arrays;
 
 public class KeywordStreamConsumer extends BaseStreamConsumer {
 
