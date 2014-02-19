@@ -1,0 +1,2 @@
+pt.sapo.labs.api.impl.handlers.EntitiesExtractionStatusMetadataHandler
+pt.sapo.labs.api.impl.handlers.TokenizerStatusMetadataHandler

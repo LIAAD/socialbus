@@ -1,0 +1,7 @@
+curl -u bw:bw_pass -i -H "Content-Type: application/json" -X POST -d  \
+'{ "user_id":2,"entity_type":1,  "name_en":"Pedro Saleiro", \
+"ergo_en":["develper", "student"],"ergo_pt":["engenheir"], \
+"alias_en": ["Saleiro", "Pedro Cruz"], \
+"height":1.84, "weight":84, "birthyear":1986, \
+"birthmonth":6, "birthday":26}' \
+http://popstar.fe.up.pt/bw/entities/api/v0.1/entity

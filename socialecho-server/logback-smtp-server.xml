@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="true">
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+	<appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+		<smtpHost>smtp.gmail.com</smtpHost>
+		<smtpPort>465</smtpPort>
+		<!--<to>socialecho-status@lists.labs.sapo.pt</to>-->
+        <to>arian@arianpasquali.com</to>
+		<from>twitterecho.alerts@gmail.com</from>
+		<!-- <subject>%logger{20} - %m</subject> -->
+		<subject>TwitterEcho Server Alert!</subject>
+		<username>twitterecho.alerts@gmail.com</username>
+		<password>reaction123</password>
+		<SSL>true</SSL>
+		
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date %-5level %logger{35} - %message%n</pattern>
+		</layout>
+		
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date %-5level %logger{0} - %message%n</pattern>
+		</encoder>
+	</appender>
+
+	<root level="DEBUG">
+		<!--<appender-ref ref="EMAIL" />-->
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>

@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <!--<parent>-->
+    <!--<groupId>pt.sapo.labs</groupId>-->
+    <!--<artifactId>socialecho</artifactId>-->
+    <!--<version>0.5</version>-->
+  <!--</parent>-->
+  <groupId>pt.sapo.labs</groupId>
+  <artifactId>socialecho-twitter-oauth</artifactId>
+  <version>0.6-SNAPSHOT</version>
+  <name>socialecho-twitter-oauth</name>
+  <url>http://maven.apache.org</url>
+
+    <repositories>
+        <repository>
+            <id>twitter4j.org</id>
+            <name>twitter4j.org Repository</name>
+            <url>http://twitter4j.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>conjars.org</id>
+            <name>conjars.org Repository</name>
+            <url>http://conjars.org/repo/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>pt.sapo.labs</groupId>
+            <artifactId>socialecho-core</artifactId>
+            <version>0.6-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-core</artifactId>
+            <version>[2.2,)</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jcl104-over-slf4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.9</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>net.sf.opencsv</groupId>-->
+            <!--<artifactId>opencsv</artifactId>-->
+            <!--<version>2.0</version>-->
+        <!--</dependency>-->
+
+
+        <!-- logger -->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+    <plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
+        <!-- The configuration of the plugin -->
+        <configuration>
+            <!-- Configuration of the archiver -->
+            <archive>
+                <!-- Manifest specific configuration -->
+                <manifest>
+                    <!-- Classpath is added to the manifest of the created jar file. -->
+                    <addClasspath>true</addClasspath>
+                    <!-- Configures the classpath prefix. This configuration option is
+                        used to specify that all needed libraries are found under lib/ directory. -->
+                    <classpathPrefix>lib/</classpathPrefix>
+                    <!-- Specifies the main class of the application -->
+                    <mainClass>pt.sapo.labs.Main</mainClass>
+                </manifest>
+            </archive>
+        </configuration>
+    </plugin>
+
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+            <target>1.6</target>
+            <source>1.6</source>
+        </configuration>
+    </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.2.2</version>
+            <configuration>
+                <descriptor>src/main/assembly/assembly.xml</descriptor>
+            </configuration>
+        </plugin>
+
+    </plugins>
+
+        <finalName>socialecho-twitter-oauth</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>build.properties</include>
+                    <include>log4j.properties</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>

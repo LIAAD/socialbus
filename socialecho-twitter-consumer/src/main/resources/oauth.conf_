@@ -1,0 +1,16 @@
+## SETTINGS
+
+## AUTHENTICATION SETTINGS
+# Twitter OAuth application tokens:
+# Twitter OAtuh user token accounts (E.g. TOKEN,SECRETTOKEN;TOKEN,SECRETTOKEN)
+# First of all you need to register your own application on Twitter at https://dev.twitter.com/apps/new
+# After that edit and run pt.sapo.labs.crawl.twitter.oauth.TwitterOAuthHelper to get your token
+# Run the following command and follow the instructions
+# java -cp twitterecho-streaming-client.jar pt.sapo.labs.crawl.twitter.oauth.TwitterOAuthHelper
+# 
+# More info at http://reaction.fe.up.pt/twitterecho-guide/command_line.html#obtaining-twitter-tokens
+
+#application.consumer.key =GJGALwtkuTDljV3eBDAYaQ
+#application.consumer.secret =lGENO2QQVasMzalcpp6A3fAciNO1u0wA2ZihMpibyY0
+
+#twitter.tokens=1734868508-bKIVbOMfEDGxS617oAwtCgbsUeEkVBWl81QnaPa,rqGp0076fnFxZuPgzZ30DmgGts1Z1bUNrkQgLMv6M

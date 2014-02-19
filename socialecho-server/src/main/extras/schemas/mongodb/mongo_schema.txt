@@ -1,0 +1,33 @@
+//create db
+use twitterecho;
+
+//create collections
+db.createCollection("tweets");
+db.createCollection("users");
+db.createCollection("users_seeds");
+db.createCollection("trend_topics");
+db.createCollection("trend_urls");
+db.createCollection("trend_sites");
+db.createCollection("trend_users");
+db.createCollection("trend_media");
+db.createCollection("geotagged_tweets_realtime");
+db.createCollection("geotagged_tweets");
+
+//create indexes
+db.tweets.ensureIndex({ "id": 1 }, { unique: true })
+db.users.ensureIndex({ "id": 1 }, { unique: true })
+db.users_seeds.ensureIndex({ "id": 1 }, { unique: true })
+db.users_seeds.ensureIndex({ "source": 1 })
+db.trend_topics.ensureIndex({"obj":1},{unique:true});
+db.trend_urls.ensureIndex({"word":1},{unique:true});
+db.trend_sites.ensureIndex({"word":1},{unique:true});
+db.trend_users.ensureIndex({"word":1},{unique:true});
+db.trend_media.ensureIndex({"media_id":1},{unique:true});
+db.trend_media.ensureIndex({"created_at":1});
+db.trend_media.ensureIndex({"retweet_count":1});
+db.geotagged_tweets.ensureIndex({"status_id":1},{unique:true});
+db.geotagged_tweets_realtime.ensureIndex({"status_id":1},{unique:true});
+
+db.trend_urls.find().sort({count : -1})
+db.trend_users.find().sort({count : -1});
+db.trend_topics.find().sort({count : -1})
