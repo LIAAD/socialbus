@@ -77,12 +77,12 @@ def getYesterdayDir():
 fileName = getYesterdayDir()
 
 print "##################################################################"
-print " [INFO] Loading last hour tweets file : " + fileName
+print " [INFO] Loading directory : " + fileName
 print "------------------------------------------------------------------"
 
 make_tarfile_for(fileName)
     
 print "##################################################################"
-print " [INFO] Finished the indexing for " + generate_file_name()
+print " [INFO] Finished tar file for " + generate_file_name()
 print "##################################################################"  
 
