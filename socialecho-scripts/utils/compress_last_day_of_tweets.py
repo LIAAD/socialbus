@@ -4,6 +4,10 @@
 Version     :    0.1
 Author      :    Arian Pasquali
 Summary     :    This program compress last day tweets files 
+
+crontab example
+
+0 0 * * * python /fasmounts/LABS/socialecho/twitterecho/scripts/general/compress_last_day_of_tweets.py -D /fasmounts/LABS/socialecho/twitterecho/data/v0.2/portugal/json/ >> /fasmounts/LABS/socialecho/log/twitterecho/compress.log
 '''
 
 import csv,os, sys, urllib,urllib2, datetime,requests,json,solr,time
