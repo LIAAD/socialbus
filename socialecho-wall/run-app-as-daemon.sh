@@ -9,7 +9,7 @@ BASE_DIR=/mnt/hd1/socialecho/socialecho-src/socialecho-wall
 SERVER_DIR=$BASE_DIR
 GRAILS=/mnt/hd1/env/grails-2.3.4/bin/grails
 # Should not conflict with Jenkins port
-SERVER_HTTP_PORT=9291
+SERVER_HTTP_PORT=9392
 SERVER_HTTPS_PORT=9544
 # For polling the application
 SERVER_URL=http://reaction.fe.up.pt:$SERVER_HTTP_PORT/socialecho-wall
