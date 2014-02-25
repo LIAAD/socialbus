@@ -15,6 +15,18 @@
 # This file will be used with PyPi in order to package and distribute the final
 # product.
 
+"""
+IMPORTANT
+
+how to use it
+python mongo-connector/mongo_connector.py -t [solr-address] -n [database.collection] -m [mongodb.address] -u [unique.id.attribute] -d [adapter.script]
+
+example 
+python mongo-connector/mongo_connector.py -t http://192.168.102.195:8983/solr/tweets -n socialecho_v05.twitter -m 192.168.102.195:27017 -u _id -d solr_doc_manager.py
+
+
+"""
+
 """Receives documents from the oplog worker threads and indexes them
 into the backend.
 
