@@ -4,7 +4,7 @@
 #
 # BASE_DIR is taken from the WORKSPACE environment variable set by Jenkins
 #BASE_DIR=$WORKSPACE
-BASE_DIR=/mnt/hd1/socialecho/socialecho-0.6/socialecho-ui
+BASE_DIR=/mnt/hd1/socialecho/socialecho-src/socialecho-ui
 # Where is your server checked out from a VCS
 SERVER_DIR=$BASE_DIR
 GRAILS=/mnt/hd1/env/grails-2.3.4/bin/grails
