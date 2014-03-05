@@ -102,7 +102,7 @@
         </g:if>
 
         <form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
-       <!--     <p>
+            <p>
 
             <h3 for='username'><g:message code="springSecurity.login.username.label"/>:</h3>
             <input type='text' class='text_' name='j_username' id='username'/>
@@ -119,7 +119,8 @@
                     Sign in as admin
                 </button>
             </p>
-			or-->
+			or
+			
 			<p>
 			<twitterAuth:button/>
 			</p>
