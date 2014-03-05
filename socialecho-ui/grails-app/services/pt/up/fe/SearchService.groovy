@@ -90,36 +90,12 @@ class SearchService {
 		println args
 		String queryStatement = args[0]
 
-		/*
-		def hashtags = extractHashtags(queryStatement)
-		hashtags.each{
-			def word = it.replace("#","")
-			queryStatement += " OR (hashtag_entities:${word}" +
-							  " OR hashtag_entities:${word.toLowerCase()}" +
-							  " OR hashtag_entities:${word.toLowerCase().capitalize()}" +
-							  " OR hashtag_entities:${word.toUpperCase()})"
-		}
-
-		def tokens = args[0].split(" ")
-		tokens.each{
-			def word = it.replace("#","")
-			queryStatement += " OR (hashtag_entities:${word}" +
-							  " OR hashtag_entities:${word.toLowerCase()}" +
-							  " OR hashtag_entities:${word.toLowerCase().capitalize()}" +
-							  " OR hashtag_entities:${word.toUpperCase()})"
-		}
-		*/
-		
-		//queryStatement += " OR status_in_reply_to_user_id:0ˆ10 "
-		//queryStatement += " OR status_in_reply_to_user_id:[-1 TO 0]ˆ10"
-
-
 		println queryStatement
 		def filterQuery = ""
 
 		def params = args[1] 
 			
-		def defaultDateRange = "24HOUR" 
+		def defaultDateRange = "48HOUR" 
 		def defaultDateGap = "+1HOUR" 
 		def dateGap = defaultDateGap
 		
@@ -130,7 +106,7 @@ class SearchService {
 		DateMathParser dtParser = new DateMathParser(TimeZone.getDefault(),Locale.UK)
 		Date dateRangeEnd = new Date()
 	    
-	    Date dateRangeStart = dtParser.parseMath("-24HOUR")
+	    Date dateRangeStart = dtParser.parseMath("-48HOUR")
 	    
 
 	    println "dateRangeStart : " + dateRangeStart
@@ -148,7 +124,7 @@ class SearchService {
 		switch(params.date_range) {
 				case "all_times": dateGap = "+1MONTH"; break;
 				case "1HOUR": dateGap = "+1MINUTE"; break;
-				case "24HOUR": dateGap = "+30MINUTES"; break;
+				case "48HOUR": dateGap = "+30MINUTES"; break;
 				case "7DAY": dateGap = "+6HOUR"; break;
 				case "30DAY": dateGap = "+1DAY"; break;					
 				break
@@ -207,7 +183,73 @@ class SearchService {
 		return 	rsp;
     }
 	
-	def loadTweetsStats(dateRangeStartStr = "-24HOUR"){
+	
+    def mapsSearch(Object[] args) {
+		println "maps search"
+		getSolrServer()
+
+		println args
+		String queryStatement = args[0]
+
+		println queryStatement
+		def filterQuery = "{!geofilt pt=42.35327148,-71.05639639 sfield=geo_location d=500}"
+
+		def params = args[1] 
+			
+		def defaultDateRange = "48HOUR" 
+		def defaultDateGap = "+1HOUR" 
+		def dateGap = defaultDateGap
+		
+		if(!params.date_range) {
+			params.date_range = defaultDateRange
+		}
+		
+		DateMathParser dtParser = new DateMathParser(TimeZone.getDefault(),Locale.UK)
+		Date dateRangeEnd = new Date()
+	    Date dateRangeStart = dtParser.parseMath("-48HOUR")
+	    
+	    println "dateRangeStart : " + dateRangeStart
+		println "dateRangeEnd : " + dateRangeEnd		
+
+		if(params.date_range.equalsIgnoreCase("all_times")){
+			def defaultAllTimesDateRange = "180DAY"
+			filterQuery+= " created_at:[NOW-${defaultAllTimesDateRange} TO NOW]"
+			dateRangeStart = dtParser.parseMath("-${defaultAllTimesDateRange}")			
+		}else{
+			filterQuery+= " created_at:[NOW-${params.date_range} TO NOW]"
+			dateRangeStart = dtParser.parseMath("-${params.date_range}")
+		}
+		
+		println queryStatement
+
+		println "dateRangeStart : " + dateRangeStart
+		println "dateRangeEnd : " + dateRangeEnd		
+	      
+		SolrQuery query = new SolrQuery().
+	    		setQuery( queryStatement).
+        		addFilterQuery(filterQuery).
+				addSortField( "created_at", SolrQuery.ORDER.desc ).
+				addSortField( "score", SolrQuery.ORDER.desc );
+		
+		println "query : " + query
+		
+		println "args.offset : " + params.offset
+		println "query -> " + query
+		if(params.offset){
+			query.setStart(Integer.parseInt(params.offset))
+		}
+		
+		println "query -> " + query
+		println "debug.1"
+		QueryResponse rsp = this.solrServer.query( query );
+		println "debug.2"
+		println "result : $rsp"
+
+/*		print rsp*/
+		return 	rsp;
+    }
+	
+	def loadTweetsStats(dateRangeStartStr = "-48HOUR"){
 		println "loadTweetsByHour"
 		
 		getSolrServer()
@@ -215,7 +257,6 @@ class SearchService {
 		DateMathParser dtParser = new DateMathParser(TimeZone.getDefault(),Locale.UK)
 		Date dateRangeEnd = new Date()	   
 		
-/*		String dateRangeStartStr = "-7DAY"*/
 	    Date dateRangeStart = dtParser.parseMath(dateRangeStartStr)
 		
 		
@@ -235,37 +276,5 @@ class SearchService {
 		QueryResponse rsp = this.solrServer.query( query );
 		print rsp
 		return 	rsp;
-	}
-	
-	/*def loadMostActiveUsers() {
-		println "search"
-		getSolrServer()
-		
-		SolrQuery query = new SolrQuery().
-	    		setQuery( "created_at:[NOW-6HOUR TO NOW]").
-        		setFacet(true).
-				setFacetMinCount(1).
-				setFacetLimit(8).
-				addFacetField("screen_name");
-		
-		QueryResponse rsp = this.solrServer.query( query );
-		print rsp
-		return 	rsp;
-	}
-	
-	def loadTrenddingTopics() {
-		println "search"
-		getSolrServer()
-		
-		SolrQuery query = new SolrQuery().
-	    		setQuery( "created_at:[NOW-6HOUR TO NOW]").
-        		setFacet(true).
-				setFacetMinCount(1).
-				setFacetLimit(8).
-				addFacetField("hashtag_entities");
-		
-		QueryResponse rsp = this.solrServer.query( query );
-		print rsp
-		return 	rsp;
-	}*/
+	}		
 }
