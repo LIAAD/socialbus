@@ -70,6 +70,52 @@ public class UrlExpanderService implements Runnable
         return databaseConnection;
     }
 
+	private boolean processUrls(DBObject tweet, DBCollection expandedUrls, DBCollection tweets){
+
+	  
+		try{
+	  	  BasicDBList urls = (BasicDBList) ((DBObject)tweet.get("metadata")).get("urls");
+	  
+	  	  for(Object url : urls)
+	  	  if(urls != null){
+	  		  Object topic = ((DBObject)tweet.get("metadata")).get("topic");
+		  
+	  		  logger.debug("expanding  : " + url.getClass().toString());
+	  		  URL expandedUrl = this.u.expand(new URL( (String) url)); 
+		  
+	  		  logger.debug("expanded result : " + expandedUrl.toString());					  
+		  
+		      BasicDBObject expandedUrlId = new BasicDBObject();
+		  	  expandedUrlId.put("short_url", (String) url);
+			  expandedUrlId.put("doc_id", tweet.get("_id"));
+			  	  
+	  		  BasicDBObject expandedUrlDetails = new BasicDBObject();
+	  		  	
+	  			expandedUrlDetails.put("url", (String) expandedUrl.toString());
+	  		  	expandedUrlDetails.put("created_at", new Date());
+	  			expandedUrlDetails.put("service", "twitter");
+  			    expandedUrlDetails.put("topic", topic);
+			  	expandedUrlDetails.put("_id",expandedUrlId);
+  			    
+			  	expandedUrls.insert(expandedUrlDetails);
+		  
+	  		  // update mongo collection
+	  		  BasicDBObject set = new BasicDBObject();
+	  		  set.append("$set", new BasicDBObject("metadata.expanded_urls", true));
+	  		  tweets.update(new BasicDBObject("_id", tweet.get("_id")), set);
+		  
+	  		  return true;
+	  	  }
+		  
+		} catch(MalformedURLException e){
+			   logger.error("erro expanding url",e);
+			   return false;
+		}
+	  
+	  
+	  	return false;
+	}
+
     public void run() {
 		logger.debug ( "computing url expander");
 
@@ -80,37 +126,34 @@ public class UrlExpanderService implements Runnable
 		Date beginDate = new Date(now.getTime() - (HOUR_IN_MS));
 		
 		// try {
+		   DBCollection expandedUrls = getConnection().getCollection("expanded_urls");
+		   expandedUrls.ensureIndex(new BasicDBObject("created_at", 1));
+		   expandedUrls.ensureIndex(new BasicDBObject("topic", 1));
+		   expandedUrls.ensureIndex(new BasicDBObject("service", 1));
+		   expandedUrls.ensureIndex(new BasicDBObject("short_url", 1));
+		   expandedUrls.ensureIndex(new BasicDBObject("doc_id", 1));
+		   
 		   DBCollection tweets = getConnection().getCollection("twitter");
 		   tweets.ensureIndex(new BasicDBObject("created_at", 1));
+		   tweets.ensureIndex(new BasicDBObject("metadata.expanded_urls", 1));
+		   	   
+		   BasicDBObject query = new BasicDBObject();
+		   query.put("created_at", new BasicDBObject("$gte", beginDate).append("$lt", endDate));
+		   query.put("metadata.expanded_urls",new BasicDBObject("$exists", false));
 		   
-		   BasicDBObject query = new BasicDBObject("created_at", 
-		                         new BasicDBObject("$gte", beginDate).append("$lt", endDate));
-		   
-		   
+		   // DBObject query = new BasicDBObject("metadata.expanded_urls", 
+// 			   new BasicDBObject("$exists", false));
+    
 		   DBCursor cursor = tweets.find(query);
 		   try {
 		      while(cursor.hasNext()) {
-		          DBObject tweet = cursor.next();
-				  
-				  BasicDBList urls = (BasicDBList) ((DBObject)tweet.get("metadata")).get("urls");
-				  
-				  for(Object url : urls)
-				  if(urls != null){
-					  
-					  logger.debug("expanding  : " + url.getClass().toString());
-					  URL expandedUrl = this.u.expand(new URL( (String) url)); 
-					  
-					  logger.debug("expanded result : " + expandedUrl.toString());					  
-					  
-					  // TODO
-					  // update mongo collection
-				  }
-				  
-				  // logger.debug(tweet.toString());
+		             DBObject tweet = cursor.next();
+					 
+					 if(!processUrls(tweet,expandedUrls,tweets)){
+						 continue;
+					 }
 		      }
-		   } catch(MalformedURLException e){
-			   logger.error("erro expanding url",e);
-		   }finally {
+		  }finally {
 		      cursor.close();
 		   }		  		   
     }
