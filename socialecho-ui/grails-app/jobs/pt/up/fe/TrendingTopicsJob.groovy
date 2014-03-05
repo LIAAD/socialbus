@@ -18,6 +18,6 @@ class TrendingTopicsJob {
     def execute() {
         // execute job
 		
-		trendingTopicsService.execute();
+/*		trendingTopicsService.execute();*/
     }
 }

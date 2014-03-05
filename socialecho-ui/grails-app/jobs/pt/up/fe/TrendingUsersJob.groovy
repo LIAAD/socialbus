@@ -16,6 +16,6 @@ class TrendingUsersJob {
     def execute() {
         // execute job
 		
-		trendingUsersService.execute();
+/*		trendingUsersService.execute();*/
     }
 }
