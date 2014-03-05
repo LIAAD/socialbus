@@ -66,8 +66,8 @@ environments {
         grails.dbconsole.urlRoot = '/admin/dbconsole'
 
         socialecho {
-/*			solr.endpoint = "http://192.168.102.195/portugal/tweets"*/
-			solr.endpoint = "http://localhost:8983/solr/tweets"
+			solr.endpoint = "http://192.168.102.195:8983/solr/tweets"
+/*			solr.endpoint = "http://localhost:8983/solr/tweets"*/
 			
 			solr.authentication.enabled = true
 			//solr.authentication.user = "socialecho"
@@ -155,5 +155,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
    '/**/images/**':      ['permitAll'],
    '/**/favicon.ico':    ['permitAll'],
    '/login/**':          ['permitAll'],
+   '/maps/**':          ['permitAll'],
    '/logout/**':         ['permitAll']
 ]
