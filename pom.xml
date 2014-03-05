@@ -22,6 +22,7 @@
 		<module>socialecho-facebook-consumer</module>
 		<module>socialecho-facebook-lookup</module>
     <module>socialecho-batch-processing</module>
+    <module>socialecho-url-expander</module>
   </modules>
 
 
