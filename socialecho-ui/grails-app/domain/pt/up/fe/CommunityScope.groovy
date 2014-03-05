@@ -9,6 +9,10 @@ class CommunityScope extends Scope {
     static constraints = {
         users(widget: 'textarea', blank: false)
     }
+	
+    static mapping = {
+          users type: "text"
+      }
 
     void afterUpdate() {
         def event = new CommunityScopeUpdateEvent(this, "update")

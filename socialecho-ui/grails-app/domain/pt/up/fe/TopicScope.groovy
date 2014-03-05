@@ -9,6 +9,10 @@ class TopicScope extends Scope {
     static constraints = {
         topics(widget: 'textarea', blank: false)
     }
+	
+    static mapping = {
+          topics type: "text"
+      }
 
     def beforeInsert() {
         if (topics) {
