@@ -1,0 +1,134 @@
+  Distritos
+Lisbon
+Lisboa
+Leiria
+Santarém
+Santarem
+Setúbal
+Setubal
+Beja
+Faro
+Évora
+Evora
+Portalegre
+Castelo Branco
+Guarda
+Coimbra
+Aveiro
+Viseu
+Bragança
+Braganca
+Vila Real
+Porto
+Braga
+Viana do Castelo
+  Províncias
+Minho
+Trás-os-Montes e Alto Douro
+Trás-os-Montes
+Tras-os-Montes
+Alto Douro
+Douro Litoral
+Douro
+Beira Litoral
+Beira Alta
+Beira Baixa
+Beira
+Estremadura
+Ribatejo
+Alto Alentejo
+Baixo Alentejo
+Alentejo
+Algarve
+  Clubes
+Benfica
+Sporting
+Porto
+Futebol Clube do Porto
+Porto
+SLB
+SCP
+FCP
+tripeiros
+tripeiro
+lampiões
+lampioes
+lampião
+lampiao
+lagartos
+lagarto
+  Personalidades
+Sócrates
+Socrates
+Passos Coelho
+Cavaco Silva
+Miguel Relvas
+Mário Nogueira
+Mario Nogueira
+Ana Jorge
+Teixeira dos Santos
+António Costa
+Antonio Costa
+Miguel Macedo
+Pinto da Costa
+Mourinho
+Santos Silva
+Paulo Portas
+Portas
+Paulo Macedo
+Jorge Lacão
+Jorge Lacao
+Durão Barroso
+Durao Barroso
+Vítor Gaspar
+Vitor Gaspar
+José Seguro
+Jose Seguro
+Luís Filipe Vieira
+Luis Filipe Vieira
+José Viegas
+Jose Viegas
+Louçã
+Loucã
+Louça
+Francisco Louca
+Fernando Pinto Monteiro
+Francisco Assis
+Alberto Martins
+João Proença
+João Proenca
+Isabel Alçada
+Isabel Alcada
+PS
+PSD
+CDU
+CDS-PP
+CDS
+PP
+BE
+Bloco de Esquerda
+Partido Socialista
+Partido Comunista
+Social Democrata
+Sociais Democratas
+Comunistas
+Comunista
+Democrata
+Democrats
+Socialista
+Socialistas
+  Empresas
+PT
+Portugal Telecom
+SAPO
+Vodafone
+TMN
+Optimus
+Clix
+EDP
+CP
+TAP
+Yorn
+Uzo
+Rede4
+Phone-ix
