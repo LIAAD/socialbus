@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-47346130-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <title>Architecture &mdash; SocialEcho 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">None</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="architecture">
+<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<p>This section describes each layer of SocialEcho.</p>
+<p>Tweets are received from the Twitter streaming API using crawler client and sent to a messaging exchange. The tweets are read from the messaging queue and processed by the computing unit. See diagram below.</p>
+<a class="reference internal image-reference" href="_images/architecture_overview.png"><img alt="_images/architecture_overview.png" src="_images/architecture_overview.png" style="height: 250px;" /></a>
+<div class="section" id="crawling">
+<h2>Crawling<a class="headerlink" href="#crawling" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="messaging-layer">
+<h2>Messaging layer<a class="headerlink" href="#messaging-layer" title="Permalink to this headline">¶</a></h2>
+<p>We are using RabbitMQ for our messaging system plus the Python helper library py-amqlib. An exchange is created to receive the posts and a consumer reads the messages from a queue. Those messages are processed by the computing unit. The advantage of using a messaging queue is we can handle surge of tweets.</p>
+</div>
+<div class="section" id="stream-processing-layer">
+<h2>Stream processing layer<a class="headerlink" href="#stream-processing-layer" title="Permalink to this headline">¶</a></h2>
+<p>Storm runs topologies to compute in realtime trend topics, most mentioned users, urls and etc. The result is stored at MongoDB.</p>
+</div>
+<div class="section" id="data-persistence">
+<h2>Data Persistence<a class="headerlink" href="#data-persistence" title="Permalink to this headline">¶</a></h2>
+<p>Data Persistence is made in various ways. Tweets are collected and saved on disk, after pre-processing they are indexed in MongoDB and Apache Solr for free text searching.</p>
+</div>
+<div class="section" id="high-availability">
+<h2>High availability<a class="headerlink" href="#high-availability" title="Permalink to this headline">¶</a></h2>
+<p>Each element above can be highly-available with the use of an extra server. We can add one more server receiving the tweets in case the active one fails over. We can detect this type of failure using an heartbeat between the active and the stand-by instance. RabbitMQ supports mirror queues. MongoDB and Solr supports replicas and master/slave architecture.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" style="margin-top: -30px;" src="_static/bw_bird_small.jpg" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Architecture</a><ul>
+<li><a class="reference internal" href="#crawling">Crawling</a></li>
+<li><a class="reference internal" href="#messaging-layer">Messaging layer</a></li>
+<li><a class="reference internal" href="#stream-processing-layer">Stream processing layer</a></li>
+<li><a class="reference internal" href="#data-persistence">Data Persistence</a></li>
+<li><a class="reference internal" href="#high-availability">High availability</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/architecture.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

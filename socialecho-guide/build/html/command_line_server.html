@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-47346130-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <title>Configuring Server &mdash; SocialEcho 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+    <link rel="next" title="Web console" href="webconsole.html" />
+    <link rel="prev" title="Configuring Facebook Consumer" href="facebook_consumer.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="webconsole.html" title="Web console"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="facebook_consumer.html" title="Configuring Facebook Consumer"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">None</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configuring-server">
+<h1>Configuring Server<a class="headerlink" href="#configuring-server" title="Permalink to this headline">¶</a></h1>
+<p>The server is responsable for processing tweets, extracting metadata, indexing, tokenization and other computations.</p>
+<p>SocialEcho Server follows the structure below.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>+ lib
++ bin
++ logs
+- conf
+        log4j.properties
+        server.conf
+
+socialecho-server.jar
+LICENSE
+</pre></div>
+</div>
+</div></blockquote>
+<p>All server configuration must be provided at <strong>conf/server.conf</strong>.
+The option <strong>rabbitmq.host</strong> is mandatory to collect the messages from clients.
+As default the server just prints the message on log file at <strong>logs/socialecho.out</strong>. To persist the messages as files you must provide
+the option <strong>home.dir</strong>.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="c">#message-broker settings from where</span>
+<span class="c">#it will collect the messages</span>
+rabbitmq.host<span class="o">=</span>localhost
+rabbitmq.port<span class="o">=</span>5672
+
+<span class="c"># you can have multiple setups running at the same server</span>
+cluster.name<span class="o">=</span>twitterecho-1
+
+<span class="c">#uncomment this option to save tweets as files</span>
+home.dir <span class="o">=</span>/tmp/stream/
+
+<span class="c">#uncomment MongoDB options to store tweets as a collection</span>
+mongodb.active <span class="o">=</span> <span class="nb">true</span>
+mongodb.host <span class="o">=</span>localhost
+mongodb.port <span class="o">=</span> 27017
+mongodb.database <span class="o">=</span>socialecho_server_1
+</pre></div>
+</div>
+</div></blockquote>
+<p>Command to start the server:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">bin</span><span class="o">/</span><span class="n">startup</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<div class="section" id="watching-logs">
+<h2>Watching logs<a class="headerlink" href="#watching-logs" title="Permalink to this headline">¶</a></h2>
+<p>While server is running it prints the message on log file at logs/socialecho.out.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>tail -f logs/socialecho.out
+</pre></div>
+</div>
+</div></blockquote>
+<p>Command to shutdown the server:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">bin</span><span class="o">/</span><span class="n">shutdown</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Important: shutdown.sh kills all twitterecho-server running instances.</p>
+<div class="section" id="next">
+<h3>Next<a class="headerlink" href="#next" title="Permalink to this headline">¶</a></h3>
+<p>One you have it up and running you can check <a class="reference internal" href="webconsole.html"><em>Web console</em></a> to monitor stream activity.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" style="margin-top: -30px;" src="_static/bw_bird_small.jpg" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuring Server</a><ul>
+<li><a class="reference internal" href="#watching-logs">Watching logs</a><ul>
+<li><a class="reference internal" href="#next">Next</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="facebook_consumer.html" title="previous chapter">Configuring Facebook Consumer</a></li>
+      <li>Next: <a href="webconsole.html" title="next chapter">Web console</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/command_line_server.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

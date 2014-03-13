@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-47346130-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <title>Getting started &mdash; SocialEcho 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">None</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>The following makes it simple to start a SocialEcho instance.</p>
+<div class="section" id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Create a SocialEcho instance</dt>
+<dd><ul class="first last simple">
+<li>Start services</li>
+<li>Configure a Data Source (Optional)</li>
+<li>Configure Apache Solr (Optional)</li>
+<li>Configure MongoDB (Optional)</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="create-a-socialecho-instance">
+<h3>Create a SocialEcho instance<a class="headerlink" href="#create-a-socialecho-instance" title="Permalink to this headline">¶</a></h3>
+<p>Once you have installed SocialEcho you can use the built-in target for creating new projects:</p>
+<div class="highlight-python"><pre>twitterecho create-instance my-project</pre>
+</div>
+<p>This creates a new directory named after your application and containing the project structure below:</p>
+<div class="highlight-python"><pre>%PROJECT_HOME%
+    + twitterecho-app
+       + conf                           ---&gt; configuration artifacts
+           + mongodb                    ---&gt; optional mongodb config
+           + solr                       ---&gt; optional solr config
+           + storm                      ---&gt; optional storm config
+
+       + realtime                       ---&gt; location of storm topologies
+       + crawlers
+                + streaming-client      ---&gt; location of crawlers
+       + widgets                        ---&gt; location of widgets
+                + sentibubbles
+                + usernetwork
+
+   + libraries                          ---&gt; lib depencies
+   + scripts                            ---&gt; scripts
+   + web-app
+       + scope-manager                  ---&gt; Interface manage scopes
+       + search-ui                      ---&gt; Interface for searching
+       + system-dashboard               ---&gt; system activity dashboard</pre>
+</div>
+</div>
+<div class="section" id="start-socialecho">
+<h3>Start SocialEcho<a class="headerlink" href="#start-socialecho" title="Permalink to this headline">¶</a></h3>
+<p>To start your SocialEcho application run the following command:</p>
+<div class="highlight-python"><pre>twitterecho run-app</pre>
+</div>
+<p>This will start up a servlet container (Tomcat). Once the command says the container has started and prints out the URL, copy the link to a browser and view the page.</p>
+<blockquote>
+<div><a class="reference external" href="http://localhost:8080/twitterecho">http://localhost:8080/twitterecho</a></div></blockquote>
+<p>Congratulations, you have started your first SocialEcho application!</p>
+</div>
+</div>
+<div class="section" id="configure-environment">
+<h2>Configure environment<a class="headerlink" href="#configure-environment" title="Permalink to this headline">¶</a></h2>
+<p>The file <cite>twitterecho-app/conf/DataSource.groovy</cite> which contains details of the database the application uses. This allows you to set common settings.</p>
+<p>By default, an application is configured to use an in-memory HSQLDB database for development and testing. If you want to use MySQL in production for example, you would have to configure it here:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># By default twitterecho server stores tracking configurations using hsdb,</span>
+<span class="c"># but you can specify your own jdbc supported database</span>
+<span class="p">[</span><span class="n">mysql</span><span class="p">]</span>
+<span class="n">mysql</span><span class="o">.</span><span class="n">host</span><span class="o">=</span><span class="n">localhost</span>
+<span class="n">mysql</span><span class="o">.</span><span class="n">port</span><span class="o">=</span><span class="mi">3304</span>
+<span class="n">mysql</span><span class="o">.</span><span class="n">dbname</span><span class="o">=</span><span class="n">twitterecho</span>
+</pre></div>
+</div>
+<p>The file <cite>twitterecho-app/conf/Config.groovy</cite> which contains details of the database the application uses. This allows you to set common settings.:</p>
+<div class="highlight-python"><pre>[logs]
+#where to log
+logpath=/var/log/twitterecho
+
+[data]
+#where to store temp files
+tmppath=/var/tmp/twitterecho
+
+[general]
+# Verbose logging output.
+verbose = false
+
+[solr]
+# Apache Solr deployment settings (optional)
+solr.host= 192.168.102.195
+solr.port= 8080
+solr.core= portugal
+solr.data= /var/twitterecho/data/solr
+
+[mongodb]
+# MongoDB deployment settings (optional)
+mongodb.host= localhost
+mongodb.port= 27018
+# Specify custom database name
+mongodb.dbname= twitterecho
+
+# Storm deployment settings (optional)
+[stream-processing]
+storm.host=localhost
+
+# RabbitMQ deployment settings (optional)
+[queues]
+amqp.host=192.168.102.195
+amqp.port=5672
+amqp.user=guest
+amqp.pass=guest
+amqp.topic=tweets</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" style="margin-top: -30px;" src="_static/bw_bird_small.jpg" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting started</a><ul>
+<li><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li><a class="reference internal" href="#create-a-socialecho-instance">Create a SocialEcho instance</a></li>
+<li><a class="reference internal" href="#start-socialecho">Start SocialEcho</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configure-environment">Configure environment</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/getting_started_2.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

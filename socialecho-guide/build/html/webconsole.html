@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-47346130-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <title>Web console &mdash; SocialEcho 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+    <link rel="next" title="About" href="license.html" />
+    <link rel="prev" title="Configuring Server" href="command_line_server.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="license.html" title="About"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="command_line_server.html" title="Configuring Server"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">None</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="web-console">
+<h1>Web console<a class="headerlink" href="#web-console" title="Permalink to this headline">¶</a></h1>
+<p>The SocialEcho webconsole provides an HTTP-based API for monitoring of your SocialEcho server, along with a browser-based UI.</p>
+<div class="section" id="features-include">
+<h2>Features include<a class="headerlink" href="#features-include" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>List topics, clients hosts, system, uptime info, etc.</li>
+<li>Monitor tweets counter length, globally, per topic and per client.</li>
+<li>Visualize tweets being processed in realtime</li>
+</ul>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots<a class="headerlink" href="#screenshots" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="_images/webconsole.png"><img alt="_images/webconsole.png" src="_images/webconsole.png" style="width: 550px;" /></a>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>The web UI is located at: <a class="reference external" href="http://[server-name]:9090/.*">http://[server-name]:9090/.*</a>
+The HTTP API its located at: <a class="reference external" href="http://[server-name]:9191/api/sysinfo*">http://[server-name]:9191/api/sysinfo*</a></p>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>IMPORTANT: Don&#8217;t try to use localhost as your address. You need to use current network IP or server name.</p>
+</div>
+<div class="section" id="accessing-system-information-via-http-rest-api">
+<h2>Accessing system information via HTTP REST API<a class="headerlink" href="#accessing-system-information-via-http-rest-api" title="Permalink to this headline">¶</a></h2>
+<p>It provides information like topics, clients, up time, tweets counter, exentensions enabled and basic system info.
+It will serve only resources of type application/json.:</p>
+<div class="highlight-python"><pre>curl -l http://[server-name]:9191/api/sysinfo</pre>
+</div>
+<p>Here an example of an instance running Twitter Sample Streaming.
+Results:</p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+<span class="nx">stats</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">topics</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">sample</span><span class="o">:</span> <span class="p">{</span>
+         <span class="nx">count</span><span class="o">:</span> <span class="mi">128</span><span class="p">,</span>
+         <span class="nx">last_message_at</span><span class="o">:</span> <span class="s2">&quot;Thu Oct 10 15:56:12 WEST 2013&quot;</span><span class="p">,</span>
+         <span class="nx">running_since</span><span class="o">:</span> <span class="s2">&quot;Thu Oct 10 15:54:56 WEST 2013&quot;</span>
+        <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">_global_</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">count</span><span class="o">:</span> <span class="mi">127</span><span class="p">,</span>
+        <span class="nx">last_message_at</span><span class="o">:</span> <span class="s2">&quot;Thu Oct 10 15:56:12 WEST 2013&quot;</span><span class="p">,</span>
+        <span class="nx">running_since</span><span class="o">:</span> <span class="s2">&quot;Thu Oct 10 15:52:47 WEST 2013&quot;</span>
+  <span class="p">},</span>
+  <span class="nx">clients</span><span class="o">:</span> <span class="p">{</span>
+        <span class="mf">192.168</span><span class="p">.</span><span class="mf">1.70</span><span class="o">:</span> <span class="p">{</span>
+         <span class="nx">count</span><span class="o">:</span> <span class="mi">128</span><span class="p">,</span>
+         <span class="nx">last_message_at</span><span class="o">:</span> <span class="s2">&quot;Thu Oct 10 15:56:12 WEST 2013&quot;</span><span class="p">,</span>
+         <span class="nx">running_since</span><span class="o">:</span> <span class="s2">&quot;Thu Oct 10 15:54:56 WEST 2013&quot;</span>
+        <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">},</span>
+<span class="nx">extensions</span><span class="o">:</span> <span class="p">{</span>
+ <span class="nx">adapters</span><span class="o">:</span> <span class="p">[</span>
+ <span class="s2">&quot;pt.sapo.labs.api.impl.adapters.ConsoleStatusAdapter&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;pt.sapo.labs.api.impl.adapters.FileStatusAdapter&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;pt.sapo.labs.api.impl.adapters.MessageBrokerStatusAdapter&quot;</span>
+ <span class="p">],</span>
+ <span class="nx">preprocessors</span><span class="o">:</span> <span class="p">[</span>
+ <span class="s2">&quot;pt.sapo.labs.api.impl.handlers.EntitiesExtractionStatusMetadataHandler&quot;</span><span class="p">,</span>
+ <span class="s2">&quot;pt.sapo.labs.api.impl.handlers.TokenizerStatusMetadataHandler&quot;</span>
+ <span class="p">]</span>
+<span class="p">},</span>
+<span class="nx">sysinfo</span><span class="o">:</span> <span class="p">{</span>
+   <span class="nx">host</span><span class="o">:</span> <span class="s2">&quot;Sapo-Labs-UP-Servers-Mac-mini.local&quot;</span><span class="p">,</span>
+   <span class="nx">os</span><span class="p">.</span><span class="nx">arch</span><span class="o">:</span> <span class="s2">&quot;x86_64&quot;</span><span class="p">,</span>
+   <span class="nx">java</span><span class="p">.</span><span class="nx">version</span><span class="o">:</span> <span class="s2">&quot;1.6.0_51&quot;</span><span class="p">,</span>
+   <span class="nx">java</span><span class="p">.</span><span class="nx">vendor</span><span class="o">:</span> <span class="s2">&quot;Apple Inc.&quot;</span><span class="p">,</span>
+   <span class="nx">os</span><span class="p">.</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Mac OS X&quot;</span>
+<span class="p">},</span>
+<span class="nx">version</span><span class="o">:</span> <span class="s2">&quot;SocialEcho-Server 1.4.1-SNAPSHOT&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" style="margin-top: -30px;" src="_static/bw_bird_small.jpg" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Web console</a><ul>
+<li><a class="reference internal" href="#features-include">Features include</a></li>
+<li><a class="reference internal" href="#screenshots">Screenshots</a></li>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#accessing-system-information-via-http-rest-api">Accessing system information via HTTP REST API</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="command_line_server.html" title="previous chapter">Configuring Server</a></li>
+      <li>Next: <a href="license.html" title="next chapter">About</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/webconsole.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>
