@@ -11,6 +11,10 @@ import sklearn.metrics
 import datetime
 import pickle
 
+from json import loads
+from optparse import OptionParser
+from pprint import pprint
+
 sample_size = 50  # Has no effect in the model data if we use premade model data.
 model_name = "mongodata.pickle"  # The name of the file containing the model.
 class_names = ("human", "bot")
@@ -26,19 +30,40 @@ def create_model(X, y):
   return classifier
 
 
+if __name__ == "__main__":
+    # Command Line Arguments Parser
+    cmd_parser = OptionParser(version="%prog 0.1")
+    cmd_parser.add_option("-H", "--host", type="string", action="store", dest="mongo_host", help="Mongo host")
+    cmd_parser.add_option("-D", "--database", type="string", action="store", dest="mongo_database", help="Mongo database")
+    cmd_parser.add_option("-P", "--port", type="string", action="store", dest="mongo_port", help="Mongo port", default="27017")
+    cmd_parser.add_option("-U", "--users", type="string", action="store", dest="users_collection", help="users collection", default="twitter_users")
+    cmd_parser.add_option("-T", "--tweets", type="string", action="store", dest="tweets_collection", help="tweets collection", default="twitter")
+    
+    (cmd_options, cmd_args) = cmd_parser.parse_args()
 
-# Load or create a model.
-try:
-  with open(model_name, "rb") as f:
-    model = pickle.load(f)
-except IOError:
-    # Read data and filter out problems with dates.
-    usable_bot = datasource.filter_bad_data(datasource.gather_data(bot, sample_size))
-    usable_human = datasource.filter_bad_data(datasource.gather_data(human, sample_size))
-    X, y = train.create_datasets(usable_human, usable_bot)
-    model = create_model(X, y)
-    with open(model_name, "wb") as f:
-      pickle.dump(model, f)
+    if not (cmd_options.mongo_host or cmd_options.mongo_database):
+        cmd_parser.print_help()
+        sys.exit(3)
+
+    print "##################################################################"
+    print " [INFO] Twitter users classifier "
+    print "------------------------------------------------------------------"
+    
+    process()
+    
+def process():
+    # Load or create a model.
+    try:
+      with open(model_name, "rb") as f:
+        model = pickle.load(f)
+    except IOError:
+        # Read data and filter out problems with dates.
+        usable_bot = datasource.filter_bad_data(datasource.gather_data(bot, sample_size))
+        usable_human = datasource.filter_bad_data(datasource.gather_data(human, sample_size))
+        X, y = train.create_datasets(usable_human, usable_bot)
+        model = create_model(X, y)
+        with open(model_name, "wb") as f:
+          pickle.dump(model, f)
 
 
 def classify_user(user_list, limit = sample_size, model = model):

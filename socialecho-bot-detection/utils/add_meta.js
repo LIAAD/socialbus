@@ -6,7 +6,7 @@
 db["twitter_users"].find({"meta": null}).forEach(
   function(doc){
     doc.meta = {"created_at": new Date(doc.created_at)};
-    db.users.save(doc);
+    db["twitter_users"].save(doc);
   }
 ); 
 

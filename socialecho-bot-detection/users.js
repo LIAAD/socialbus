@@ -1,6 +1,6 @@
 var n_messages = 100;
 
-var invalid_users = db.users.find({
+var invalid_users = db["twitter_users"].find({
   "$or": [
     {"meta.bot": {"$exists": true},},
     {"statuses_count": {"$lt": n_messages}},
@@ -35,7 +35,7 @@ reduce = function(key, emits) {
 };
 
 var x = db.runCommand({
-  "mapreduce": "tweets",
+  "mapreduce": "twitter",
   "map": map,
   "reduce": reduce,
   "out": "temp",

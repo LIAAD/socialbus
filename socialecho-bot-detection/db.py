@@ -12,7 +12,7 @@
 # This was made to work only on pymongo 2.2.1, since it was the version installed
 # on koi.
 server = "192.168.102.195"
-database = "twitterecho"
+database = "socialecho_v05"
 
 number_messages_to_eval = 100
 max_users = 200
@@ -31,7 +31,7 @@ db = connection[database]
 def get_list_of_user_id_not_classified(n_messages):
 # TODO: consider other filtering criteria (e.g. date or version of classification).
   users = [ x["id"]
-    for x in db.users.find(
+    for x in db["twitter_users"].find(
       {
         "meta.bot": {"$exists": False},
         "statuses_count": {"$gte": n_messages}
@@ -85,7 +85,7 @@ def get_list_of_messages_from_unclassified_users(n_messages):
 
 # TODO: Consider using an incremental map-reduce.
 # Also, the temporary collection is left on the DB to be overwriten at the next pass.
-  return db.tweets.map_reduce(
+  return db["twitter"].map_reduce(
     map = js_map,
     reduce = js_reduce,
     query = {"user.id": {"$in": get_list_of_user_id_not_classified(n_messages)}},
@@ -107,6 +107,6 @@ def author_iterator(n_messages):
   )
 
 def debug_author(id = 79197076, limit=number_messages_to_eval):
-  u = db.users.find_one({"id": id})
-  t = list(db.tweets.find({"user.id": id}, order=[("user.meta.created_at",-1)], limit=limit))
+  u = db["twitter_users"].find_one({"id": id})
+  t = list(db["twitter"].find({"user.id": id}, order=[("user.meta.created_at",-1)], limit=limit))
   return Author(u,t)
