@@ -10,7 +10,7 @@ import sklearn.cross_validation as kfold
 import sklearn.metrics
 import datetime
 import pickle
-
+import sys
 from json import loads
 from optparse import OptionParser
 from pprint import pprint
@@ -32,18 +32,18 @@ def create_model(X, y):
 
 if __name__ == "__main__":
     # Command Line Arguments Parser
-    cmd_parser = OptionParser(version="%prog 0.1")
-    cmd_parser.add_option("-H", "--host", type="string", action="store", dest="mongo_host", help="Mongo host")
-    cmd_parser.add_option("-D", "--database", type="string", action="store", dest="mongo_database", help="Mongo database")
-    cmd_parser.add_option("-P", "--port", type="string", action="store", dest="mongo_port", help="Mongo port", default="27017")
-    cmd_parser.add_option("-U", "--users", type="string", action="store", dest="users_collection", help="users collection", default="twitter_users")
-    cmd_parser.add_option("-T", "--tweets", type="string", action="store", dest="tweets_collection", help="tweets collection", default="twitter")
-    
-    (cmd_options, cmd_args) = cmd_parser.parse_args()
-
-    if not (cmd_options.mongo_host or cmd_options.mongo_database):
-        cmd_parser.print_help()
-        sys.exit(3)
+    # cmd_parser = OptionParser(version="%prog 0.1")
+#     cmd_parser.add_option("-H", "--host", type="string", action="store", dest="mongo_host", help="Mongo host")
+#     cmd_parser.add_option("-D", "--database", type="string", action="store", dest="mongo_database", help="Mongo database")
+#     cmd_parser.add_option("-P", "--port", type="string", action="store", dest="mongo_port", help="Mongo port", default="27017")
+#     cmd_parser.add_option("-U", "--users", type="string", action="store", dest="users_collection", help="users collection", default="twitter_users")
+#     cmd_parser.add_option("-T", "--tweets", type="string", action="store", dest="tweets_collection", help="tweets collection", default="twitter")
+#     
+#     (cmd_options, cmd_args) = cmd_parser.parse_args()
+# 
+#     if not (cmd_options.mongo_host or cmd_options.mongo_database):
+#         cmd_parser.print_help()
+#         sys.exit(3)
 
     print "##################################################################"
     print " [INFO] Twitter users classifier "
