@@ -20,8 +20,6 @@ from datasources import MongoDataSource
 
 def compute_user_data(tweet):
     user_collection = mongo_conn.database["twitter_users"]
-    user_collection.ensure_index('metadata.type')
-    user_collection.ensure_index('metadata.portuguese_origin')
     
     print "processing tweet ", tweet["id"]
     
@@ -65,6 +63,10 @@ if __name__ == "__main__":
     mongo_conn = MongoDataSource()
     mongo_conn.open_connection({"host":cmd_options.mongo_host,"port":int(cmd_options.mongo_port),"database":cmd_options.mongo_database})
 
+    user_collection = mongo_conn.database["twitter_users"]
+    user_collection.ensure_index('metadata.type')
+    user_collection.ensure_index('metadata.portuguese_origin')
+    
     load_tweets()
         
     print "------------------------------------------------------------------"
