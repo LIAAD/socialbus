@@ -8,7 +8,7 @@ Summary     :    This class defines MongoDB interface
 
 from DataSource import *
 
-import json,solr,time
+import json,time
 import pymongo
 from pymongo import Connection
 import sys
