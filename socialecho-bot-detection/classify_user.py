@@ -29,6 +29,19 @@ def create_model(X, y):
   classifier.fit(X, y)
   return classifier
 
+def process():
+    # Load or create a model.
+    try:
+      with open(model_name, "rb") as f:
+        model = pickle.load(f)
+    except IOError:
+        # Read data and filter out problems with dates.
+        usable_bot = datasource.filter_bad_data(datasource.gather_data(bot, sample_size))
+        usable_human = datasource.filter_bad_data(datasource.gather_data(human, sample_size))
+        X, y = train.create_datasets(usable_human, usable_bot)
+        model = create_model(X, y)
+        with open(model_name, "wb") as f:
+          pickle.dump(model, f)
 
 if __name__ == "__main__":
     # Command Line Arguments Parser
@@ -51,19 +64,7 @@ if __name__ == "__main__":
     
     process()
     
-def process():
-    # Load or create a model.
-    try:
-      with open(model_name, "rb") as f:
-        model = pickle.load(f)
-    except IOError:
-        # Read data and filter out problems with dates.
-        usable_bot = datasource.filter_bad_data(datasource.gather_data(bot, sample_size))
-        usable_human = datasource.filter_bad_data(datasource.gather_data(human, sample_size))
-        X, y = train.create_datasets(usable_human, usable_bot)
-        model = create_model(X, y)
-        with open(model_name, "wb") as f:
-          pickle.dump(model, f)
+
 
 
 def classify_user(user_list, limit = sample_size, model = model):
