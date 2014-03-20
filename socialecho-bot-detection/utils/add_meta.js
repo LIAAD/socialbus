@@ -3,18 +3,18 @@
 
 // Introduce the meta subdocument to users table.
 
-db.users.find({"meta": null}).forEach(
+db["twitter_users"].find({"meta": null}).forEach(
   function(doc){
     doc.meta = {"created_at": new Date(doc.created_at)};
     db.users.save(doc);
   }
 ); 
 
-db.users.ensureIndex({"id": 1});
+db["twitter_users"].ensureIndex({"id": 1});
 
 // Introduce the meta subdocument to tweets table.
 
-db.tweets.find({"user.meta": null}).forEach(
+db["twitter"].find({"user.meta": null}).forEach(
   function(doc){
     var date = new Date(doc.created_at);
     var offset = doc.user.utc_offset;
@@ -25,9 +25,9 @@ db.tweets.find({"user.meta": null}).forEach(
     }
     doc.meta = {"created_at": date, "created_at_local": local_date};
     doc.user.meta = {"created_at": new Date(doc.user.created_at)};
-    db.tweets.save(doc);
+    db["twitter"].save(doc);
   }
 ); 
 
-db.tweets.ensureIndex({"id": 1});
-db.tweets.ensureIndex({"meta.created_at": -1});
+db["twitter"].ensureIndex({"id": 1});
+db["twitter"].ensureIndex({"meta.created_at": -1});
