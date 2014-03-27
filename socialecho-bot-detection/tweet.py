@@ -18,7 +18,8 @@ class Tweet:
     self.tokenized_text = tweet_data['text'].split(" ")
 
   def get_date(self):
-    return self.data['user_created_at']
+    # return self.data['user_created_at']
+    return self.data['user']['created_at']
 
 #  Disabled due to changes in the database.
 #  def get_local_date(self):

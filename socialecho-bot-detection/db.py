@@ -14,8 +14,8 @@
 server = "192.168.102.195"
 database = "socialecho_v05"
 
-number_messages_to_eval = 100
-max_users = 200
+number_messages_to_eval = 10
+max_users = 20000
 tmp_collection_name = "tmp_tweets_from_user_sample"
 
 from pymongo import Connection
@@ -90,7 +90,8 @@ def get_list_of_messages_from_unclassified_users(n_messages):
     reduce = js_reduce,
     query = {"user.id": {"$in": get_list_of_user_id_not_classified(n_messages)}},
     finalize = js_finalize,
-    sort = SON([("meta.created_at", -1)]),
+    # sort = SON([("meta.created_at", -1)]),
+    sort = SON([("created_at", -1)]),
     scope = {"n_messages": n_messages},
     out = {"replace": tmp_collection_name},
     limit = 1E6
@@ -108,5 +109,6 @@ def author_iterator(n_messages):
 
 def debug_author(id = 79197076, limit=number_messages_to_eval):
   u = db["twitter_users"].find_one({"id": id})
-  t = list(db["twitter"].find({"user.id": id}, order=[("user.meta.created_at",-1)], limit=limit))
+  # t = list(db["twitter"].find({"user.id": id}, order=[("user.meta.created_at",-1)], limit=limit))
+  t = list(db["twitter"].find({"user.id": id}, order=[("user.created_at",-1)], limit=limit))
   return Author(u,t)

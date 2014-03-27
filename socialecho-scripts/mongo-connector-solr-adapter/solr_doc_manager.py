@@ -103,8 +103,7 @@ class DocManager():
                 
                 print doc_coordinate
                 
-        # only tweets
-        self.solr.add([{
+        doc = {
                       "_id":doc["id"],
                       # corrigir essa redundancia
                       "id":doc["id"],
@@ -124,7 +123,7 @@ class DocManager():
                   
                       "lang":doc["lang"],
                       "retweeted":doc["retweeted"],
-                      # "retweet_count":retweeted_status_count,
+
                       "retweet_count":doc["retweet_count"],
                       "source":doc["source"],
                   
@@ -146,9 +145,21 @@ class DocManager():
                       "listed_count":doc["user"]["listed_count"],
                       "profile_image_url":doc["user"]["profile_image_url"],
                       "location":doc["user"]["location"],
+                  }
     
-                  
-                  }], commit=False)              
+        # persists metadata using dinamic fields            
+        for metadata_key in metadata.keys:
+            if not metadata_key == "user":
+                if not doc[metadata_key]:
+                    metadata_value = metadata[metadata_key]
+                    doc[metadata_key + "_s"] = metadata_value
+            else:
+                for user_metadata_key in metadata["user"].keys:
+                    user_metadata_value = metadata["user"][user_metadata_key]
+                    doc["user_" + user_metadata_key + "_s"] = user_metadata_value
+                    
+        # only tweets
+        self.solr.add([doc], commit=False)              
 
     def remove(self, doc):
         """Removes documents from Solr
