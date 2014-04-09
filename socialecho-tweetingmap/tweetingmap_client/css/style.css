@@ -4,12 +4,6 @@ body {
   background-color: #f6f6f3;
 }
 
-.about_fixed {
-position: fixed;
-top: 0;
-left: 100px;
-}
-
 #container {
   width: 1024px;
   margin: 0 auto;
@@ -21,9 +15,9 @@ left: 100px;
   */
 #settings {
   position: fixed;
-  top: 40px;
+  top: 0px;
 /*  right: 200px;*/
-  left: 50px;
+/*  left: 50px;*/
 }
 
 #settings-button {
