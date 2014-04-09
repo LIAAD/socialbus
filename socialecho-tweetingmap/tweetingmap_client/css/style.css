@@ -1,0 +1,64 @@
+body {
+  background-color: #f6f6f3;
+}
+
+#container {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+/*
+  Settings
+  */
+#settings {
+  position: fixed;
+  top: 0;
+}
+
+#settings-button {
+  position: absolute;
+  padding: 10px;
+  line-height: 0;
+}
+
+#settings-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 633px;
+  padding: 40px 12px 12px;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 0px 0px 4px 0px;
+  border-radius: 0px 0px 4px 0px;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+}
+
+/*
+  Map
+  */
+#map {
+  background-image: url(../img/tweeting-world-map.png);
+  background-repeat: no-repeat;
+  height: 748px;
+}
+
+#map circle {
+  cursor: pointer;
+}
+
+/*
+  Footer
+  */
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
+footer p {
+  margin: 0 10px;  
+}
