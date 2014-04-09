@@ -32,9 +32,7 @@ var amqp = require('amqp');
 console.log("Starting ... AMQP ");
 
 var conn = amqp.createConnection({
-	host: 'localhost'
-	, port: 5672
-	, connectionTimeout: 0
+	host: '192.168.102.195'
  });
 
 conn.addListener('error', function (e) {
