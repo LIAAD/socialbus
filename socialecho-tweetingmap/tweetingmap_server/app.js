@@ -28,7 +28,6 @@ var io = require('socket.io').listen(port, function() {
 
 var amqp = require('amqp');
 
-
 console.log("Starting ... AMQP ...");
 
 var conn = amqp.createConnection({
@@ -72,30 +71,29 @@ conn.addListener('ready', function () {
 //   io.set("polling duration", 10); 
 // });
 
-
 // Stream Twitter to clients with Socket.IO
-var twitter = require('ntwitter');
-var twit = new twitter({
-  consumer_key: 'nzlQLLYqzeBUFT9wP49jqE0z4',
-  consumer_secret: 'Ox9hLXIDSSYxJdlGy9Sjl1rstQh2hlb2lwdrVSLntomqpPfBiF',
-  access_token_key: '2432370937-VFoo8HzLSdtMHUCoukww156f9oPeLGexkLvP1pE',
-  access_token_secret: 'oP2KXNn99IP7xwZZ4vbxWW9wjC5T8bnCgVFhTFbW95PTz'
-});
-
-twit.stream('statuses/filter', {'locations':'-180,-90,180,90'}, function(stream) {
-  stream.on('data', function (data) {
-    // console.log(data);
-    if (data['coordinates'] != null && data['coordinates']['type'] == 'Point' && data['coordinates']['coordinates'] != [0, 0]) {
-      var custom_data = {
-        'text': data['text'],
-        'id': data['id_str'],
-        'user_id': data['user']['id_str'],
-        'coordinates': data['coordinates']['coordinates'],
-        'color': data['user']['profile_background_color'],
-        'followers_count': data['user']['followers_count']
-      }
-	  // console.log(custom_data["text"]);
-      io.sockets.emit('data', custom_data);
-    };
-  });
-});
+// var twitter = require('ntwitter');
+// var twit = new twitter({
+//   consumer_key: 'nzlQLLYqzeBUFT9wP49jqE0z4',
+//   consumer_secret: 'Ox9hLXIDSSYxJdlGy9Sjl1rstQh2hlb2lwdrVSLntomqpPfBiF',
+//   access_token_key: '2432370937-VFoo8HzLSdtMHUCoukww156f9oPeLGexkLvP1pE',
+//   access_token_secret: 'oP2KXNn99IP7xwZZ4vbxWW9wjC5T8bnCgVFhTFbW95PTz'
+// });
+// 
+// twit.stream('statuses/filter', {'locations':'-180,-90,180,90'}, function(stream) {
+//   stream.on('data', function (data) {
+//     // console.log(data);
+//     if (data['coordinates'] != null && data['coordinates']['type'] == 'Point' && data['coordinates']['coordinates'] != [0, 0]) {
+//       var custom_data = {
+//         'text': data['text'],
+//         'id': data['id_str'],
+//         'user_id': data['user']['id_str'],
+//         'coordinates': data['coordinates']['coordinates'],
+//         'color': data['user']['profile_background_color'],
+//         'followers_count': data['user']['followers_count']
+//       }
+// 	  // console.log(custom_data["text"]);
+//       io.sockets.emit('data', custom_data);
+//     };
+//   });
+// });
