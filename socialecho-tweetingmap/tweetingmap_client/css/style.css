@@ -20,8 +20,8 @@ left: 200px;
   */
 #settings {
   position: fixed;
-  top: 0;
-  right: 200px;
+  top: 50px;
+/*  right: 200px;*/
 }
 
 #settings-button {
