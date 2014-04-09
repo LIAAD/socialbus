@@ -1,5 +1,13 @@
+
+
 body {
   background-color: #f6f6f3;
+}
+
+.about_fixed {
+position: fixed;
+top: 0;
+left: 200px;
 }
 
 #container {
@@ -13,6 +21,7 @@ body {
 #settings {
   position: fixed;
   top: 0;
+  right: 200px;
 }
 
 #settings-button {
