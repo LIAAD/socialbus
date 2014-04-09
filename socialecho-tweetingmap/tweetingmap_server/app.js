@@ -26,6 +26,30 @@ var io = require('socket.io').listen(port, function() {
   console.log("Listening on " + port);
 });
 
+var amqp = require('amqp');
+
+function rabbitUrl(){
+	return "amqp://192.168.102.195:5672";
+}
+
+console.log("Starting ... AMQP URL: " + rabbitUrl());
+var conn = amqp.createConnection({url: rabbitUrl() });
+
+conn.addListener('error', function (e) {
+	console.log("error");
+    throw e;
+});
+ 
+conn.addListener('close', function (e) {
+  console.log('connection closed.');
+});
+ 
+ 
+conn.addListener('ready', function () {
+  console.log("connected to " + conn.serverProperties.product);
+});
+ 
+
 // Force long polling and prevent the use of WebSockets for Heroku.
 // http://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
 // io.configure(function () { 
@@ -55,7 +79,7 @@ twit.stream('statuses/filter', {'locations':'-180,-90,180,90'}, function(stream)
         'color': data['user']['profile_background_color'],
         'followers_count': data['user']['followers_count']
       }
-	  console.log(custom_data["text"]);
+	  // console.log(custom_data["text"]);
       io.sockets.emit('data', custom_data);
     };
   });
