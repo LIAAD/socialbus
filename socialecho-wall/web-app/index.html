@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -19,9 +18,6 @@
 
 	<link rel="stylesheet" href="https://platform.twitter.com/twt/twt.css" type="text/css">
 
-	<!-- <link rel="stylesheet" href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" type="text/css"> -->
-
-	<!-- <link rel="stylesheet" href="http://bootswatch.com/yeti/bootstrap.min.css" type="text/css">	 -->
 	<link rel="stylesheet" href="css/cosmo.bootstrap.css" type="text/css">
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -53,30 +49,14 @@
 		            <div class="nav-collapse collapse">
 		                <ul class="nav">
 		                	<li class="active">
-		                		<a href="#" class="" data-reveal-id="about">SOCIALECHO WALL</a>
+		                		<a href="#" class="" data-reveal-id="about">PORTUGAL TWITTER STREAM</a>
 		                	</li>
-
-							<li>
-						    	<a id="btn_recent" href="#">+ recent</a>
-						    </li>
-
-						    <li>
-						    	<a id="btn_hot" href="#">+ popular</a>
-						    </li>
 						</ul>
 						<ul class="nav pull-right nav-social-icons">
 
-							<!-- <li class="nav-social-icons-facebook" style="padding-top: 15px;">
-								<div class="fb-like" data-href="http://www.vdevinagre.com.br/" data-send="true" data-layout="button_count" data-width="200" data-show-faces="false" data-action="like"></div>
-							</li>
-
-						   	<li class="nav-social-icons-twitter" style="padding-top: 15px; padding-left: 15px;">
-		                	<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.vdevinagre.com.br" data-text="Acompanhe aqui todos os tweets sobre os protestos no Brasil" data-hashtags="protestosbr,changebrazil,mudabrasil,nerdpower">Tweet</a>
-							</li>
-
-							<li class="nav-social-icons-gplus" style="padding-top: 15px;">
-								<div class="g-plusone" data-size="medium"></div>
-							</li> -->
+		                	<li class="active">
+		                		<a href="#" class="" data-reveal-id="about">Show QR-Code</a>
+		                	</li>
 		                </ul>
 		            </div>
 		        </div>
@@ -92,13 +72,14 @@
     <div id="pagging" data-offset="0" data-sort="hot"></div>
 
 	<div id="about" class="reveal-modal">
-		<h2>Portugal Social Stream</h2>
+		<h2>Portugal Twitter Stream</h2>
 		<p>The project is being developed at the <a href="http://www.fe.up.pt/" target="_blank">Faculty of Engineering of the University of Porto</a> , in the scope of the <a href="http://dmir.inesc-id.pt/reaction/Reaction" target="_blank">REACTION</a> project, a computational journalism study in collaboration with <a href="http://labs.sapo.pt/" target="_blank">Sapo Labs</a> .</p>
-		<!-- <ul>
-			<li><a href="http://dmir.inesc-id.pt/reaction/Reaction" target="_blank">REACTION</a></li>
-			<a href="http://labs.sapo.pt/" target="_blank">Sapo Labs</a>
-			<a href="http://www.fe.up.pt/" target="_blank">Faculty of Engineering of the University of Porto</a>
-		</ul> -->
+		
+		<p>
+			Open it on your smartphone.
+		</p>
+		<a href="https://www.the-qrcode-generator.com/"><img src="http://chart.apis.google.com/chart?chs=200x200&amp;cht=qr&amp;chld=|1&amp;chl=http%3A%2F%2Freaction.fe.up.pt%2Fsocialecho-wall%2F" alt="QR Code" /></a>
+		
 	</div>
 
 	<script>
@@ -148,6 +129,11 @@
 			           lastMorePosts();
 			        }
 				});
+
+				setInterval(function(){
+					loadPosts("recent",0);
+				},
+				60000);
 
 				loadPosts("recent",0);
 
