@@ -50,6 +50,21 @@ conn.addListener('close', function (e) {
  
 conn.addListener('ready', function () {
   console.log("connected to " + conn.serverProperties.product);
+  
+  var exchange = conn.exchange('socialecho-1', {'type': 'fanout', durable: false}, function () {
+         var queue = conn.queue('', function () {
+             console.log('Queue ' + exchange.name + ' is open');
+             
+             queue.bind(exchange.name, '');
+             queue.subscribe(function (msg) {
+                 console.log('Subscribed to msg: ' + JSON.stringify(msg));
+                 // api.saveMsg(msg);
+             });
+         });
+         queue.on('queueBindOk', function () {
+             console.log('Queue bound successfully.');
+         });
+     });
 });
  
 
