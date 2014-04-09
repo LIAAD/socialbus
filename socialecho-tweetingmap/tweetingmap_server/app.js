@@ -29,10 +29,11 @@ var io = require('socket.io').listen(port, function() {
 var amqp = require('amqp');
 
 
-console.log("Starting ... AMQP ");
+console.log("Starting ... AMQP ...");
 
 var conn = amqp.createConnection({
-	host: '127.0.0.1'
+	host: '127.0.0.1',
+	port:'5672'	
  });
 
 conn.addListener('error', function (e) {
