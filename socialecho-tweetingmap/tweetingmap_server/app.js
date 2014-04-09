@@ -30,13 +30,12 @@ var amqp = require('amqp');
 
 
 console.log("Starting ... AMQP ");
+
 var conn = amqp.createConnection({
 	host: 'localhost'
 	, port: 5672
-	, login: 'guest'
-	, password: 'guest'
 	, connectionTimeout: 0
- },{defaultExchangeName: "socialecho-1"});
+ });
 
 conn.addListener('error', function (e) {
 	console.log("error");
@@ -46,8 +45,7 @@ conn.addListener('error', function (e) {
 conn.addListener('close', function (e) {
   console.log('connection closed.');
 });
- 
- 
+  
 conn.addListener('ready', function () {
   console.log("connected to " + conn.serverProperties.product);
   
