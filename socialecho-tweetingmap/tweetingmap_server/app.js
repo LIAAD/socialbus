@@ -28,12 +28,15 @@ var io = require('socket.io').listen(port, function() {
 
 var amqp = require('amqp');
 
-function rabbitUrl(){
-	return "amqp://192.168.102.195:5672";
-}
 
-console.log("Starting ... AMQP URL: " + rabbitUrl());
-var conn = amqp.createConnection({url: rabbitUrl() });
+console.log("Starting ... AMQP ");
+var conn = amqp.createConnection({
+	host: 'localhost'
+	, port: 5672
+	, login: 'guest'
+	, password: 'guest'
+	, connectionTimeout: 0
+ },{defaultExchangeName: "socialecho-1"});
 
 conn.addListener('error', function (e) {
 	console.log("error");
