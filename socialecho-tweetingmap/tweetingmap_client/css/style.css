@@ -12,7 +12,7 @@ body {
 
 div#console { 
 	clear: both; 
-	width: 80em; 
+/*	width: 80em; */
 	height: 35ex; 
 	overflow: auto; 
 /*	background-color: #f0f0f0; */
