@@ -17,6 +17,9 @@ div#console {
 	overflow: auto; 
 /*	background-color: #f0f0f0; */
 
+    position: fixed;
+    bottom: 0px;
+	right: 20px;
 	padding: 4px; 
 	border: 0px solid black; 
 	
