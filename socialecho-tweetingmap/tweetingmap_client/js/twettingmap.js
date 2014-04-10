@@ -57,8 +57,6 @@ function weightForFollowers(followers_count) {
 function appendToConsole(tweet){
     var _console=$('#console');
 
-    var tweet = JSON.parse(m.data);
-
     var consoleText = tweet['text'];
 
     var spanText = $( "<span/>", {
