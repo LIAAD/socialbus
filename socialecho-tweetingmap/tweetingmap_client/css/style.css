@@ -1,7 +1,7 @@
 
 
 body {
-  background-color: #f6f6f3;
+  background-color: #0D0D0D;
 }
 
 #container {
@@ -47,7 +47,7 @@ body {
   Map
   */
 #map {
-  background-image: url(../img/tweeting-world-map.png);
+  background-image: url(../img/tweeting-world-map-bw.png);
   background-repeat: no-repeat;
   height: 748px;
 }
