@@ -46,11 +46,34 @@ socket.on('data', function (data) {
   
   if (latitude == 0 && longitude == 0) return;
   
+  appendToConsole(data);
   drawTweet(text, url, latitude, longitude, weight, color);
 });
 
 function weightForFollowers(followers_count) {
   return Math.log(Math.sqrt(followers_count/20));
+}
+
+function appendToConsole(tweet){
+    var _console=$('#console');
+
+    var tweet = JSON.parse(m.data);
+
+    var consoleText = tweet['text'];
+
+    var spanText = $( "<span/>", {
+        text: consoleText,
+        class : "text"
+    });
+
+    spanText.innerHTML = consoleText;
+
+    spanText.appendTo(_console);
+    $("<br/>", {}).appendTo( _console );
+
+    _console.scrollTop(
+            _console[0].scrollHeight - _console.height()
+    );
 }
 
 function drawTweet(text, url, lat, lon, weight, color) {
@@ -61,6 +84,8 @@ function drawTweet(text, url, lat, lon, weight, color) {
   var circle = paper.circle(x, y, 0);
   circle.attr("fill", "#"+color);
   circle.attr("stroke", "none");
+  
+  
   
   $(circle.node).attr("title", text).tooltip().bind('mouseenter', function() {
     circle.pause();

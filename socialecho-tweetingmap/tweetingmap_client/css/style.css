@@ -10,6 +10,19 @@ body {
   
 }
 
+div#console { 
+	clear: both; 
+	width: 80em; 
+	height: 35ex; 
+	overflow: auto; 
+/*	background-color: #f0f0f0; */
+
+	padding: 4px; 
+	border: 0px solid black; 
+	
+	color: white; background-color: transparent;
+}
+
 /*
   Settings
   */
