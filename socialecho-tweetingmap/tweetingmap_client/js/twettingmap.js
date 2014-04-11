@@ -54,8 +54,14 @@ function weightForFollowers(followers_count) {
   return Math.log(Math.sqrt(followers_count/20));
 }
 
+function cleanConsole(){
+	$('#console').empty();
+}
+
+setInterval(cleanConsole,60000);
+
 function appendToConsole(tweet){
-    var _console=$('#console');
+    
 
     var consoleText = tweet['user_name'] + " : " + tweet['text'];
 
