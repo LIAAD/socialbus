@@ -62,7 +62,8 @@ setInterval(cleanConsole,60000);
 
 function appendToConsole(tweet){
     
-
+	var _console = $('#console');
+	
     var consoleText = tweet['user_name'] + " : " + tweet['text'];
 
     var spanText = $( "<span/>", {
