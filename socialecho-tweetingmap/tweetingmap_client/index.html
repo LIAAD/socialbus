@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/add2home.css">
 
   <!--[if lt IE 9]>
-  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
   <link rel="shortcut icon" href="img/favicon.png">
@@ -25,50 +25,53 @@
 </head>
 
 <body>
-	
+
 	<!-- <div class="about_fixed">
-		
+
 	</div> -->
-	
+
   <div id="container">
-	  
+
     <section id="map"></section>
-	<div id='console'></div>
-	
+	<div id='console' class="journalbox center"></div>
+
     <aside id="settings">
-	  <h1 href="#" style="color:white">Portuguese Twitter Stream</h1>	
+	  <h2 href="#" style="color:white">Portuguese Twitter Stream</h2>
+
       <div id="settings-content">
         <p><strong>Tweeting Map</strong> is an experimental visualization of near-realtime public geo-localized tweets.</p>
         <p>Each circle represents a tweet on its location, at near the moment it is being posted. The color comes from user’s profile, and the size represents the number of user’s followers.</p>
         <p>Tweeting Map may be run on one of the following modes:</p>
         <p id="mode-switch" class="btn-group">
-          <a class="btn volatile active" href="#">Fireworks mode</a>
-          <a class="btn fixed" href="#">Paint mode</a>
+          <a class="btn volatile active" href="index.html#">Fireworks mode</a>
+          <a class="btn fixed" href="index.html#">Paint mode</a>
         </p>
-		
+
 		<p>
 		Open on your smartphone
 		</p>
 		<p>
-<a href="https://www.the-qrcode-generator.com/"><img src="http://chart.apis.google.com/chart?chs=200x200&amp;cht=qr&amp;chld=|1&amp;chl=http%3A%2F%2Freaction.fe.up.pt%2Fsocialecho-maps%2F" alt="QR Code" /></a>		
+<a href="https://www.the-qrcode-generator.com/"><img src="http://chart.apis.google.com/chart?chs=200x200&cht=qr&chld=%7C1&chl=http://reaction.fe.up.pt/socialecho-maps/" alt="QR Code" /></a>
 </p>
-		
-		
+
+
       </div>
-      <p><a id="settings-button" href="#">
+
+        <!--<p><a id="settings-button" href="index.html#">
 		  <h3>About</h3>
-		  <!-- <i class="icon-cog"></i> -->
-	  </a></p>
+		  <i class="icon-cog"></i>
+	  </a></p>-->
+
     </aside>
 
     <footer>
-      <p><small>By <a href="http://tomatique.com/">Sapo Labs - Nuno Baldaia, Arian</a></p>		  
+      <!--<p><small>By <a href="http://tomatique.com/">Sapo Labs - Nuno Baldaia, Arian</a></p>-->
     </footer>
 
   </div> <!-- /container -->
 
-   <script src="http://dry-island-6625.herokuapp.com//socket.io/socket.io.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script src="http://dry-island-6625.herokuapp.com/socket.io/socket.io.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
   <script src="js/libs/bootstrap.min.js"></script>
   <script src="js/libs/raphael-min.js" type="text/javascript"></script>
