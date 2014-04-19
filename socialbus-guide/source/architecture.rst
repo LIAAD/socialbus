@@ -1,7 +1,7 @@
 Architecture
 ##############
 
-This section describes each layer of SocialEcho. 
+This section describes each layer of SocialBus. 
 
 Tweets are received from the Twitter streaming API using crawler client and sent to a messaging exchange. The tweets are read from the messaging queue and processed by the computing unit. See diagram below.
 

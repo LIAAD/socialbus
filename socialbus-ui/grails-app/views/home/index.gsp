@@ -14,7 +14,7 @@
 
         <p>
             Monitoring messages on social networks.
-            SocialEcho enables you to continuously collect data from particular user communities, topics or locations.
+            SocialBus enables you to continuously collect data from particular user communities, topics or locations.
             Start now defining a new monitoring scope.
         </p>
 

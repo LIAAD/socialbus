@@ -2,16 +2,16 @@ Installing the Client
 ======================
 
 Clients are instances used to monitor and consume tweets from Twitter. Users can define which keywords or users they are interested in.
-When a SocialEcho Twitter Consumer instance receives a tweet it sends the tweet to the server. 
+When a SocialBus Twitter Consumer instance receives a tweet it sends the tweet to the server. 
 You can deploy as many consumers as you want.
 
 
-These are instructions to deploy an instance of SocialEcho Twitter Consumer.
+These are instructions to deploy an instance of SocialBus Twitter Consumer.
 
 Requirements
 -------------------------
 
-Before installing SocialEcho Twitter Consumer you will need as a minimum the following requiriments 
+Before installing SocialBus Twitter Consumer you will need as a minimum the following requiriments 
 
 	- Java JDK, 1.6 or above
 
@@ -26,18 +26,18 @@ On some platforms (for example OS X) the Java installation is automatically dete
 Downloading and Installing
 ---------------------------------
 
-Download a binary distribution of `SocialEcho <http://goo.gl/HwX0f5>`_ and extract the resulting zip file to a location of your choice.
+Download a binary distribution of `SocialBus <http://goo.gl/HwX0f5>`_ and extract the resulting zip file to a location of your choice.
 Your extracted dir should look like this:
 
 	.. code-block:: bash
 	
-		+ socialbus-server-consumer
-		+ socialbus-twitter-consumer
-		+ socialbus-twitter-oauth
+		+ socialecho-server-consumer
+		+ socialecho-twitter-consumer
+		+ socialecho-twitter-oauth
 		+ docs
 		LICENSE
 
-Open socialbus-twitter-consumer directory:
+Open socialecho-twitter-consumer directory:
 
 	.. code-block:: bash	
 	
@@ -45,10 +45,10 @@ Open socialbus-twitter-consumer directory:
 		+ bin
 		+ conf
 		+ logs
-		socialbus-twitter-consumer.jar
+		socialecho-twitter-consumer.jar
 		LICENSE
 
-If SocialEcho is working correctly you should now be able to type in the terminal::
+If SocialBus is working correctly you should now be able to type in the terminal::
 
 	bin/startup.sh
 
@@ -62,14 +62,14 @@ You should see output similar to this::
 		/_______  /\____/ \___  >__(____  /____/_______  /\___  >___|  /\____/ 
 		        \/            \/        \/             \/     \/     \/        
 	##############################################################################
-	 SocialEcho Twitter Consumer, 2013, Version 0.5
+	 SocialBus Twitter Consumer, 2013, Version 0.5
 	##############################################################################
 	
 To shutdown client services::
 
 	bin/shutdown.sh
 
-Important: shutdown.sh kills all socialbus-twitter-consumer running instances.
+Important: shutdown.sh kills all socialecho-twitter-consumer running instances.
 
 Next step
 #########	

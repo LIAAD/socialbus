@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # -----------------------------------------------------------------------------
-# Stop script for the SocialEcho
+# Stop script for the SocialBus
 #
 # -----------------------------------------------------------------------------
 

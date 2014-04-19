@@ -3,12 +3,12 @@ Client-Server deployment
 
 The server is responsable for processing tweets, extracting metadata, applying language detection, tokenization and other computations.
 
-These are instructions to deploy SocialEcho Server.
+These are instructions to deploy SocialBus Server.
 
 Requirements
 -------------------------
 
-Before installing SocialEcho Server you will need as a minimum the following requiriments 
+Before installing SocialBus Server you will need as a minimum the following requiriments 
 
 	- Java JDK, 1.6 or above
 
@@ -33,21 +33,21 @@ After making sure you have JDK properly installed you need to install the follow
 Downloading and Installing
 ---------------------------------
 
-Download a binary distribution of `SocialEcho <http://goo.gl/HwX0f5>`_ and extract the resulting zip file to a location of your choice.
+Download a binary distribution of `SocialBus <http://goo.gl/HwX0f5>`_ and extract the resulting zip file to a location of your choice.
 Your extracted dir should look like this.
 
 
 	.. code-block:: bash
 	
-		+ socialbus-server-consumer
-		+ socialbus-twitter-consumer
-		+ socialbus-facebook-consumer
-		+ socialbus-twitter-oauth
+		+ socialecho-server-consumer
+		+ socialecho-twitter-consumer
+		+ socialecho-facebook-consumer
+		+ socialecho-twitter-oauth
 		+ docs
 		LICENSE
 
 Before configuring your server go to :doc:`command_line` and follow the steps.
-Open socialbus-server directory:
+Open socialecho-server directory:
 
 	.. code-block:: bash
 
@@ -56,10 +56,10 @@ Open socialbus-server directory:
 		+ bin
 		+ logs
 		+ lib
-		socialbus-server.jar
+		socialecho-server.jar
 		LICENSE
 
-If SocialEcho is working correctly you should now be able to type in the terminal::
+If SocialBus is working correctly you should now be able to type in the terminal::
 
 	bin/startup.sh
 
@@ -73,14 +73,14 @@ You should see output similar to this::
 		/_______  /\____/ \___  >__(____  /____/_______  /\___  >___|  /\____/ 
 		        \/            \/        \/             \/     \/     \/        
 	##############################################################################
-	 SocialEcho Server, 2013, Version 0.5
+	 SocialBus Server, 2013, Version 0.5
 	##############################################################################
 	
 To shutdown server::
 
 	bin/shutdown.sh
 
-Important: shutdown.sh kills all socialbus-server running instances.	
+Important: shutdown.sh kills all socialecho-server running instances.	
 	
 Next step
 #########

@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # -----------------------------------------------------------------------------
-# Start Script for the SocialEcho Authentication Helper
+# Start Script for the SocialBus Authentication Helper
 #
 # -----------------------------------------------------------------------------
 

@@ -1,7 +1,7 @@
 Getting started
 ================
 
-The following makes it simple to start a SocialEcho instance. 
+The following makes it simple to start a SocialBus instance. 
 
 
 Quick Start
@@ -10,9 +10,9 @@ Quick Start
 .. toctree::
 	:maxdepth: 1
 
-Create a SocialEcho instance
+Create a SocialBus instance
 ******************************
-Once you have installed SocialEcho you can use the built-in target for creating new projects::
+Once you have installed SocialBus you can use the built-in target for creating new projects::
 
 	twitterecho create-instance my-project
 
@@ -43,9 +43,9 @@ This creates a new directory named after your application and containing the pro
 			+ libraries 		--> lib depencies	  
 
 
-Start SocialEcho
+Start SocialBus
 ******************
-To start all SocialEcho services run the following command::
+To start all SocialBus services run the following command::
 
 	twitterecho start-all
 
@@ -61,7 +61,7 @@ This will start up a servlet container (Tomcat). Once the command says the conta
 	- http://localhost:8080/scopes
 	- http://localhost:3030/dashboard
 
-Congratulations, you have started your SocialEcho!
+Congratulations, you have started your SocialBus!
 
 Configure environment
 ---------------------

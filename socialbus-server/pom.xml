@@ -7,7 +7,7 @@
 	<version>0.6-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>SocialEcho Server</name>
+	<name>SocialBus Server</name>
 	<url>http://reaction.fe.up.pt/socialbus-guide/</url>
 
 	<licenses>

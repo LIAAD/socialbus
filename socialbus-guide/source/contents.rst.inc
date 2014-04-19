@@ -12,7 +12,7 @@ User's Guide
 --------------------
 
 This part of the documentation is written text and should give you an idea
-how to work with SocialEcho.
+how to work with SocialBus.
 
 .. toctree::
    :maxdepth: 2

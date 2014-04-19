@@ -1,7 +1,7 @@
 About
 =======
+The platform is being developed at the Faculty of Engineering of the University of Porto and is partially funded by the REACTION grant (funded by FCT, Ref. UTA-Est/MAI/0006/2009) and Sapo Labs.  
 
-The platform is being developed at the Faculty of Engineering of the University of Porto, in the scope of the REACTION project and in collaboration with SAPO Labs .
 
 License
 -------
@@ -13,8 +13,8 @@ Matko Boanjak, Eduardo Oliveira, José Martins, Eduarda Mendes Rodrigues, and Lu
 
 .. _authors:
 
-Authors
--------
+Contributors
+------------
 
 .. include:: AUTHORS
 

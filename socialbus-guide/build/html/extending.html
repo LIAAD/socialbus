@@ -17,7 +17,7 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <title>Extending SocialEcho &mdash; SocialEcho 2.0 documentation</title>
+    <title>Extending SocialBus &mdash; SocialBus 2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+    <link rel="top" title="SocialBus 2.0 documentation" href="index.html" />
    
   
   <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
@@ -59,19 +59,19 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="extending-socialecho">
-<h1>Extending SocialEcho<a class="headerlink" href="#extending-socialecho" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="extending-socialbus">
+<h1>Extending SocialBus<a class="headerlink" href="#extending-socialbus" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="java-serviceloader-api">
 <h2>Java ServiceLoader API<a class="headerlink" href="#java-serviceloader-api" title="Permalink to this headline">¶</a></h2>
 <p>Defining an API and developing the corresponding implementation has become an uber mainstream practice when developing large Java applications. Modularization is such an useful design principle, especially to avoid spaghetti code, for testing and debugging, and for re-implementation of old code.</p>
 <p>Many developers seek to separate API interfaces and abstract classes from their implementation in separate packages. Yet, this almost always leads to cycles between java packages (api refers to impl, and vice-versa). There has been many frameworks, such as OSGi, supporting modularization, but the documentation has not always been good and complete. Many developers have struggled with class loading issues too.</p>
 <p>Fortunately, Java has delivered the ServiceLoader (<a class="reference external" href="http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html">http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html</a>) utility since release 6. The example described in this post is available from Github in the Java-ServiceLoader directory. It is inspired from here.</p>
-<p>SocialEcho makes use of ServiceLoader API to extend new modules. This section shows how to define custom adapters to implement custom and creative ways for indexing tweets.</p>
+<p>SocialBus makes use of ServiceLoader API to extend new modules. This section shows how to define custom adapters to implement custom and creative ways for indexing tweets.</p>
 </div>
 <div class="section" id="defining-custom-adapters">
 <h2>Defining custom adapters<a class="headerlink" href="#defining-custom-adapters" title="Permalink to this headline">¶</a></h2>
-<p>SocialEcho already offers builtin modules for file and MongoDB indexing. But you may face diferent needs and in order to accomplish this is how you must implement your custom indexing specifications.</p>
-<p>For SocialEcho definition, <strong>Adapters</strong> handle each tweet message that comes into the system. You can define your own adapter to get messages to index to MySQL for example or even send it to a message-broker system. It is up to you.</p>
+<p>SocialBus already offers builtin modules for file and MongoDB indexing. But you may face diferent needs and in order to accomplish this is how you must implement your custom indexing specifications.</p>
+<p>For SocialBus definition, <strong>Adapters</strong> handle each tweet message that comes into the system. You can define your own adapter to get messages to index to MySQL for example or even send it to a message-broker system. It is up to you.</p>
 <p>First thing you need is to create a java project and make sure you have <strong>twitterecho-core.jar</strong> into your classpath. You find it at <strong>lib/</strong> folder.
 Given our interface for adapters you can implement your own class. This is the interface:</p>
 <blockquote>
@@ -160,7 +160,7 @@ Given our interface for adapters you can implement your own class. This is the i
 <div class="highlight-python"><div class="highlight"><pre><span class="n">pt</span><span class="o">.</span><span class="n">sapo</span><span class="o">.</span><span class="n">labs</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">impl</span><span class="o">.</span><span class="n">adapters</span><span class="o">.</span><span class="n">ConsoleStatusAdapter</span>
 </pre></div>
 </div>
-<p>Build your project in a jar and deploy it at SocialEcho <em>lib</em> folder and restart it.</p>
+<p>Build your project in a jar and deploy it at SocialBus <em>lib</em> folder and restart it.</p>
 <p>The service implementation is loaded at bootstrap.</p>
 <div class="section" id="defining-custom-processors">
 <h3>Defining custom processors<a class="headerlink" href="#defining-custom-processors" title="Permalink to this headline">¶</a></h3>
@@ -179,7 +179,7 @@ Given our interface for adapters you can implement your own class. This is the i
 </a></p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Extending SocialEcho</a><ul>
+<li><a class="reference internal" href="#">Extending SocialBus</a><ul>
 <li><a class="reference internal" href="#java-serviceloader-api">Java ServiceLoader API</a></li>
 <li><a class="reference internal" href="#defining-custom-adapters">Defining custom adapters</a><ul>
 <li><a class="reference internal" href="#defining-custom-processors">Defining custom processors</a></li>

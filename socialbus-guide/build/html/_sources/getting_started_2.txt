@@ -1,20 +1,20 @@
 Getting started
 ================
 
-The following makes it simple to start a SocialEcho instance. 
+The following makes it simple to start a SocialBus instance. 
 
 Quick Start
 -------------
 
-- Create a SocialEcho instance
+- Create a SocialBus instance
 	- Start services
 	- Configure a Data Source (Optional)
 	- Configure Apache Solr (Optional)
 	- Configure MongoDB (Optional)
 
-Create a SocialEcho instance
+Create a SocialBus instance
 ******************************
-Once you have installed SocialEcho you can use the built-in target for creating new projects::
+Once you have installed SocialBus you can use the built-in target for creating new projects::
 
 	twitterecho create-instance my-project
 
@@ -42,9 +42,9 @@ This creates a new directory named after your application and containing the pro
 	       + system-dashboard		---> system activity dashboard
 
 
-Start SocialEcho
+Start SocialBus
 ******************
-To start your SocialEcho application run the following command::
+To start your SocialBus application run the following command::
 
 	twitterecho run-app
 
@@ -52,7 +52,7 @@ This will start up a servlet container (Tomcat). Once the command says the conta
 
 	http://localhost:8080/twitterecho
 
-Congratulations, you have started your first SocialEcho application!
+Congratulations, you have started your first SocialBus application!
 
 
 Configure environment

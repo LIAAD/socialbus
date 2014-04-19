@@ -1,7 +1,7 @@
 Web console
 ===========
 
-The SocialEcho webconsole provides an HTTP-based API for monitoring of your SocialEcho server, along with a browser-based UI. 
+The SocialBus webconsole provides an HTTP-based API for monitoring of your SocialBus server, along with a browser-based UI. 
 
 Features include
 -----------------
@@ -25,7 +25,7 @@ The HTTP API its located at: http://[server-name]:9191/api/sysinfo*
 
 .. Configuration
 .. ----------------
-.. Options are managed through the main SocialEcho configuration file **conf/server.conf**.
+.. Options are managed through the main SocialBus configuration file **conf/server.conf**.
 ..  
 .. .. code-block:: bash
 .. 
@@ -87,5 +87,5 @@ Results:
 		   java.vendor: "Apple Inc.",
 		   os.name: "Mac OS X"
 		},
-		version: "socialbus-Server 1.4.1-SNAPSHOT"
+		version: "SocialBus-Server 1.4.1-SNAPSHOT"
 		}

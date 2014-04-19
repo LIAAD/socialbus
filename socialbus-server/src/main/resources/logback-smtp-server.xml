@@ -14,7 +14,7 @@
 		<password></password>
 		<SSL>true</SSL>
 
-		<subject>SocialEcho Server Alert! %logger{20} - %m</subject> -->
+		<subject>SocialBus Server Alert! %logger{20} - %m</subject> -->
 
 		
 		<layout class="ch.qos.logback.classic.PatternLayout">

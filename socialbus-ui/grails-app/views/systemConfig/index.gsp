@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="bootstrap"/>
-    <title>SocialEcho</title>
+    <title>SocialBus</title>
 </head>
 
 <body>

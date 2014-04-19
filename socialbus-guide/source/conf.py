@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# SocialEcho documentation build configuration file, created by
+# SocialBus documentation build configuration file, created by
 # sphinx-quickstart on Tue May 28 14:53:55 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'SocialEcho'
+project = u'SocialBus'
 copyright = u'2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -187,7 +187,7 @@ html_use_modindex = True
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'SocialEchodoc'
+htmlhelp_basename = 'SocialBusdoc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
@@ -205,7 +205,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'SocialEcho.tex', u'SocialEcho Documentation',
+  ('index', 'SocialBus.tex', u'SocialBus Documentation',
    u'Arian Pasquali', 'manual'),
 ]
 
@@ -234,7 +234,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'twitterecho', u'SocialEcho Documentation',
+    ('index', 'twitterecho', u'SocialBus Documentation',
      [u'Arian Pasquali'], 1)
 ]
 
@@ -247,8 +247,8 @@ man_show_urls = False
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'SocialEcho', u'SocialEcho Documentation',
-   u'Arian Pasquali', 'SocialEcho', 'One line description of project.',
+  ('index', 'SocialBus', u'SocialBus Documentation',
+   u'Arian Pasquali', 'SocialBus', 'One line description of project.',
    'Miscellaneous'),
 ]
 

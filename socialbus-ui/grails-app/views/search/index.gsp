@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="layout" content="bootstrap"/>
-    <title>SocialEcho</title>
+    <title>SocialBus</title>
 	
 	<link REL=StyleSheet type="text/css" href="${resource(dir: 'css/twitter', file: 'card_embed.css')}" />
 	<link REL=StyleSheet type="text/css" href="${resource(dir: 'css', file: 'trendlines.css')}" />

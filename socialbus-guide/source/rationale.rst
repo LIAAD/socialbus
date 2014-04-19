@@ -12,8 +12,8 @@ Social networks provide a huge and valuable amount of reasearch assets, real-tim
 Project definition
 --------------------
 
-SocialEcho aims to be a fault tolerant data collector for social networks. Currently it supports Twitter and in the near future it will support Facebook.
+SocialBus aims to be a fault tolerant data collector for social networks. Currently it supports Twitter and in the near future it will support Facebook.
 
 Building a data collector for social networks can be tricky, user have to manage API constraints, authorization tokens and sometimes networks failures. 
 
-SocialEcho is a toolkit for collecting and processing messages from social networks for supporting research. It enables you to continuously collect data from particular user communities or topics, while respecting imposed limits and being fault tolerant. Additional modules can be easily implemented and extended. 
+SocialBus is a toolkit for collecting and processing messages from social networks for supporting research. It enables you to continuously collect data from particular user communities or topics, while respecting imposed limits and being fault tolerant. Additional modules can be easily implemented and extended. 

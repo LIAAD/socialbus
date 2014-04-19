@@ -1,4 +1,4 @@
-Extending SocialEcho
+Extending SocialBus
 =====================
 
 Java ServiceLoader API
@@ -10,14 +10,14 @@ Many developers seek to separate API interfaces and abstract classes from their 
 
 Fortunately, Java has delivered the ServiceLoader (http://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html) utility since release 6. The example described in this post is available from Github in the Java-ServiceLoader directory. It is inspired from here.
 
-SocialEcho makes use of ServiceLoader API to extend new modules. This section shows how to define custom adapters to implement custom and creative ways for indexing tweets.
+SocialBus makes use of ServiceLoader API to extend new modules. This section shows how to define custom adapters to implement custom and creative ways for indexing tweets.
 
 Defining custom adapters
 ************************
 
-SocialEcho already offers builtin modules for file and MongoDB indexing. But you may face diferent needs and in order to accomplish this is how you must implement your custom indexing specifications.
+SocialBus already offers builtin modules for file and MongoDB indexing. But you may face diferent needs and in order to accomplish this is how you must implement your custom indexing specifications.
 
-For SocialEcho definition, **Adapters** handle each tweet message that comes into the system. You can define your own adapter to get messages to index to MySQL for example or even send it to a message-broker system. It is up to you. 
+For SocialBus definition, **Adapters** handle each tweet message that comes into the system. You can define your own adapter to get messages to index to MySQL for example or even send it to a message-broker system. It is up to you. 
 
 First thing you need is to create a java project and make sure you have **twitterecho-core.jar** into your classpath. You find it at **lib/** folder.
 Given our interface for adapters you can implement your own class. This is the interface:
@@ -111,7 +111,7 @@ The file contains fully qualified name of the implementation. This would be the 
 
 		pt.sapo.labs.api.impl.adapters.ConsoleStatusAdapter
 
-Build your project in a jar and deploy it at SocialEcho *lib* folder and restart it.
+Build your project in a jar and deploy it at SocialBus *lib* folder and restart it.
 	
 The service implementation is loaded at bootstrap.
 

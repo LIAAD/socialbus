@@ -17,7 +17,7 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <title>Quick start deployment &mdash; SocialEcho 2.0 documentation</title>
+    <title>Quick start deployment &mdash; SocialBus 2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+    <link rel="top" title="SocialBus 2.0 documentation" href="index.html" />
     <link rel="next" title="Client-Server deployment" href="installation_serverclient_mode.html" />
     <link rel="prev" title="Rationale" href="rationale.html" />
    
@@ -70,12 +70,12 @@
   <div class="section" id="quick-start-deployment">
 <h1>Quick start deployment<a class="headerlink" href="#quick-start-deployment" title="Permalink to this headline">¶</a></h1>
 <p>Clients are instances used to monitor and consume tweets from Twitter. Users can define which keywords or users they are interested in.
-When a SocialEcho Twitter Consumer instance receives a tweet it sends the tweet to the server.
+When a SocialBus Twitter Consumer instance receives a tweet it sends the tweet to the server.
 You can deploy as many consumers as you want.</p>
-<p>These are instructions to deploy an instance of SocialEcho Twitter Consumer.</p>
+<p>These are instructions to deploy an instance of SocialBus Twitter Consumer.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>Before installing SocialEcho Twitter Consumer you will need as a minimum the following requiriments</p>
+<p>Before installing SocialBus Twitter Consumer you will need as a minimum the following requiriments</p>
 <blockquote>
 <div><ul class="simple">
 <li>Java JDK, 1.6 or above</li>
@@ -92,37 +92,37 @@ On some platforms (for example OS X) the Java installation is automatically dete
 </div>
 <div class="section" id="downloading-and-installing">
 <h2>Downloading and Installing<a class="headerlink" href="#downloading-and-installing" title="Permalink to this headline">¶</a></h2>
-<p>Download a binary distribution of <a class="reference external" href="http://goo.gl/HwX0f5">SocialEcho</a> and extract the resulting zip file to a location of your choice.
+<p>Download a binary distribution of <a class="reference external" href="http://goo.gl/HwX0f5">SocialBus</a> and extract the resulting zip file to a location of your choice.
 Your extracted dir should look like this:</p>
 <blockquote>
-<div><div class="highlight-bash"><div class="highlight"><pre>+ socialbus-server-consumer
-+ socialbus-twitter-consumer
-+ socialbus-facebook-consumer
-+ socialbus-twitter-oauth
+<div><div class="highlight-bash"><div class="highlight"><pre>+ socialecho-server-consumer
++ socialecho-twitter-consumer
++ socialecho-facebook-consumer
++ socialecho-twitter-oauth
 + docs
 LICENSE
 </pre></div>
 </div>
 </div></blockquote>
-<p>Open socialbus-twitter-consumer directory:</p>
+<p>Open socialecho-twitter-consumer directory:</p>
 <blockquote>
 <div><div class="highlight-bash"><div class="highlight"><pre>+ lib
 + bin
 + conf
 + logs
-socialbus-twitter-consumer.jar
+socialecho-twitter-consumer.jar
 LICENSE
 </pre></div>
 </div>
 </div></blockquote>
-<p>Before start your Twitter Consumer you will need to <a class="reference internal" href="setup_twitter_app.html"><em>Twitter user lookup</em></a>.
+<p>Before start your Twitter Consumer you will need to <a class="reference internal" href="setup_twitter_app.html"><em>Setup Twitter authorized access</em></a>.
 Make sure to follow the steps to create your file with token authorization.</p>
-<p>If SocialEcho is working correctly you should now be able to type in the terminal:</p>
+<p>If SocialBus is working correctly you should now be able to type in the terminal:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="nb">bin</span><span class="o">/</span><span class="n">startup</span><span class="o">.</span><span class="n">sh</span> <span class="o">-</span><span class="n">oauth</span><span class="o">=</span><span class="n">your</span><span class="o">-</span><span class="n">tokens</span><span class="o">-</span><span class="nb">file</span><span class="o">.</span><span class="n">csv</span>
 </pre></div>
 </div>
-<p>Following <a class="reference internal" href="setup_twitter_app.html"><em>Twitter user lookup</em></a> steps you will can type:</p>
-<div class="highlight-python"><pre>bin/startup.sh -oauth=../../socialbus-twitter-oauth/tokens.csv</pre>
+<p>Following <a class="reference internal" href="setup_twitter_app.html"><em>Setup Twitter authorized access</em></a> steps you will can type:</p>
+<div class="highlight-python"><pre>bin/startup.sh -oauth=../../socialecho-twitter-oauth/tokens.csv</pre>
 </div>
 <p>You should see output similar to this:</p>
 <div class="highlight-python"><pre>##############################################################################
@@ -133,14 +133,14 @@ Make sure to follow the steps to create your file with token authorization.</p>
         /_______  /\____/ \___  &gt;__(____  /____/_______  /\___  &gt;___|  /\____/
                 \/            \/        \/             \/     \/     \/
 ##############################################################################
- SocialEcho Twitter Consumer, 2013, Version 0.5
+ SocialBus Twitter Consumer, 2013, Version 0.5
 ##############################################################################</pre>
 </div>
 <p>To shutdown client services:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="nb">bin</span><span class="o">/</span><span class="n">shutdown</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
-<p>Important: shutdown.sh kills all socialbus-twitter-consumer running instances.</p>
+<p>Important: shutdown.sh kills all socialecho-twitter-consumer running instances.</p>
 <div class="section" id="next-step">
 <h3>Next step<a class="headerlink" href="#next-step" title="Permalink to this headline">¶</a></h3>
 <p>For more details about configuration go to <a class="reference internal" href="command_line.html"><em>Configuring Twitter Consumer</em></a>.</p>

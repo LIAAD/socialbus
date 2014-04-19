@@ -16,7 +16,7 @@
 # limitations under the License.
 
 # -----------------------------------------------------------------------------
-# Start/Stop Script for the SocialEcho Server
+# Start/Stop Script for the SocialBus Server
 #
 # Environment Variable Prerequisites
 #
@@ -73,11 +73,11 @@
 #   SOCIALECHO_PID    (Optional) Path of the file which should contains the pid
 #                   of catalina startup java process, when start (fork) is used
 #
-#   LOGGING_CONFIG  (Optional) Override SocialEcho's logging config file
+#   LOGGING_CONFIG  (Optional) Override SocialBus's logging config file
 #                   Example (all one line)
 #                   LOGGING_CONFIG="-Djava.util.logging.config.file=$SOCIALECHO_BASE/conf/logging.properties"
 #
-#   LOGGING_MANAGER (Optional) Override SocialEcho's logging manager
+#   LOGGING_MANAGER (Optional) Override SocialBus's logging manager
 #                   Example (all one line)
 #                   LOGGING_MANAGER="-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager"
 #
@@ -238,14 +238,14 @@ fi
 if [ "$1" = "start" ] ; then
 
 echo "##############################################################################"
-echo "  _________             .__       .__  ___________      .__            "
-echo " /   _____/ ____   ____ |__|____  |  | \_   _____/ ____ |  |__   ____  "
-echo " \_____  \ /  _ \_/ ___\|  \__  \ |  |  |    __)__/ ___\|  |  \ /  _ \ "
-echo " /        (  <_> )  \___|  |/ __ \|  |__|        \  \___|   Y  (  <_> )"
-echo "/_______  /\____/ \___  >__(____  /____/_______  /\___  >___|  /\____/ "
-echo "        \/            \/        \/             \/     \/     \/        "
+echo "  _________             .__       .__ __________              "
+echo " /   _____/ ____   ____ |__|____  |  |\______   \__ __  ______"
+echo " \_____  \ /  _ \_/ ___\|  \__  \ |  | |    |  _/  |  \/  ___/"
+echo " /        (  <_> )  \___|  |/ __ \|  |_|    |   \  |  /\___ \ "
+echo "/_______  /\____/ \___  >__(____  /____/______  /____//____  >"
+
 echo "##############################################################################"
-echo " SocialEcho Streaming Client, 2013, Version 0.5"
+echo " SocialBus Streaming Client, 2013, Version 0.5"
 
 SOCIALECHO_ARGS=" "
 SOCIALECHO_FILTER_FILE=$2
@@ -271,7 +271,7 @@ echo "##########################################################################
           PID=`cat "$SOCIALECHO_PID"`
           ps -p $PID >/dev/null 2>&1
           if [ $? -eq 0 ] ; then
-            echo "SocialEcho appears to still be running with PID $PID. Start aborted."
+            echo "SocialBus appears to still be running with PID $PID. Start aborted."
             exit 1
           else
             echo "Removing/clearing stale PID file."
@@ -317,7 +317,7 @@ echo "##########################################################################
   fi
 
 elif [ "$1" = "stop" ] ; then
-	echo "Stopping SocialEcho Client"
+	echo "Stopping SocialBus Client"
 	ps aux | grep socialbus-facebook-consumer | awk '{print $2}' | xargs kill -9
 	echo "Done"
 
@@ -325,11 +325,11 @@ else
 
   echo "Usage: socialbus-facebook-consumer.sh ( commands ... )"
   echo "commands:"
-  echo "  start [configfile] Start SocialEcho in a separate window"
-  echo "  stop               Stop SocialEcho, waiting up to 5 seconds for the process to end"
-  echo "  stop n             Stop SocialEcho, waiting up to n seconds for the process to end"
-  echo "  stop -force        Stop SocialEcho, wait up to 5 seconds and then use kill -KILL if still running"
-  echo "  stop n -force      Stop SocialEcho, wait up to n seconds and then use kill -KILL if still running"
+  echo "  start [configfile] Start SocialBus in a separate window"
+  echo "  stop               Stop SocialBus, waiting up to 5 seconds for the process to end"
+  echo "  stop n             Stop SocialBus, waiting up to n seconds for the process to end"
+  echo "  stop -force        Stop SocialBus, wait up to 5 seconds and then use kill -KILL if still running"
+  echo "  stop n -force      Stop SocialBus, wait up to n seconds and then use kill -KILL if still running"
   echo "Note: Waiting for the process to end and use of the -force option require that \$SOCIALECHO_PID is defined"
   exit 1
 

@@ -1,10 +1,10 @@
 Setup Twitter authorized access 
 ###############################
 
-SocialEcho Twitter Consumer needs to make authorized calls to Twitter's APIs. 
-But first Twitter needs to indentify your SocialEcho instance as an application.
+SocialBus Twitter Consumer needs to make authorized calls to Twitter's APIs. 
+But first Twitter needs to indentify your SocialBus instance as an application.
 
-This guide walks you through the steps of registering an application that you can use to integrate your SocialEcho instance with Twitter. 
+This guide walks you through the steps of registering an application that you can use to integrate your SocialBus instance with Twitter. 
 
 Registering a new application at Twitter
 ----------------------------------------
@@ -45,13 +45,13 @@ Obtaining Twitter access tokens
 
 There are many ways to obtain such tokens, in our case we will use Twitter's PIN-based authorization <https://dev.twitter.com/docs/auth/pin-based-authorization>.
 
-To obtain the tokens for you instance please go to socialbus-twitter-oauth at your base dir::
+To obtain the tokens for you instance please go to socialecho-twitter-oauth at your base dir::
 
-	> cd socialbus-twitter-oauth
+	> cd socialecho-twitter-oauth
 	
 And finally run:: 
 
-	> ./socialbus-twitter-oauth.sh
+	> ./socialecho-twitter-oauth.sh
 	
 You will see the following output::
 
@@ -76,7 +76,7 @@ You should now have a tokens.csv file similar to this::
 
 	<token>,<token-secret>,<consumer-key>,<consumer-secret>
 	
-You don't have to worry with its content. You are ready to inform it when running socialbus-twitter-consumer.
+You don't have to worry with its content. You are ready to inform it when running socialecho-twitter-consumer.
 
 
 Next

@@ -17,7 +17,7 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <title>Welcome to SocialEcho &mdash; SocialEcho 2.0 documentation</title>
+    <title>Welcome to SocialBus &mdash; SocialBus 2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -34,7 +34,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="SocialEcho 2.0 documentation" href="#" />
+    <link rel="top" title="SocialBus 2.0 documentation" href="#" />
     <link rel="next" title="Rationale" href="rationale.html" />
    
   
@@ -65,13 +65,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-socialecho">
-<h1>Welcome to SocialEcho<a class="headerlink" href="#welcome-to-socialecho" title="Permalink to this headline">¶</a></h1>
-<a class="floatingflask reference internal image-reference" href="_images/panther1.jpg"><img alt="SocialEcho: web development, one drop at a time" class="floatingflask" src="_images/panther1.jpg" style="height: 300px;" /></a>
-<p>Welcome to SocialEcho&#8217;s documentation.</p>
-<p>The project is being developed at the <a class="reference external" href="http://www.fe.up.pt/">Faculty of Engineering of the University of Porto</a>  , in the scope of the  <a class="reference external" href="http://dmir.inesc-id.pt/reaction/Reaction">REACTION</a> project, a computational journalism study in collaboration with  <a class="reference external" href="http://labs.sapo.pt">Sapo Labs</a> .</p>
-<p>SocialEcho aims to be a fault tolerant data collector for social networks. Currently it supports Twitter and in the near future it will support Facebook.</p>
-<p>The <em class="xref std std-ref">rationale</em> page explains what SocialEcho is and why it was built.</p>
+  <div class="section" id="welcome-to-socialbus">
+<h1>Welcome to SocialBus<a class="headerlink" href="#welcome-to-socialbus" title="Permalink to this headline">¶</a></h1>
+<a class="floatingflask reference internal image-reference" href="_images/meadow-lark-clip-art.jpg"><img alt="SocialBus: web development, one drop at a time" class="floatingflask" src="_images/meadow-lark-clip-art.jpg" style="height: 300px;" /></a>
+<p>Welcome to SocialBus&#8217;s documentation.</p>
+<p>The project is being developed at the <a class="reference external" href="http://www.fe.up.pt/">Faculty of Engineering of the University of Porto</a> and is partially funded by the <a class="reference external" href="http://dmir.inesc-id.pt/reaction/Reaction">REACTION</a> grant (funded by FCT, Ref. UTA-Est/MAI/0006/2009) and <a class="reference external" href="http://labs.sapo.pt">Sapo Labs</a> .</p>
+<p>SocialBus aims to be a fault tolerant data collector for social networks. Currently it supports Twitter and Facebook.</p>
+<p>The <em class="xref std std-ref">rationale</em> page explains what SocialBus is and why it was built.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="rationale.html">Rationale</a></li>
@@ -79,22 +79,25 @@
 </div>
 <div class="section" id="how-it-works">
 <h2>How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
-<p>SocialEcho comprises somes packages. SocialEcho Server, SocialEcho Twitter Consumer, SocialEcho Facebook Consumer and SocialEcho Twitter OAuth.</p>
-<p>SocialEcho Twitter Consumer is used to monitor and consume tweets from Twitter. Users can define which keywords or users they are interested in. Users can deploy as many consumers as wanted.</p>
-<p>SocialEcho Facebook Consumer is capable of searching posts on Facebook based also on keywords.</p>
-<p>When a consumer receives a tweet it sends the message to SocialEcho Server which is responsable for processing, extracting metadata, indexing, tokenizing and other computations.</p>
-<p>SocialEcho Twitter OAuth is a helper tool to create a file with Twitter user authorization token.</p>
-<p>This documentation has all the instructions to deploy you own SocialEcho instance.</p>
+<p>SocialBus comes with Facebook and Twitter consumers. You can extend and implement yours.</p>
+<ul class="simple">
+<li>SocialBus Twitter Consumer is used to monitor and consume tweets from Twitter. Users can define which keywords or users they are interested in. Users can deploy as many consumers as wanted.</li>
+<li>SocialBus Facebook Consumer is capable of searching posts on Facebook based also on keywords.</li>
+</ul>
+<p>When a consumer receives a tweet it sends the message to SocialBus Server which is responsable for processing, extracting metadata, indexing, tokenizing and other computations.</p>
+<p>This documentation has all the instructions to deploy you own SocialBus instance.</p>
 </div>
 <div class="section" id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
 <a class="reference internal image-reference" href="_images/socialecho_architecture.png"><img alt="_images/socialecho_architecture.png" src="_images/socialecho_architecture.png" style="width: 550px;" /></a>
 </div>
-<div class="section" id="download-last-release">
-<h2>Download last release<a class="headerlink" href="#download-last-release" title="Permalink to this headline">¶</a></h2>
-<p>Release v0.6</p>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h2>
+<p>If you intend to use TwitterEcho, please cite the following paper:
+“Matko Bošnjak, Eduardo Oliveira, José Martins, Eduarda Mendes Rodrigues, Luís Sarmento “TwitterEcho – A Distributed Focused Crawler to Support Open Research with Twitter Data”, World Wide Web Conference 2012, April 16–20, 2012, Lyon, France”</p>
+<p>Release v0.6 - Compatible with any UNIX system</p>
 <ul class="simple">
-<li><a class="reference external" href="http://goo.gl/HwX0f5">SocialEcho 0.6</a></li>
+<li><a class="reference external" href="http://goo.gl/HwX0f5">SocialBus 0.6</a></li>
 </ul>
 </div>
 <div class="section" id="installation-s-guide">
@@ -118,10 +121,6 @@
 <h2>User&#8217;s Guide<a class="headerlink" href="#user-s-guide" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="setup_facebook_app.html">Setup Facebook authorized access</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="setup_facebook_app.html#registering-a-new-application-at-facebook">Registering a new application at Facebook</a></li>
-</ul>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="setup_twitter_app.html">Setup Twitter authorized access</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="setup_twitter_app.html#registering-a-new-application-at-twitter">Registering a new application at Twitter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="setup_twitter_app.html#obtaining-twitter-access-tokens">Obtaining Twitter access tokens</a></li>
@@ -133,11 +132,6 @@
 <li class="toctree-l2"><a class="reference internal" href="command_line.html#filtering-tweets-by-topic">Filtering tweets by topic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line.html#filtering-tweets-by-users">Filtering tweets by users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_line.html#setting-up-alerts-when-fails">Setting up alerts when fails</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="facebook_consumer.html">Configuring Facebook Consumer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="facebook_consumer.html#watching-logs">Watching logs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="facebook_consumer.html#filtering-posts-by-topic">Filtering posts by topic</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="command_line_server.html">Configuring Server</a><ul>
@@ -162,11 +156,36 @@
 <li class="toctree-l1"><a class="reference internal" href="license.html">About</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="license.html#license">License</a></li>
 <li class="toctree-l2"><a class="reference internal" href="license.html#publications">Publications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="license.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="license.html#contributors">Contributors</a></li>
 </ul>
 </li>
 </ul>
 </div>
+</div>
+<div class="section" id="support">
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
+<p>For any questions or a discussion about usage and development, please use the SocialBus-Dev mailing list. To post to the group, send your message to <a class="reference external" href="mailto:socialbus-dev&#37;&#52;&#48;lists&#46;labs&#46;sapo&#46;pt">socialbus-dev<span>&#64;</span>lists<span>&#46;</span>labs<span>&#46;</span>sapo<span>&#46;</span>pt</a>.</p>
+</div>
+<div class="section" id="projects-using-socialbus">
+<h2>Projects using SocialBus<a class="headerlink" href="#projects-using-socialbus" title="Permalink to this headline">¶</a></h2>
+<p>O Mundo Em Pessoa (2013):
+“O Mundo Em Pessoa” is available at <a class="reference external" href="http://fernadopessoa.labs.sapo.pt">http://fernadopessoa.labs.sapo.pt</a></p>
+<p>REACTION (2011-2013):
+REACTION is available at <a class="reference external" href="http://dmir.inesc-id.pt/project/Reaction">http://dmir.inesc-id.pt/project/Reaction</a></p>
+<p>POPSTAR (2012-2013):
+POPSTAR is available at <a class="reference external" href="http://popstar.pt">http://popstar.pt</a></p>
+<p>Twitteuro (2012):
+Twitteuro is available at <a class="reference external" href="http://twitteuro.sapo.pt">http://twitteuro.sapo.pt</a></p>
+<p>Twitómetro (2011):
+Twitómetro is available at <a class="reference external" href="http://legislativas.sapo.pt/2011/twitometro/">http://legislativas.sapo.pt/2011/twitometro/</a></p>
+</div>
+<div class="section" id="scientific-contributions">
+<h2>Scientific Contributions<a class="headerlink" href="#scientific-contributions" title="Permalink to this headline">¶</a></h2>
+<p>Thesis:
+[Rodrigues, 2014] Rodrigues, T.A., 2014. RetweetPatterns: detection of spatio- temporal patterns of retweets. M.Sc. Thesis. Master in Informatics Engineering, Faculdade de Engenharia, Universidade do Porto.
+[Cunha, 2013] Cunha T.D.S., 2013. TweeProfiles: detection of spatio-temporal patterns on Twitter. M.Sc. Thesis. Master in Informatics Engineering, Faculdade de Engenharia, Universidade do Porto.</p>
+<p>Papers:
+Matko Bošnjak, Eduardo Oliveira, José Martins, Eduarda Mendes Rodrigues, Luís Sarmento “TwitterEcho – A Distributed Focused Crawler to Support Open Research with Twitter Data”, World Wide Web Conference 2012, April 16–20, 2012, Lyon, France</p>
 </div>
 </div>
 
@@ -175,9 +194,9 @@
         </div>
       </div>
       <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper"><h3>About SocialEcho</h3>
+        <div class="sphinxsidebarwrapper"><h3>About SocialBus</h3>
 <p>
-  SocialEcho is a toolkit for collecting and processing tweets.  You are currently
+  SocialBus is a toolkit for collecting and processing messages.  You are currently
   looking at the documentation of the development version.
 </p>
 <!-- <h3>Other Formats</h3>
@@ -195,7 +214,7 @@
   <li><a target="_blank" href="http://goo.gl/HwX0f5">Download last version</a></li>
 
   <li><a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION Workshops</a></li>
-  <li><a target="_blank" href="http://robinson.fe.up.pt/~projects/twitter_crawler">SocialEcho 0.1 homepage</a></li>
+  <li><a target="_blank" href="http://robinson.fe.up.pt/~projects/twitter_crawler">SocialBus 0.1 homepage</a></li>
 </ul>
   <h3>This Page</h3>
   <ul class="this-page-menu">

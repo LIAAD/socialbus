@@ -2,10 +2,10 @@ Configuring Twitter Consumer
 ############################
 
 Clients are instances used to monitor and consume tweets from Twitter. Users can define which keywords or users they are interested in.
-When a SocialEcho Twitter Consumer instance receives a tweet it sends the tweet to the server. 
+When a SocialBus Twitter Consumer instance receives a tweet it sends the tweet to the server. 
 You can deploy as many consumers as you want.
 
-SocialEcho Twitter Consumer follows the structure below.
+SocialBus Twitter Consumer follows the structure below.
 
 	.. code-block:: bash
 
@@ -20,7 +20,7 @@ SocialEcho Twitter Consumer follows the structure below.
 				filter_by_users.conf
 				logback-smtp-client.xml
 						
-			socialbus-twitter-consumer.jar
+			socialecho-twitter-consumer.jar
 			LICENSE
 
 
@@ -61,11 +61,11 @@ Collecting tweets from sample stream is plain easy. If you don't inform **-filte
 
 Watching logs
 --------------
-While consumer is running it prints the message on log file at logs/socialbus-twitter-consumer.out. 
+While consumer is running it prints the message on log file at logs/socialecho-twitter-consumer.out. 
  
 	.. code-block:: bash
 	
-		tail -f logs/socialbus-twitter-consumer.out
+		tail -f logs/socialecho-twitter-consumer.out
 
 Filtering tweets by topic
 --------------------------
@@ -124,7 +124,7 @@ IMPORTANT: Be careful with relative path when defining **filter.file** option. T
 
 Setting up alerts when fails
 -----------------------
-You will want to know when things goes wrong. SocialEcho can send you email when a failure occours specifying your email configuration at **logback-smtp-client.xml**.
+You will want to know when things goes wrong. SocialBus can send you email when a failure occours specifying your email configuration at **logback-smtp-client.xml**.
 	.. code-block:: xml
 
 		<?xml version="1.0" encoding="UTF-8" ?>
@@ -137,7 +137,7 @@ You will want to know when things goes wrong. SocialEcho can send you email when
 
 		        <to>change_it@email.com</to>
 				<from>change_it@email.com</from>
-				<subject>SocialEcho Alert!</subject>
+				<subject>SocialBus Alert!</subject>
 
 				<username>change_it@email.com</username>
 				<password>change_it</password>

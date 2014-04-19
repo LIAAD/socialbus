@@ -17,7 +17,7 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <title>Configuring Twitter Consumer &mdash; SocialEcho 2.0 documentation</title>
+    <title>Configuring Twitter Consumer &mdash; SocialBus 2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -34,9 +34,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+    <link rel="top" title="SocialBus 2.0 documentation" href="index.html" />
     <link rel="next" title="Configuring Server" href="command_line_server.html" />
-    <link rel="prev" title="Twitter user lookup" href="setup_twitter_app.html" />
+    <link rel="prev" title="Setup Twitter authorized access" href="setup_twitter_app.html" />
    
   
   <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
@@ -56,7 +56,7 @@
           <a href="command_line_server.html" title="Configuring Server"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="setup_twitter_app.html" title="Twitter user lookup"
+          <a href="setup_twitter_app.html" title="Setup Twitter authorized access"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">None</a> &raquo;</li> 
       </ul>
@@ -70,9 +70,9 @@
   <div class="section" id="configuring-twitter-consumer">
 <h1>Configuring Twitter Consumer<a class="headerlink" href="#configuring-twitter-consumer" title="Permalink to this headline">¶</a></h1>
 <p>Clients are instances used to monitor and consume tweets from Twitter. Users can define which keywords or users they are interested in.
-When a SocialEcho Twitter Consumer instance receives a tweet it sends the tweet to the server.
+When a SocialBus Twitter Consumer instance receives a tweet it sends the tweet to the server.
 You can deploy as many consumers as you want.</p>
-<p>SocialEcho Twitter Consumer follows the structure below.</p>
+<p>SocialBus Twitter Consumer follows the structure below.</p>
 <blockquote>
 <div><div class="highlight-bash"><div class="highlight"><pre>+ lib
 + bin
@@ -85,7 +85,7 @@ You can deploy as many consumers as you want.</p>
         filter_by_users.conf
         logback-smtp-client.xml
 
-socialbus-twitter-consumer.jar
+socialecho-twitter-consumer.jar
 LICENSE
 </pre></div>
 </div>
@@ -123,9 +123,9 @@ home.dir <span class="o">=</span>/tmp/stream/
 </div>
 <div class="section" id="watching-logs">
 <h2>Watching logs<a class="headerlink" href="#watching-logs" title="Permalink to this headline">¶</a></h2>
-<p>While consumer is running it prints the message on log file at logs/socialbus-twitter-consumer.out.</p>
+<p>While consumer is running it prints the message on log file at logs/socialecho-twitter-consumer.out.</p>
 <blockquote>
-<div><div class="highlight-bash"><div class="highlight"><pre>tail -f logs/socialbus-twitter-consumer.out
+<div><div class="highlight-bash"><div class="highlight"><pre>tail -f logs/socialecho-twitter-consumer.out
 </pre></div>
 </div>
 </div></blockquote>
@@ -188,7 +188,7 @@ filter.file<span class="o">=</span>./examples/my_community_filters.txt
 <div class="section" id="setting-up-alerts-when-fails">
 <h2>Setting up alerts when fails<a class="headerlink" href="#setting-up-alerts-when-fails" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
-<dt>You will want to know when things goes wrong. SocialEcho can send you email when a failure occours specifying your email configuration at <strong>logback-smtp-client.xml</strong>.</dt>
+<dt>You will want to know when things goes wrong. SocialBus can send you email when a failure occours specifying your email configuration at <strong>logback-smtp-client.xml</strong>.</dt>
 <dd><div class="first last highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span>
 <span class="nt">&lt;configuration</span> <span class="na">scan=</span><span class="s">&quot;true&quot;</span> <span class="na">scanPeriod=</span><span class="s">&quot;60 seconds&quot;</span> <span class="na">debug=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;statusListener</span> <span class="na">class=</span><span class="s">&quot;ch.qos.logback.core.status.OnConsoleStatusListener&quot;</span> <span class="nt">/&gt;</span>
@@ -199,7 +199,7 @@ filter.file<span class="o">=</span>./examples/my_community_filters.txt
 
         <span class="nt">&lt;to&gt;</span>change_it@email.com<span class="nt">&lt;/to&gt;</span>
                 <span class="nt">&lt;from&gt;</span>change_it@email.com<span class="nt">&lt;/from&gt;</span>
-                <span class="nt">&lt;subject&gt;</span>SocialEcho Alert!<span class="nt">&lt;/subject&gt;</span>
+                <span class="nt">&lt;subject&gt;</span>SocialBus Alert!<span class="nt">&lt;/subject&gt;</span>
 
                 <span class="nt">&lt;username&gt;</span>change_it@email.com<span class="nt">&lt;/username&gt;</span>
                 <span class="nt">&lt;password&gt;</span>change_it<span class="nt">&lt;/password&gt;</span>
@@ -258,7 +258,7 @@ filter.file<span class="o">=</span>./examples/my_community_filters.txt
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="setup_twitter_app.html" title="previous chapter">Twitter user lookup</a></li>
+      <li>Previous: <a href="setup_twitter_app.html" title="previous chapter">Setup Twitter authorized access</a></li>
       <li>Next: <a href="command_line_server.html" title="next chapter">Configuring Server</a></li>
   </ul></li>
 </ul>

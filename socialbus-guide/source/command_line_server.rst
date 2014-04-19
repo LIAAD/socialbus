@@ -3,7 +3,7 @@ Configuring Server
 
 The server is responsable for processing tweets, extracting metadata, indexing, tokenization and other computations.
 
-SocialEcho Server follows the structure below.
+SocialBus Server follows the structure below.
 
 	.. code-block:: bash
 
@@ -14,7 +14,7 @@ SocialEcho Server follows the structure below.
 				log4j.properties
 				server.conf
 		
-			socialbus-server.jar
+			socialecho-server.jar
 			LICENSE
 
 All server configuration must be provided at **conf/server.conf**.
