@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-47346130-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <title>Configuring Facebook Consumer &mdash; SocialEcho 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+    <link rel="next" title="Configuring Server" href="command_line_server.html" />
+    <link rel="prev" title="Configuring Twitter Consumer" href="command_line.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="command_line_server.html" title="Configuring Server"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="command_line.html" title="Configuring Twitter Consumer"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">None</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configuring-facebook-consumer">
+<h1>Configuring Facebook Consumer<a class="headerlink" href="#configuring-facebook-consumer" title="Permalink to this headline">¶</a></h1>
+<p>Clients are instances used to monitor and search posts from Facebook. Users can define which keywords they are interested in.
+When a SocialEcho Facebook Consumer instance finds a post it sends to the server.
+You can deploy as many consumers as you want.</p>
+<p>SocialEcho Facebook Consumer follows the structure below.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>+ lib
++ bin
++ logs
+- conf
+        + examples
+        log4j.properties
+        client.conf
+        filter.conf
+        logback-smtp-client.xml
+
+socialbus-facebook-consumer.jar
+LICENSE
+</pre></div>
+</div>
+</div></blockquote>
+<p>Socialecho Server is mandatory for Facebook. Specifying <strong>rabbitmq.host</strong> option is mandatory.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="c">## SETTINGS</span>
+
+<span class="c">## Server connection config</span>
+<span class="c"># this options defines where the client will send posts</span>
+rabbitmq.host<span class="o">=</span>localhost
+
+<span class="c"># defines where the client will save posts (optional)</span>
+home.dir <span class="o">=</span>/tmp/stream/
+
+<span class="c"># request interval in minutes</span>
+facebook.search.interval<span class="o">=</span>5
+facebook.page.monitor.interval<span class="o">=</span>5
+
+<span class="c"># authentication</span>
+facebook.application.key<span class="o">=</span>&lt;your-app-key&gt;
+facebook.application.secret<span class="o">=</span>&lt;your-app-secret-key&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<p>To run this client just run:</p>
+<div class="highlight-python"><pre>&gt; bin/startup.sh [-config] [-filter]</pre>
+</div>
+<p>If not informed the system will assume the following values for each argument:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">-</span><span class="n">config</span> <span class="o">=</span> <span class="n">conf</span><span class="o">/</span><span class="n">client</span><span class="o">.</span><span class="n">conf</span>
+<span class="o">-</span><span class="nb">filter</span> <span class="o">=</span> <span class="bp">None</span> <span class="p">(</span><span class="n">Mandatory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Optionaly you can specify where your config, oauth and filter file are:</p>
+<div class="highlight-python"><pre>&gt; bin/startup.sh -config=conf/client.conf -filter=my_filter.conf</pre>
+</div>
+<div class="section" id="watching-logs">
+<h2>Watching logs<a class="headerlink" href="#watching-logs" title="Permalink to this headline">¶</a></h2>
+<p>While consumer is running it prints the message on log file at logs/socialbus-facebook-consumer.out.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>tail -f logs/socialbus-facebook-consumer.out
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="filtering-posts-by-topic">
+<h2>Filtering posts by topic<a class="headerlink" href="#filtering-posts-by-topic" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>The config file <strong>examples/filter_by_topics.conf</strong> contains an example to monitor tweets by keywords.</dt>
+<dd><div class="first last highlight-bash"><div class="highlight"><pre><span class="c"># This option defines the topic name of your messages.</span>
+<span class="c"># Messages are indexed according their topic.</span>
+topic.name<span class="o">=</span>my_topic
+
+<span class="c"># file containing filters</span>
+keywords.file<span class="o">=</span>./examples/keywords.txt
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>This example filter file contains the following.</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre>&gt; cat ./examples/keywords.txt
+android
+iphone
+windowsphone
+ios7
+</pre></div>
+</div>
+</div></blockquote>
+<p>IMPORTANT: Be careful with relative path when defining <strong>filter.file</strong> option. Try to use absolute path.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" style="margin-top: -30px;" src="_static/bw_bird_small.jpg" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuring Facebook Consumer</a><ul>
+<li><a class="reference internal" href="#watching-logs">Watching logs</a></li>
+<li><a class="reference internal" href="#filtering-posts-by-topic">Filtering posts by topic</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="command_line.html" title="previous chapter">Configuring Twitter Consumer</a></li>
+      <li>Next: <a href="command_line_server.html" title="next chapter">Configuring Server</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/facebook_consumer.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

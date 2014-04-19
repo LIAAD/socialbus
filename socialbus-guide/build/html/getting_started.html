@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-47346130-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <title>Getting started &mdash; SocialEcho 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialEcho 2.0 documentation" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+  
+  
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">None</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>The following makes it simple to start a SocialEcho instance.</p>
+<div class="section" id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<div class="section" id="create-a-socialbus-instance">
+<h3>Create a SocialEcho instance<a class="headerlink" href="#create-a-socialbus-instance" title="Permalink to this headline">¶</a></h3>
+<p>Once you have installed SocialEcho you can use the built-in target for creating new projects:</p>
+<div class="highlight-python"><pre>twitterecho create-instance my-project</pre>
+</div>
+<p>This creates a new directory named after your application and containing the project structure below:</p>
+<blockquote>
+<div><div class="highlight-bash"><div class="highlight"><pre><span class="nv">$TWITTERECHO_HOME</span>
+        + bin                   --&gt; main binaries
+        + scripts               --&gt; scripts
+        + conf                  --&gt; configuration artifacts
+        + realtime              --&gt; location of storm topologies
+        + crawlers              --&gt; location of crawlers
+          + streaming
+          + user_profiles
+          + user_network
+        + modules
+          + sentiment_analysis
+          + language_detection
+          + topic_detection
+          + user_influence
+        + widgets               --&gt; location of widgets
+          + sentibubbles
+          + usernetwork
+        + extensions
+          + solr                        --&gt; solr schemes
+
+        + libraries             --&gt; lib depencies
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="start-socialecho">
+<h3>Start SocialEcho<a class="headerlink" href="#start-socialecho" title="Permalink to this headline">¶</a></h3>
+<p>To start all SocialEcho services run the following command:</p>
+<div class="highlight-python"><pre>twitterecho start-all</pre>
+</div>
+<p>It will start all the following services:</p>
+<div class="highlight-python"><pre>twitterecho start-storm
+twitterecho start-crawler
+twitterecho start-ui
+twitterecho start-dashboard</pre>
+</div>
+<p>This will start up a servlet container (Tomcat). Once the command says the container has started and prints out the URL, copy the link to a browser and view the page.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://localhost:8080/scopes">http://localhost:8080/scopes</a></li>
+<li><a class="reference external" href="http://localhost:3030/dashboard">http://localhost:3030/dashboard</a></li>
+</ul>
+</div></blockquote>
+<p>Congratulations, you have started your SocialEcho!</p>
+</div>
+</div>
+<div class="section" id="configure-environment">
+<h2>Configure environment<a class="headerlink" href="#configure-environment" title="Permalink to this headline">¶</a></h2>
+<p>The file <cite>$TWITTERECHO_HOME/conf/twitterecho.conf</cite> which contains details of the database the application uses. This allows you to set common settings:</p>
+<div class="highlight-python"><pre>[logs]
+#where to log
+logpath=/var/log/twitterecho
+# Verbose logging output.
+verbose = false
+
+[data]
+#where to store temp files
+tmppath=/var/tmp/twitterecho
+
+[mongodb]
+# MongoDB deployment settings (optional)
+mongodb.host= localhost
+mongodb.port= 27018
+# Specify custom database name
+mongodb.dbname= twitterecho
+
+[solr]
+# Apache Solr deployment settings (optional)
+solr.host= 192.168.102.195
+solr.port= 8080
+solr.core= portugal
+solr.data= /var/twitterecho/data/solr
+
+# Storm deployment settings (optional)
+[stream-processing]
+storm.host=localhost
+
+# RabbitMQ deployment settings (optional)
+[queues]
+amqp.host=192.168.102.195
+amqp.port=5672
+amqp.user=guest
+amqp.pass=guest
+amqp.topic=tweets</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" style="margin-top: -30px;" src="_static/bw_bird_small.jpg" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting started</a><ul>
+<li><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li><a class="reference internal" href="#create-a-socialbus-instance">Create a SocialEcho instance</a></li>
+<li><a class="reference internal" href="#start-socialecho">Start SocialEcho</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configure-environment">Configure environment</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/getting_started.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    &copy; Copyright 2013, <a target="_blank" href="http://dmir.inesc-id.pt/project/REACTION_Workshops">REACTION</a>.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  
+  </body>
+</html>

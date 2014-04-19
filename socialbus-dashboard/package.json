@@ -1,0 +1,11 @@
+{
+  "name": "socialbus-dashboard",
+  "description": "socialbus-dashboard",
+  "author": "Arian Pasquali",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "dashing-js": "~0.1.5"
+  },
+  "engine": "node >= 0.10"
+}

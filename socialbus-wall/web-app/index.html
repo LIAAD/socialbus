@@ -1,0 +1,402 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>socialecho wall</title>
+
+	<!-- <meta name="title" content="V de Vinagre - Mural do Brasil">
+	<meta name="description" content="Junho de 2013 já entrou pra história e estamos mudando o país. Esse site é um mural que agrega os tweets com as principais hashtags do movimento. Não importa se você está nas ruas ou na internet. Ajude a espalhar a mensagem. O Brasil acordou! #OccupySP, #OccupyBrasil, #OGiganteAcordou, #ChangeBrazil, #MudaBrasil, #ProtestoBrasil, #VemPraRua"> -->
+	<!-- <meta name="keywords" content="#OccupySP, #OccupyBrasil, #OGiganteAcordou, #ChangeBrazil, #MudaBrasil, #ProtestoBrasil, #VemPraRua">
+	<meta name="og:title" content="V de Vinagre - Mural das Manifestações">
+	<meta name="og:description" content="Junho de 2013 já entrou pra história e estamos mudando o país. Esse site é um mural que agrega os tweets com as principais hashtags do movimento. Não importa se você está nas ruas ou na internet. Ajude a espalhar a mensagem. O Brasil acordou!	#OccupySP, #OccupyBrasil, #OGiganteAcordou, #ChangeBrazil, #MudaBrasil, #ProtestoBrasil, #VemPraRua"> -->
+
+    <link rel="stylesheet" href="css/reset.css" type="text/css">
+    <link rel="stylesheet" href="css/wookmark_style.css" type="text/css">
+
+	<link rel="stylesheet" href="css/startup.css" type="text/css">
+	<link rel="stylesheet" href="css/custom.css" type="text/css">
+	<link rel="stylesheet" href="css/reveal.css" type="text/css">
+
+	<link rel="stylesheet" href="https://platform.twitter.com/twt/twt.css" type="text/css">
+
+	<link rel="stylesheet" href="css/cosmo.bootstrap.css" type="text/css">
+
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://fgnass.github.io/spin.js/spin.min.js"></script>
+	<script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
+
+
+    <script src="js/jquery.wookmark.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.reveal.js"></script>
+
+	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+     <div id="container">
+	    <div class="headerbg navbar-fixed-top"></div>
+     	<div class="navbar navbar-inverse navbar-fixed-top">
+		    <div class="navbar-inner">
+		        <div class="container-fluid">
+		            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		            </a>
+
+		            <div class="nav-collapse collapse">
+		                <ul class="nav">
+		                	<li class="active">
+		                		<a href="#" class="" data-reveal-id="about">PORTUGAL TWITTER STREAM</a>
+		                	</li>
+						</ul>
+						<ul class="nav pull-right nav-social-icons">
+
+		                	<li class="active">
+		                		<a href="#" class="" data-reveal-id="about">Show QR-Code</a>
+		                	</li>
+		                </ul>
+		            </div>
+		        </div>
+		    </div>
+	    </div>
+
+	    <div id="main" role="main">
+		      <ul id="tiles"></ul>
+		      <div id="loading"></div>
+		 </div>
+	</div>
+
+    <div id="pagging" data-offset="0" data-sort="hot"></div>
+
+	<div id="about" class="reveal-modal">
+		<h2>Portugal Twitter Stream</h2>
+		<p>The project is being developed at the <a href="http://www.fe.up.pt/" target="_blank">Faculty of Engineering of the University of Porto</a> , in the scope of the <a href="http://dmir.inesc-id.pt/reaction/Reaction" target="_blank">REACTION</a> project, a computational journalism study in collaboration with <a href="http://labs.sapo.pt/" target="_blank">Sapo Labs</a> .</p>
+		
+		<p>
+			Open it on your smartphone.
+		</p>
+		<a href="https://www.the-qrcode-generator.com/"><img src="http://chart.apis.google.com/chart?chs=200x200&amp;cht=qr&amp;chld=|1&amp;chl=http%3A%2F%2Freaction.fe.up.pt%2Fsocialbus-wall%2F" alt="QR Code" /></a>
+		
+	</div>
+
+	<script>
+		// // Google Analytics
+	// 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	// 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	// 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	// 	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	// 	ga('create', 'UA-41836690-1', 'vdevinagre.com.br');
+	// 	ga('send', 'pageview');
+	// 
+	// 	// Twitter
+	// 	!function(d,s,id){
+	// 		var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}
+	// 	}(document, 'script', 'twitter-wjs');
+	// 
+	// 	// Facebook
+	// 	(function(d, s, id) {
+	// 		var js, fjs = d.getElementsByTagName(s)[0];
+	// 		if (d.getElementById(id)) return;
+	// 		js = d.createElement(s); js.id = id;
+	// 		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=147797781919476";
+	// 		fjs.parentNode.insertBefore(js, fjs);
+	// 	}(document, 'script', 'facebook-jssdk'));
+	// 
+	// 	// Google +1
+	// 	window.___gcfg = {lang: 'pt-BR'};
+	// 	(function() {
+	// 	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	// 	po.src = 'https://apis.google.com/js/plusone.js';
+	// 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	// 	})();
+
+		// Our custom functions
+		(function ($){
+			$(document).ready(function() {
+
+				var handler;
+		        var filters;
+				var spinner;
+
+				var loadNewPostsTimeout;
+				var loadNewPostsInterval;
+
+				$(window).scroll(function(){
+			        if  ($(window).scrollTop() == $(document).height() - $(window).height()){
+			           lastMorePosts();
+			        }
+				});
+
+				setInterval(function(){
+					loadPosts("recent",0);
+				},
+				60000);
+
+				loadPosts("recent",0);
+
+				$("#btn_recent").click(function() { loadPosts("recent",0); return false; });
+				$("#btn_hot").click(function() { loadPosts("hot",0); return false; });
+
+				function organizeCards(){
+					handler = $('.item'),
+					filters = $('#filters li');
+
+			        var options = {
+			          autoResize: true, // This will auto-update the layout when the browser window is resized.
+			          container: $('#tiles'), // Optional, used for some extra CSS styling
+			          offset: 15, // Optional, the distance between grid items
+			          itemWidth: 0 // Optional, the width of a grid item
+			        };
+
+			        // Call the layout function.
+			        handler.wookmark(options);
+				}
+
+				function showSpinner(){
+					var target = document.getElementById('loading');
+					spinner = new Spinner().spin(target);
+				}
+
+				function resetViewPosts() {
+					$("#tiles").empty();
+				}
+
+				function setupMenu(sort){
+					$('#btn_hot').removeClass("btn_active");
+					$('#btn_recent').removeClass("btn_active");
+
+					if(sort == "recent"){
+						$('#btn_recent').addClass("btn_active");
+
+					}else{
+						$('#btn_hot').addClass("btn_active");
+					}
+				}
+
+				function resetLoadNewPostsTimeout() {
+					if (loadNewPostsTimeout) {
+						clearTimeout(loadNewPostsTimeout);
+					}
+					var sort = $("#pagging").attr('data-sort');
+					if (sort == "recent") {
+						loadNewPostsInterval = 3 * 60 * 1000;
+					} else {
+						loadNewPostsInterval = 10 * 60 * 1000;
+					}
+					loadNewPostsTimeout = setTimeout(function() {
+						loadPosts(sort,0);
+					}, loadNewPostsInterval);
+				}
+
+				resetLoadNewPostsTimeout();
+
+				function loadNewPosts(){
+					var sort = $("#pagging").attr('data-sort');
+					setupMenu(sort);
+
+					var timestamp = $("#pagging").data('data-timestamp');
+					var dataToSend = { timestamp: timestamp, sort: sort};
+
+					showSpinner();
+					var url = "home/loadNewPosts";
+					$.post(url, dataToSend, function(data){
+						if (data.success == 1){
+							resetViewPosts();
+							$("#pagging").data('data-timestamp',data.timestamp);
+						}
+					}).always(function() {
+						resetLoadNewPostsTimeout();
+						spinner.stop();
+					});
+				}
+
+				function loadPosts(sort,offset){
+
+					setupMenu(sort);
+
+					if(offset == 0){
+						resetViewPosts();
+					}
+
+					showSpinner();
+
+					$.ajax({
+						url: 'home/loadPosts',
+						dataType: 'json',
+						data: {sort:sort,offset:offset}
+					}).done(function(data) {
+						if(data.posts instanceof Array){
+
+							$("#pagging").data('data-timestamp',data.timestamp);
+							$("#pagging").attr('data-offset',data.offset);
+							$("#pagging").attr('data-sort',data.sort);
+
+							$.each(data.posts, function(index, status){
+								var card = createCard(status)
+								$("#tiles").append(card);
+							});
+
+							organizeCards();
+							spinner.stop();
+						}
+					}).always(function() {
+						resetLoadNewPostsTimeout();
+					});
+				};
+
+				function lastMorePosts()
+				{
+					var lastOffset = $("#pagging").attr("data-offset");
+				    var sort = $("#pagging").attr("data-sort");
+
+				    loadPosts(sort,lastOffset);
+				};
+
+				function parseText(msg) {
+					msg = parseURLs(msg);
+					msg = parseHashs(msg);
+					msg = parseAts(msg);
+					return $.trim(msg);
+				}
+
+				function parseAts(str) {
+					var result = "";
+					var lastIndex = 0;
+
+					var regex = new RegExp("@[^ \"':]+", "mig");
+					str.replace(regex, function(matchStr, indexOf) {
+						result += str.substring(lastIndex, indexOf) + "<a href='https://twitter.com/"+matchStr.substr(1)+"' target='_blank'>"+matchStr+"</a>";
+						lastIndex = indexOf + matchStr.length;
+					});
+					result += str.substring(lastIndex, str.length);
+					return result;
+				}
+
+				function parseHashs(str) {
+					var result = "";
+					var lastIndex = 0;
+
+					var regex = new RegExp("#[^ \"':]+", "mig");
+					str.replace(regex, function(matchStr, indexOf) {
+						result += str.substring(lastIndex, indexOf) + "<a href='https://twitter.com/search?q=%23"+matchStr.substr(1)+"&src=hash' target='_blank'><span class='hashtag'>"+matchStr+"</span></a>";
+						lastIndex = indexOf + matchStr.length;
+					});
+					result += str.substring(lastIndex, str.length);
+					return result;
+				}
+
+				function parseURLs(str) {
+					var result = "";
+					var lastIndex = 0;
+
+					var regex = new RegExp("https?://[^ ]+", "mig");
+					str.replace(regex, function(matchStr, indexOf) {
+						result += str.substring(lastIndex, indexOf) + "<a href='"+matchStr+"' target='_blank'>"+matchStr+"</a>";
+						lastIndex = indexOf + matchStr.length;
+					});
+					result += str.substring(lastIndex, str.length);
+					return result;
+				}
+
+			    function createCard(status){
+
+					var html= "<li  class='item'>";
+
+					var hashtags = [];
+
+					if(status.hashtags != null){
+						$.each(status.hashtags, function(idx,val) {
+						     var str = "'" + val + "'";
+						     str = str.toLowerCase().trim();
+						     str = str.replace("#","");
+						     hashtags.push(str);
+						});
+
+						html = "<li data-filter-class=\"[" + hashtags.join(",") + "]\" class='item'>";
+					}
+
+					html += "<div  data-id='" + status.id + "'  >";
+	                html += "  <blockquote data-twt-id='"+status.id+"' data-twt-intents='false' data-twt-product='tweetembed' class='twt-o twt-tweet h-entry twt-always-show-actions twt-pinned twt-standard'>";
+	                html += "    <div class='h-card p-author'>";
+				    html += "      <a class='screen-name u-url' href='https://twitter.com/"+status.screen_name+"' data-screen-name='"+status.screen_name+"'>";
+				    html += "        <span class='avatar'>";
+				    html += "          <img src='"+status.profile_image_url+"' class='u-photo' alt=''>";
+				    html += "        </span>";
+				    html += "        <span class='p-name'>"+status.name+"</span>";
+				    html += "        <span class='p-nickname'>@<b>"+status.screen_name+"</b></span>";
+
+				    html += "      </a>";
+
+				    html += "    </div>";
+
+				    html += "    <div class='e-content'>";
+				    html += "      <p class='p-name'>"+parseText(status.text)+"</p>";
+
+
+				    if(status.medias != null){
+						$.each(status.medias, function(idx,val) {
+						     var media_url = val.split("#_####_#")[0];
+						     var url = val.split("#_####_#")[1];
+
+				    		 html += "<a target='_blank' href='" + url + "'>";
+				    		 html += "<img src='"+media_url+"' style='width:275px !important'></img>";
+				    		 html += "</a>";
+						});
+					}
+
+				    html += "    </div>";
+
+				    html += "    <div class='footer'>";
+
+				    html += "      <a class='view-details' href='https://twitter.com/"+status.screen_name+"/statuses/"+status.id+"'>";
+				    html += "        <span class='dt-updated ' title='"+status.created_at+"'>";
+				    html += "           <span class='value-title' title='"+status.created_at+"'>"
+
+				    if(status.is_rt_b){
+				    	html +=	 "RT ";
+				    }
+
+				    html += status.pretty_created_at
+				    html += "</span>";
+
+				    html += "        </span>";
+				    html += "      </a>";
+				    html += "      <ul class='twt-actions'>";
+
+
+				    html += '<li><a href="https://twitter.com/intent/tweet?in_reply_to=' + status.id + '" class="reply-action twt-intent" title="Reply">'
+				    html +=	"<i></i><b>Reply</b></a></li>"
+
+					html += "	     <li>";
+					html += "		   <a href='https://twitter.com/intent/retweet?tweet_id="+status.id+"' class=' retweet-action  twt-intent' title='Retweet'><i></i><b>"+status.retweet_count+"</b></a>";
+					html += "		 </li>";
+
+				    html += "        <li>";
+					
+					var fav_count = 0;
+					
+					if(status.favourites_count != undefined){
+						fav_count = status.favourites_count;
+					}
+					
+				    html += "          <a href='https://twitter.com/intent/favorite?tweet_id="+status.id+"' class=' favorite-action  twt-intent' title='Favorite'><i></i><b>"					
+					+ fav_count +					
+					"</b></a>";
+				    html += "        </li>";
+
+				    html += "      </ul>";
+				    html += "    </div>";
+
+		    		html += "  </blockquote>";
+					html += "</div>";
+					html += "<li>";
+					return html;
+				}
+			});
+		})(jQuery);
+	</script>
+</body>
+</html>

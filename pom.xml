@@ -4,25 +4,26 @@
     <modelVersion>4.0.0</modelVersion>
 
 	<groupId>pt.sapo.labs</groupId>
-	<artifactId>socialecho-parent</artifactId>
+	<artifactId>socialbus-parent</artifactId>
 	<version>0.6-SNAPSHOT</version>
 	<packaging>pom</packaging>
     
-    <name>SocialEcho Project</name>
+    <name>SocialBus Project</name>
 
     <modules>
-		<module>socialecho-core</module>
-		<module>socialecho-langdetection</module>
-		<module>socialecho-server</module>
+		<module>socialbus-core</module>
+		<module>socialbus-langdetection</module>
+		<module>socialbus-server</module>
 
-		<module>socialecho-twitter-lookup</module>
-		<module>socialecho-twitter-oauth</module>
-		<module>socialecho-twitter-consumer</module>
+		<module>socialbus-twitter-lookup</module>
+		<module>socialbus-twitter-oauth</module>
+		<module>socialbus-twitter-consumer</module>
 		
-		<module>socialecho-facebook-consumer</module>
-		<module>socialecho-facebook-lookup</module>
-    <module>socialecho-batch-processing</module>
-    <module>socialecho-url-expander</module>
+		<module>socialbus-facebook-consumer</module>
+		<module>socialbus-facebook-lookup</module>
+		
+	    <module>socialbus-batch-processing</module>
+	    <module>socialbus-url-expander</module>
   </modules>
 
 
