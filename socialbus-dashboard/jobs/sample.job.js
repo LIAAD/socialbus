@@ -7,7 +7,7 @@ setInterval(function() {
   current_valuation = Math.floor(Math.random() * 100);
   current_karma = Math.floor(Math.random() * 200000);
 
-  send_event('valuation', {current: current_valuation, last: last_valuation});
-  send_event('karma', {current: current_karma, last: last_karma});
-  send_event('synergy', {value: Math.floor(Math.random() * 100)});
+  // send_event('valuation', {current: current_valuation, last: last_valuation});
+//   send_event('karma', {current: current_karma, last: last_karma});
+//   send_event('synergy', {value: Math.floor(Math.random() * 100)});
 }, 2 * 1000);

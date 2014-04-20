@@ -12,6 +12,7 @@ dashing.protected = function(req, res, next) {
 */
 
 // Set your default dashboard here
-// dashing.default_dashboard = 'sampletv';
+dashing.default_dashboard = 'console';
+dashing.socialecho_endpoint = "http://reaction.fe.up.pt:9191/api/sysinfo";
 
 dashing.start();
