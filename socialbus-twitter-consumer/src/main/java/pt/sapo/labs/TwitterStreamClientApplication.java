@@ -1,18 +1,20 @@
 package pt.sapo.labs;
 
-import com.twitter.hbc.httpclient.ClientContext;
-import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
+import java.util.List;
+
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.Configuration;
+import org.apache.http.client.protocol.ClientContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import pt.sapo.labs.api.services.StatusAdapter;
 import pt.sapo.labs.crawl.twitter.ApplicationManager;
 import pt.sapo.labs.crawl.twitter.streaming.TokenManager;
 import pt.sapo.labs.utils.AppUtils;
 import pt.sapo.labs.utils.TwitterOAuthInfo;
 
-import java.util.List;
+import com.twitter.hbc.twitter4j.Twitter4jStatusClient;
 
 public class TwitterStreamClientApplication implements IApp {
 
@@ -48,16 +50,16 @@ public class TwitterStreamClientApplication implements IApp {
 
         StreamStrategyContext streamStrategyContext = new StreamStrategyContext(this.applicationManager,
                                                                                 this.tokenManager,
-                                                                                getContext());
+                                                                                null);
         streamStrategyContext.execute(filterType);
 	}
 
-    protected ClientContext getContext(){
-
-        ClientContext context = AppUtils.convertConfigurationToClientContext(applicationManager.getConfig());
-
-        return context;
-    }
+//    protected ClientContext getContext(){
+//
+//        ClientContext context = AppUtils.convertConfigurationToClientContext(applicationManager.getConfig());
+//
+//        return context;
+//    }
 
 	protected void loadAdapters() {
 

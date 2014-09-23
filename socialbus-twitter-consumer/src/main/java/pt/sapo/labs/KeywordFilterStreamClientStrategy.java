@@ -1,32 +1,32 @@
 package pt.sapo.labs;
 
-import com.twitter.hbc.BasicRateTracker;
-import com.twitter.hbc.ClientBuilder;
-import com.twitter.hbc.RateTracker;
-import com.twitter.hbc.ReconnectionManager;
-import com.twitter.hbc.core.Constants;
-import com.twitter.hbc.core.endpoint.StatusesFilterEndpoint;
-import com.twitter.hbc.core.processor.StringDelimitedProcessor;
-import com.twitter.hbc.httpclient.BasicClient;
-import com.twitter.hbc.httpclient.ClientContext;
-import com.twitter.hbc.httpclient.auth.Authentication;
-import com.twitter.hbc.httpclient.auth.OAuth1;
-import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import org.apache.http.client.protocol.ClientContext;
+//import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import pt.sapo.labs.api.services.StatusAdapter;
 import pt.sapo.labs.crawl.twitter.ApplicationManager;
 import pt.sapo.labs.crawl.twitter.FilterManager;
 import pt.sapo.labs.crawl.twitter.streaming.TokenManager;
 import pt.sapo.labs.utils.TwitterOAuthInfo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
+import com.twitter.hbc.ClientBuilder;
+import com.twitter.hbc.core.Constants;
+import com.twitter.hbc.core.endpoint.StatusesFilterEndpoint;
+import com.twitter.hbc.core.processor.StringDelimitedProcessor;
+import com.twitter.hbc.httpclient.BasicClient;
+//import com.twitter.hbc.httpclient.ClientContext;
+import com.twitter.hbc.httpclient.auth.Authentication;
+import com.twitter.hbc.httpclient.auth.OAuth1;
+import com.twitter.hbc.twitter4j.Twitter4jStatusClient;
 
 public class KeywordFilterStreamClientStrategy implements StreamClientStrategy {
 
@@ -89,7 +89,8 @@ public class KeywordFilterStreamClientStrategy implements StreamClientStrategy {
             Authentication auth = new OAuth1(consumerKey, consumerSecret, oAuthToken, oAuthSecretToken);
             // Authentication auth = new BasicAuth(username, password);
 
-            int retries = Integer.parseInt((String)this.context.getProperty("connection.retries"));
+//            int retries = Integer.parseInt((String)this.context.getProperty("connection.retries"));
+            int retries = 10;
 
             // Create a new BasicClient. By default gzip is enabled.
             BasicClient client = new ClientBuilder()
@@ -97,7 +98,7 @@ public class KeywordFilterStreamClientStrategy implements StreamClientStrategy {
                     .endpoint(endpoint)
                     .authentication(auth)
                     .processor(new StringDelimitedProcessor(queue))
-                    .context(this.context)
+//                    .context(this.context)
                     .retries(retries)
                     .build();
 
@@ -107,9 +108,10 @@ public class KeywordFilterStreamClientStrategy implements StreamClientStrategy {
             ExecutorService service = Executors.newFixedThreadPool(numProcessingThreads);
 
             Twitter4jStatusClient t4jClient = new Twitter4jStatusClient(
-                    client, queue, adapters, service, true);
+                    client, queue, adapters, service);
 
-
+            t4jClient.setJSONStoreEnabled(true);
+            
             this.applicationManager.getActiveTwitterStreamClients().add(t4jClient);
             // Establish a connection
             t4jClient.connect();

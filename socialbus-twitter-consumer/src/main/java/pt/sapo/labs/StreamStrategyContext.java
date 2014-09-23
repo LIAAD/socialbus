@@ -1,11 +1,11 @@
 package pt.sapo.labs;
 
-import com.twitter.hbc.httpclient.ClientContext;
+import org.apache.http.client.protocol.ClientContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import pt.sapo.labs.crawl.twitter.ApplicationManager;
 import pt.sapo.labs.crawl.twitter.streaming.TokenManager;
-import pt.sapo.labs.utils.AppUtils;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,13 +1,15 @@
 package pt.sapo.labs.crawl.twitter.streaming;
 
-import com.twitter.hbc.twitter4j.v3.handler.StatusStreamHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
+
+import com.twitter.hbc.twitter4j.handler.StatusStreamHandler;
 
 public abstract class BaseStreamConsumer {
 

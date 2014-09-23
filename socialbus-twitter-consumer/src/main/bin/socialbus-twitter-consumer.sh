@@ -155,12 +155,24 @@ if $os400; then
   # this will not work if the user belongs in secondary groups
   BASEDIR="$SOCIALECHO_HOME"
   . "$SOCIALECHO_HOME"/bin/setclasspath.sh
+  
+  BASEDIR="$SOCIALECHO_HOME"
+  . "$SOCIALECHO_HOME"/bin/setproxy.sh
 else
   if [ -r "$SOCIALECHO_HOME"/bin/setclasspath.sh ]; then
     BASEDIR="$SOCIALECHO_HOME"
     . "$SOCIALECHO_HOME"/bin/setclasspath.sh
   else
     echo "Cannot find $SOCIALECHO_HOME/bin/setclasspath.sh"
+    echo "This file is needed to run this program"
+    exit 1
+  fi
+  
+  if [ -r "$SOCIALECHO_HOME"/bin/setproxy.sh ]; then
+    BASEDIR="$SOCIALECHO_HOME"
+    . "$SOCIALECHO_HOME"/bin/setproxy.sh
+  else
+    echo "Cannot find $SOCIALECHO_HOME/bin/setproxy.sh"
     echo "This file is needed to run this program"
     exit 1
   fi
@@ -321,6 +333,7 @@ echo "##########################################################################
   shift
     touch "$SOCIALECHO_OUT"
           "$_RUNJAVA" "$LOGGING_CONFIG" $LOGGING_MANAGER $JAVA_OPTS $SOCIALECHO_OPTS \
+		  $SOCIALBUS_PROXY_SETTINGS \
 		  -Dfile.encoding=UTF-8 \
           -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" -classpath "$CLASSPATH" \
           -Dtwitterecho.home="$SOCIALECHO_HOME" \

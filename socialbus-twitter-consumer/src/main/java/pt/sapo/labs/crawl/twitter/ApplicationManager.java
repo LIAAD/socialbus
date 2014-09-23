@@ -1,21 +1,22 @@
 package pt.sapo.labs.crawl.twitter;
 
-import au.com.bytecode.opencsv.CSVReader;
-import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import pt.sapo.labs.StreamFilterType;
 import pt.sapo.labs.api.services.StatusAdapter;
 import pt.sapo.labs.crawl.twitter.streaming.TokenManager;
 import pt.sapo.labs.utils.TwitterOAuthInfo;
+import au.com.bytecode.opencsv.CSVReader;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.twitter.hbc.twitter4j.Twitter4jStatusClient;
 
 public class ApplicationManager {
 

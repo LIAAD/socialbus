@@ -1,13 +1,14 @@
 package pt.sapo.labs;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import pt.sapo.labs.api.services.StatusAdapter;
-import pt.sapo.labs.api.services.StatusMetadataHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import pt.sapo.labs.api.services.StatusAdapter;
+import pt.sapo.labs.api.services.StatusMetadataHandler;
 
 /**
  * Created with IntelliJ IDEA.
