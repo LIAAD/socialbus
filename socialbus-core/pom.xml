@@ -221,7 +221,8 @@
       <dependency>
           <groupId>com.twitter</groupId>
           <artifactId>twitter-text</artifactId>
-          <version>1.9.9-SNAPSHOT</version>
+          <!-- <version>1.9.9-SNAPSHOT</version> -->
+		  <version>1.9.8</version>
       </dependency>
 
       <dependency>
