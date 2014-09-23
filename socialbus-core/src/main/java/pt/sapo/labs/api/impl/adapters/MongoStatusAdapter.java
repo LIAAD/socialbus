@@ -101,7 +101,7 @@ public class MongoStatusAdapter extends AbstractStatusAdapter {
     }
 
     @Override
-    public void onStatus(twitter4j.internal.org.json.JSONObject status) {
+    public void onStatus(twitter4j.JSONObject status) {
         super.onStatus(status);
 
         String jsonString = status.toString();

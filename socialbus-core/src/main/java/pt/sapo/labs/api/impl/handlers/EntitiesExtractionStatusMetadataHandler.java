@@ -1,15 +1,13 @@
 package pt.sapo.labs.api.impl.handlers;
 
-import com.twitter.common.text.extractor.EmoticonExtractor;
-import com.twitter.common.text.extractor.HashtagExtractor;
-import com.twitter.common.text.extractor.URLExtractor;
-import com.twitter.common.text.extractor.UserNameExtractor;
-import com.twitter.common.text.token.TokenStream;
+import java.util.List;
+
+import org.apache.lucene.analysis.TokenStream;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+import com.twitter.Extractor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,8 +19,11 @@ import java.util.List;
 public class EntitiesExtractionStatusMetadataHandler extends AbstractStatusMetadataHandler {
 
     private static Logger logger = LoggerFactory.getLogger(EntitiesExtractionStatusMetadataHandler.class);
-
-    public EntitiesExtractionStatusMetadataHandler(){}
+    protected Extractor extractor;
+    
+    public EntitiesExtractionStatusMetadataHandler(){
+    	extractor = new Extractor();
+    }
 
     @Override
     protected boolean accept(JSONObject json) {
@@ -44,28 +45,17 @@ public class EntitiesExtractionStatusMetadataHandler extends AbstractStatusMetad
 			
 			// support only to twitter
 			if(service.equals("twitter")){
-	            TokenStream hashtagsStream = new HashtagExtractor();
-	            TokenStream usersStream = new UserNameExtractor();
-	            TokenStream urlsStream = new URLExtractor();
-	            TokenStream emoticonsStream = new EmoticonExtractor();
 
 	            String statusText = (String) json.get("text");
 
-	            hashtagsStream.reset(statusText);
-	            usersStream.reset(statusText);
-	            urlsStream.reset(statusText);
-	            emoticonsStream.reset(statusText);
-
-	            List<String> users = usersStream.toStringList();
-                List<String> hashtags = hashtagsStream.toStringList();
-                List<String> urls = urlsStream.toStringList();
-	            List<String> emoticons = emoticonsStream.toStringList();
-
+	            List<String> users = extractor.extractMentionedScreennames(statusText);
+                List<String> hashtags = extractor.extractHashtags(statusText);
+                List<String> urls = extractor.extractURLs(statusText);
+	            
 	            metadata.put("hashtags", hashtags);
 	            metadata.put("mentions", users);
 	            metadata.put("urls", urls);
-	            metadata.put("emoticons", emoticons);
-
+	            
 	            json.remove("metadata");
 	            json.put("metadata", metadata);
 
@@ -84,14 +74,8 @@ public class EntitiesExtractionStatusMetadataHandler extends AbstractStatusMetad
                         preprossedText += (String) json.get("description");
                     }
 
-                    TokenStream hashtagsStream = new HashtagExtractor();
-                    TokenStream urlsStream = new URLExtractor();
-
-                    hashtagsStream.reset(preprossedText );
-                    urlsStream.reset(preprossedText );
-
-                    List<String> hashtags = hashtagsStream.toStringList();
-                    List<String> urls = urlsStream.toStringList();
+                    List<String> hashtags = extractor.extractHashtags(preprossedText);
+                    List<String> urls = extractor.extractURLs(preprossedText);
 
 
                     metadata.put("hashtags", hashtags);

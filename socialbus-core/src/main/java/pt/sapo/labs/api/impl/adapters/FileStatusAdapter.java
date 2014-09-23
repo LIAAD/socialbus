@@ -1,14 +1,16 @@
 package pt.sapo.labs.api.impl.adapters;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import twitter4j.JSONException;
 
 public class FileStatusAdapter extends AbstractStatusAdapter {
 
@@ -99,16 +101,16 @@ public class FileStatusAdapter extends AbstractStatusAdapter {
     }
 
     @Override
-	public void onStatus(twitter4j.internal.org.json.JSONObject status) {
+	public void onStatus(twitter4j.JSONObject status) {
 		super.onStatus(status);
 
-        String jsonString = status.toString();
-		
-	    this.onStatus(jsonString);
+		String jsonString = parseJsonString(status);
+    	
+        this.onStatus(jsonString);
 	}
 
     @Override
-    public void onStatus(JSONObject status) {
+    public void onStatus( org.json.simple.JSONObject status) {
         super.onStatus(status);
 
         String jsonString = parseJsonString(status);

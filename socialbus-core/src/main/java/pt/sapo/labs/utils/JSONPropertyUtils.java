@@ -25,12 +25,12 @@ SOFTWARE.
 */
 
 
-import twitter4j.internal.org.json.JSONException;
-import twitter4j.internal.org.json.JSONObject;
-
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Properties;
+
+import twitter4j.JSONException;
+import twitter4j.JSONObject;
 
 /**
  * Converts a Property file data into JSONObject and back.

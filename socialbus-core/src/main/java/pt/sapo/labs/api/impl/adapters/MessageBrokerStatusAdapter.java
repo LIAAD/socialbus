@@ -1,16 +1,21 @@
 package pt.sapo.labs.api.impl.adapters;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import twitter4j.internal.org.json.JSONException;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
+import twitter4j.JSONException;
+
+
+
+
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 /**
  * Created with IntelliJ IDEA.
@@ -76,28 +81,22 @@ public class MessageBrokerStatusAdapter extends AbstractStatusAdapter{
                 logger.error("Error declaring channel",e);
             }
         }
-
+        
         @Override
-        public void onStatus(twitter4j.internal.org.json.JSONObject twitterJson) {
-
-            if(!this.isEnabled()) {
+        public void onStatus(twitter4j.JSONObject status) {
+        	super.onStatus(status);
+        	
+        	if(!this.isEnabled()) {
                 return;
             }
 
-//            Status status = parseJsonStatus(twitterJson);
+        	String rawStatus = parseJsonString(status);
+        	
+        	sendToMessageBroker(rawStatus);
+        }
 
-            try {
-                logger.info("Sending message "+twitterJson.get("id").toString()+
-                        ", topic:" + this.topicName+
-                        ", broker:" + this.clusterName +
-                        ", host:" + this.host);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            String rawStatus = parseJsonString(twitterJson);
-
-            JSONObject jsonObj = (JSONObject) JSONValue.parse(rawStatus);
+		private void sendToMessageBroker(String rawStatus) {
+			JSONObject jsonObj = (JSONObject) JSONValue.parse(rawStatus);
 
             JSONObject metadata = buildMetadata();
             jsonObj.put("metadata", metadata);
@@ -110,11 +109,30 @@ public class MessageBrokerStatusAdapter extends AbstractStatusAdapter{
             try {
 //                this.channel.basicPublish(this.clusterName, this.routingKey, null, jsonString.getBytes());
 
+            	logger.info("Sending message "+jsonObj.get("id").toString()+
+    			        ", topic:" + this.topicName+
+    			        ", broker:" + this.clusterName +
+    			        ", host:" + this.host);
+            	
                 this.channel.basicPublish(this.clusterName, this.routingKey, null, jsonString.getBytes());
 
             } catch (IOException e) {
                 logger.error("Error publishing message to server",e);
             }
+		}
+
+        @Override
+        public void onStatus(JSONObject twitterJson) {
+
+            if(!this.isEnabled()) {
+                return;
+            }
+
+//            Status status = parseJsonStatus(twitterJson);
+
+            String rawStatus = parseJsonString(twitterJson);
+
+            sendToMessageBroker(rawStatus);
         }
 
     private JSONObject buildMetadata() {

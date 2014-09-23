@@ -36,7 +36,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="SocialBus 2.0 documentation" href="index.html" />
     <link rel="next" title="Configuring Twitter Consumer" href="command_line.html" />
-    <link rel="prev" title="Client-Server deployment" href="installation_serverclient_mode.html" />
+    <link rel="prev" title="Setup Facebook authorized access" href="setup_facebook_app.html" />
    
   
   <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "com.twitter.common.text/css" rel="stylesheet" />
@@ -56,7 +56,7 @@
           <a href="command_line.html" title="Configuring Twitter Consumer"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="installation_serverclient_mode.html" title="Client-Server deployment"
+          <a href="setup_facebook_app.html" title="Setup Facebook authorized access"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">None</a> &raquo;</li> 
       </ul>
@@ -77,16 +77,16 @@ But first Twitter needs to indentify your SocialBus instance as an application.<
 <p>All Twitter users are potentially Twitter application developers. Simply visit <a class="reference external" href="http://dev.twitter.com">http://dev.twitter.com</a> and sign in with your Twitter credentials.</p>
 <p>From <a class="reference external" href="http://dev.twitter.com">http://dev.twitter.com</a>, find your avatar in the upper-right corner and move your mouse over it. You see a menu that includes (among other things) &#8220;My applications&#8221;. Select &#8220;My applications&#8221; to see a page that will list all your Twitter applications, once you create them. You haven&#8217;t created any applications yet, so the list is empty.</p>
 <p>Click the &#8220;Create a new application &#8221; button near the top. A new page with the Create an application form requires basic information about your application.</p>
-<img alt="_static/twitterecho/twitter/tw-create-app.png" src="_static/twitterecho/twitter/tw-create-app.png" />
+<img alt="_images/tw-create-app.png" src="_images/tw-create-app.png" />
 <p>Fields Name, Description and Website are mandatory. Fill them as you please.</p>
 <p>Twitter demands attention to handle tweets.
 The developer Rules Of The Road section outlines rules you must agree to follow. It is recommended that you read these rules closely to make sure you don&#8217;t violate them.</p>
-<img alt="_static/twitterecho/twitter/tw-rules-of-road.png" src="_static/twitterecho/twitter/tw-rules-of-road.png" />
+<img alt="_images/tw-rules-of-road.png" src="_images/tw-rules-of-road.png" />
 <p>If you agree to the rules, check &#8220;Yes, I agree&#8221;.</p>
 <p>A Captcha challenge ensures that you&#8217;re not setting up applications through an automated process.</p>
-<img alt="_static/twitterecho/twitter/tw-captcha.png" src="_static/twitterecho/twitter/tw-captcha.png" />
+<img alt="_images/tw-captcha.png" src="_images/tw-captcha.png" />
 <p>Click &#8220;Create your Twitter application&#8221; to complete the form and go to the application settings page.</p>
-<img alt="_static/twitterecho/twitter/tw-app-details.png" src="_static/twitterecho/twitter/tw-app-details.png" />
+<img alt="_images/tw-app-details.png" src="_images/tw-app-details.png" />
 <p>Here you have all the details about your application.
 The main fields to note are Consumer key and Consumer secret. These values are your application&#8217;s credentials for Twitter and thats what you will use to obtain access tokens.</p>
 <p>Take note of these keys. Now you have them you are ready to obtain access tokens.</p>
@@ -113,7 +113,7 @@ Before start you must have.
 <p>It will asks for you Consumer key and Consumer secret. Inform the keys you obtained when you registered you application above.
 After inform Consumer key and Consumer secret it will present you an url.
 Open the url on your browser and authorize the app. After authorize it Twitter will inform you a PIN.</p>
-<img alt="_static/twitterecho/twitter/pin.png" src="_static/twitterecho/twitter/pin.png" />
+<img alt="_images/pin.png" src="_images/pin.png" />
 <p>Copy it and paste it at your console and press ENTER. The tokens will be stored in a file called tokens.csv at your current directory.</p>
 <p>You should now have a tokens.csv file similar to this:</p>
 <div class="highlight-python"><pre>&lt;token&gt;,&lt;token-secret&gt;,&lt;consumer-key&gt;,&lt;consumer-secret&gt;</pre>
@@ -148,7 +148,7 @@ Open the url on your browser and authorize the app. After authorize it Twitter w
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="installation_serverclient_mode.html" title="previous chapter">Client-Server deployment</a></li>
+      <li>Previous: <a href="setup_facebook_app.html" title="previous chapter">Setup Facebook authorized access</a></li>
       <li>Next: <a href="command_line.html" title="next chapter">Configuring Twitter Consumer</a></li>
   </ul></li>
 </ul>
