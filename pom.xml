@@ -5,25 +5,25 @@
 
 	<groupId>pt.sapo.labs</groupId>
 	<artifactId>socialbus-parent</artifactId>
-	<version>0.6-SNAPSHOT</version>
+	<version>0.7-SNAPSHOT</version>
 	<packaging>pom</packaging>
     
     <name>SocialBus Project</name>
 
     <modules>
 		<module>socialbus-core</module>
-		<module>socialbus-langdetection</module>
-		<module>socialbus-server</module>
-
-		<module>socialbus-twitter-lookup</module>
-		<module>socialbus-twitter-oauth</module>
+		<!-- <module>socialbus-langdetection</module> -->
+<!--		 <module>socialbus-server</module>
+-->
+		<!-- <module>socialbus-twitter-lookup</module>
+		<module>socialbus-twitter-oauth</module> -->
 		<module>socialbus-twitter-consumer</module>
 		
-		<module>socialbus-facebook-consumer</module>
+		<!-- <module>socialbus-facebook-consumer</module>
 		<module>socialbus-facebook-lookup</module>
 		
 	    <module>socialbus-batch-processing</module>
-	    <module>socialbus-url-expander</module>
+	    <module>socialbus-url-expander</module> -->
   </modules>
 
 
