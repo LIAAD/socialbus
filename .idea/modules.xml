@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/socialbus-batch-processing/socialbus-batch-processing.iml" filepath="$PROJECT_DIR$/socialbus-batch-processing/socialbus-batch-processing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-core/socialbus-core.iml" filepath="$PROJECT_DIR$/socialbus-core/socialbus-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-facebook-consumer/socialbus-facebook-client.iml" filepath="$PROJECT_DIR$/socialbus-facebook-consumer/socialbus-facebook-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-facebook-lookup/socialbus-facebook-lookup.iml" filepath="$PROJECT_DIR$/socialbus-facebook-lookup/socialbus-facebook-lookup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-langdetection/socialbus-langdetection.iml" filepath="$PROJECT_DIR$/socialbus-langdetection/socialbus-langdetection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-parent.iml" filepath="$PROJECT_DIR$/socialbus-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-server/socialbus-server.iml" filepath="$PROJECT_DIR$/socialbus-server/socialbus-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-twitter-consumer/socialbus-twitter-consumer.iml" filepath="$PROJECT_DIR$/socialbus-twitter-consumer/socialbus-twitter-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-twitter-lookup/socialbus-twitter-lookup.iml" filepath="$PROJECT_DIR$/socialbus-twitter-lookup/socialbus-twitter-lookup.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-twitter-oauth/socialbus-twitter-oauth.iml" filepath="$PROJECT_DIR$/socialbus-twitter-oauth/socialbus-twitter-oauth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socialbus-url-expander/socialbus-url-expander.iml" filepath="$PROJECT_DIR$/socialbus-url-expander/socialbus-url-expander.iml" />
+    </modules>
+  </component>
+</project>

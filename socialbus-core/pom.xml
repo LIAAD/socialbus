@@ -14,18 +14,7 @@
   <url>http://maven.apache.org</url>
 
   <repositories>
-      <!-- <repository>
-          <id>twitter4j.org</id>
-          <name>twitter4j.org Repository</name>
-          <url>http://twitter4j.org/maven2</url>
-          <releases>
-              <enabled>true</enabled>
-          </releases>
-          <snapshots>
-              <enabled>true</enabled>
-          </snapshots>
-      </repository> -->
-	
+
       <repository>
           <id>repo1.maven.org</id>
           <name>mvn2 Repository</name>
@@ -38,19 +27,6 @@
           </snapshots>
       </repository>
 	
-
-    <!-- <repository>
-        <id>conjars.org</id>
-        <name>conjars.org Repository</name>
-        <url>http://conjars.org/repo/</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository> -->
-
       <repository>
           <id>Apache Snapshots </id>
           <name>Apache Snapshots Repository</name>
@@ -83,12 +59,6 @@
   </repositories>
 
   <dependencies>
-
-      <!--<dependency>-->
-          <!--<groupId>org.jeromq</groupId>-->
-          <!--<artifactId>jeromq</artifactId>-->
-          <!--<version>0.2.0</version>-->
-      <!--</dependency>-->
 
       <dependency>
           <groupId>org.apache.camel</groupId>
@@ -139,6 +109,7 @@
           <artifactId>twitter4j-core</artifactId>
           <!-- <version>[2.2,)</version> -->
 		  <version>2.2.5</version>
+		  
 		   
           <exclusions>
               <exclusion>
@@ -151,7 +122,11 @@
       <dependency>
           <groupId>com.twitter</groupId>
           <artifactId>hbc-core</artifactId>
-          <version>1.4.1-SNAPSHOT</version>
+          <!-- <version>1.4.1-SNAPSHOT</version> -->
+		  <!-- <version>1.4.2</version> -->
+  		  <!-- <version>1.4.1</version> -->
+		  <version>1.4.0</version>
+		  
           <exclusions>
               <exclusion>
                   <groupId>org.twitter4j</groupId>
@@ -162,8 +137,11 @@
 
       <dependency>
           <groupId>com.twitter</groupId>
-          <artifactId>hbc-twitter4j-v3</artifactId>
-          <version>1.4.2-SNAPSHOT</version>
+          <!-- <artifactId>hbc-twitter4j-v3</artifactId> -->
+          <!-- <version>1.4.2-SNAPSHOT</version> -->
+		  <artifactId>hbc-twitter4j-v3</artifactId>
+		  <!-- <artifactId>hbc-twitter4j</artifactId> -->
+		  <version>1.4.2</version>
           <exclusions>
               <exclusion>
                   <groupId>org.twitter4j</groupId>

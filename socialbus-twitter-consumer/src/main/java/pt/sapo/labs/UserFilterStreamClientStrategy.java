@@ -6,7 +6,7 @@ import com.twitter.hbc.core.Constants;
 import com.twitter.hbc.core.endpoint.StatusesFilterEndpoint;
 import com.twitter.hbc.core.processor.StringDelimitedProcessor;
 import com.twitter.hbc.httpclient.BasicClient;
-import com.twitter.hbc.httpclient.ClientContext;
+
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
 import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
@@ -31,12 +31,10 @@ public class UserFilterStreamClientStrategy implements StreamClientStrategy{
 
     private ApplicationManager applicationManager;
     private TokenManager tokenManager;
-    private ClientContext context;
 
-    public UserFilterStreamClientStrategy(ApplicationManager applicationManager,TokenManager tokenManager,ClientContext context) {
+	public UserFilterStreamClientStrategy(ApplicationManager applicationManager,TokenManager tokenManager) {	
         this.applicationManager = applicationManager;
         this.tokenManager = tokenManager;
-        this.context = context;
     }
 
     public void execute() {
@@ -86,23 +84,20 @@ public class UserFilterStreamClientStrategy implements StreamClientStrategy{
                     adapter.getConfiguration().setProperty("token.secret", oAuthSecretToken);
                 }
 
-                //            String consumerKey = this.applicationManager.getConfig().getString("application.consumer.key");
-//            String consumerSecret = this.applicationManager.getConfig().getString("application.consumer.secret");
-
                 String consumerKey = authenticationData.getConsumerKey();
                 String consumerSecret = authenticationData.getConsumerSecret();
 
                 Authentication auth = new OAuth1(consumerKey, consumerSecret, oAuthToken, oAuthSecretToken);
                 // Authentication auth = new BasicAuth(username, password);
 
-                int retries = Integer.parseInt((String)this.context.getProperty("connection.retries"));
+				int retries = 10;
                 // Create a new BasicClient. By default gzip is enabled.
                 BasicClient client = new ClientBuilder()
                         .hosts(Constants.STREAM_HOST)
                         .endpoint(endpoint)
                         .authentication(auth)
                         .processor(new StringDelimitedProcessor(queue))
-                        .context(this.context)
+                        // .context(this.context)
                         .retries(retries)
                         .build();
 
@@ -112,8 +107,8 @@ public class UserFilterStreamClientStrategy implements StreamClientStrategy{
                 ExecutorService service = Executors.newFixedThreadPool(numProcessingThreads);
 
                 Twitter4jStatusClient t4jClient = new Twitter4jStatusClient(
-                        client, queue, adapters, service, true);
-
+                        client, queue, adapters, service);
+//
                 this.applicationManager.getActiveTwitterStreamClients().add(t4jClient);
                 // Establish a connection
                 t4jClient.connect();

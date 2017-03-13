@@ -1,6 +1,6 @@
 package pt.sapo.labs.twitterecho;
 
-import com.twitter.hbc.httpclient.ClientContext;
+// import com.twitter.hbc.httpclient.ClientContext;
 import org.apache.camel.main.Main;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.Configuration;
@@ -31,12 +31,6 @@ public class TwitterechoServerApplication implements IApp {
         this.config = config;
     }
 
-    protected ClientContext getContext(){
-
-        ClientContext context = AppUtils.convertConfigurationToClientContext(applicationManager.getConfig());
-
-        return context;
-    }
 
     public ApplicationManager getApplicationManager(){
         return this.applicationManager;
@@ -74,27 +68,6 @@ public class TwitterechoServerApplication implements IApp {
 
         Thread t = new Thread(consumer);
 		t.start();
-
-
-
-//        try{
-//            ProducerTemplate template = null;
-//// send to default endpoint
-//            while(template == null){
-//                logger.info("sending message try get context");
-//                if(twitterechoWebserver.getCamelContext() == null){
-//                    continue;
-//                }
-//                template = twitterechoWebserver.getCamelContext().getCamelTemplate();
-//                while(true){
-//                    logger.info("sending message");
-//                    template.sendBody("direct:foo","<hello>world!</hello>");
-//                }
-//            }
-//        }   catch(Exception e){
-//             e.printStackTrace();
-//        }
-
 	}
 
     protected void loadAdapters() {

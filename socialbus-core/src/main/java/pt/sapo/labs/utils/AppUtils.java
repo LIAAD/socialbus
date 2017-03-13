@@ -1,7 +1,7 @@
 package pt.sapo.labs.utils;
 
 import com.google.common.collect.Lists;
-import com.twitter.hbc.httpclient.ClientContext;
+// import com.twitter.hbc.httpclient.ClientContext;
 import org.apache.commons.configuration.Configuration;
 
 import java.net.UnknownHostException;
@@ -15,27 +15,6 @@ import java.util.Iterator;
  * To change this template use File | Settings | File Templates.
  */
 public class AppUtils {
-
-    public static ClientContext convertConfigurationToClientContext(Configuration config){
-        ClientContext context = new ClientContext();
-
-        String[] ignoreKeys = {"application.consumer.key","application.consumer.secret","twitter.tokens"};
-        Iterator<String> keys = config.getKeys();
-
-        while ( keys.hasNext() ){
-            String configKey = keys.next();
-
-            if(configKey == " ") continue;
-
-            if(!Lists.newArrayList(ignoreKeys).contains(configKey)){
-                Object propValue = config.getProperty(configKey);
-
-                context.setProperty(configKey,(String)propValue);
-            }
-        }
-
-        return context;
-    }
 
     public static String getLocalIpAddress() {
 

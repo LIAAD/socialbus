@@ -1,6 +1,5 @@
 package pt.sapo.labs;
 
-import com.twitter.hbc.httpclient.ClientContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.sapo.labs.crawl.twitter.ApplicationManager;
@@ -20,14 +19,12 @@ public class StreamStrategyContext {
 
     private ApplicationManager applicationManager;
     private TokenManager tokenManager;
-    private ClientContext context;
 
     private StreamClientStrategy strategy;
 
-    public StreamStrategyContext(ApplicationManager applicationManager,TokenManager tokenManager,ClientContext context) {
+	public StreamStrategyContext(ApplicationManager applicationManager,TokenManager tokenManager) {
         this.applicationManager = applicationManager;
         this.tokenManager = tokenManager;
-        this.context = context;
     }
 
     public void execute(String filterType) {
@@ -37,19 +34,20 @@ public class StreamStrategyContext {
 
         switch (filterTypeEnum){
             case KEYWORDS :
-                this.strategy = new KeywordFilterStreamClientStrategy(applicationManager,tokenManager,context);
+				this.strategy = new KeywordFilterStreamClientStrategy(applicationManager,tokenManager);
                 break;
 
             case USERS :
-                this.strategy = new UserFilterStreamClientStrategy(applicationManager,tokenManager,context);
+				this.strategy = new UserFilterStreamClientStrategy(applicationManager,tokenManager);
                 break;
 
             case GEOLOCATION :
+				//TODO: implement support for geolocation streaming
                 logger.warn("geolocation stream not implemented yet");
                 break;
 
             default : //SAMPLE STREAM
-                this.strategy = new SampleStreamClientStrategy(applicationManager,tokenManager,context);
+				this.strategy = new SampleStreamClientStrategy(applicationManager,tokenManager);
                 break;
         }
 

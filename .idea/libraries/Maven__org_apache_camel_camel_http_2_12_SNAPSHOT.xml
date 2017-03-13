@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.camel:camel-http:2.12-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/camel/camel-http/2.12-SNAPSHOT/camel-http-2.12-20130829.143445-189.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/camel/camel-http/2.12-SNAPSHOT/camel-http-2.12-20130829.143445-189-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/camel/camel-http/2.12-SNAPSHOT/camel-http-2.12-20130829.143445-189-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

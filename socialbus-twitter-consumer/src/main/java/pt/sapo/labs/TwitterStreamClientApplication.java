@@ -1,6 +1,5 @@
 package pt.sapo.labs;
 
-import com.twitter.hbc.httpclient.ClientContext;
 import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.Configuration;
@@ -44,20 +43,10 @@ public class TwitterStreamClientApplication implements IApp {
 		String filterType = this.config.getString("filter.type", StreamFilterType.NONE.toString());
 
         // Three contexts following different strategies
-
-
-        StreamStrategyContext streamStrategyContext = new StreamStrategyContext(this.applicationManager,
-                                                                                this.tokenManager,
-                                                                                getContext());
+		StreamStrategyContext streamStrategyContext = new StreamStrategyContext(this.applicationManager,
+                                                                        this.tokenManager);
         streamStrategyContext.execute(filterType);
 	}
-
-    protected ClientContext getContext(){
-
-        ClientContext context = AppUtils.convertConfigurationToClientContext(applicationManager.getConfig());
-
-        return context;
-    }
 
 	protected void loadAdapters() {
 

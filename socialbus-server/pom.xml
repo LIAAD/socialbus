@@ -208,7 +208,8 @@
         <dependency>
             <groupId>com.twitter</groupId>
             <artifactId>hbc-core</artifactId>
-            <version>1.4.1-SNAPSHOT</version>
+            <!-- <version>1.4.1-SNAPSHOT</version> -->
+			<version>1.4.2</version>
         </dependency>
 
 		<!--<dependency>-->

@@ -3,8 +3,10 @@ package pt.sapo.labs.twitterecho.broker;
 import com.rabbitmq.client.*;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.main.Main;
+
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.sapo.labs.api.services.StatusAdapter;
