@@ -63,13 +63,18 @@ public class SampleStreamClientStrategy implements StreamClientStrategy{
             StatusesSampleEndpoint endpoint = new StatusesSampleEndpoint();
 
 			int retries = 10;
+            logger.debug("consumerKey : " + consumerKey);
+            logger.debug("consumerSecret : " + consumerSecret);
 
-            String consumerKey_= "qo1X760cN7owZNXTE05tTzeWE";
-            String consumerSecret_ = "kvRWa6bzyVEQKig8LRm8vfwz27yXAMCeSpAieSAygX8YRdYBJR";
-            String token = "839802838633046017-OtuVGS3R7M60gJpXvduFMrcNGHrtEO5";
-            String secret = "7pyyfFEwasGnmoxYSoZxFp7D1P2AT7UOJk3K1qW8JhlKW";
+            logger.debug("oAuthToken : " + oAuthToken);
+            logger.debug("oAuthSecretToken : " + oAuthSecretToken);
 
-            Authentication auth = new OAuth1(consumerKey_, consumerSecret_, token, secret);
+            consumerKey = consumerKey.trim();
+            consumerSecret = consumerSecret.trim();
+            oAuthToken = oAuthToken.trim();
+            oAuthSecretToken = oAuthSecretToken.trim();
+
+            Authentication auth = new OAuth1(consumerKey, consumerSecret, oAuthToken, oAuthSecretToken);
 
             // Create a new BasicClient. By default gzip is enabled.
             BasicClient client = new ClientBuilder()
@@ -77,6 +82,7 @@ public class SampleStreamClientStrategy implements StreamClientStrategy{
                     .hosts(Constants.STREAM_HOST)
                     .endpoint(endpoint)
                     .authentication(auth)
+                    .retries(retries)
                     .processor(new StringDelimitedProcessor(queue))
                     .build();
 
