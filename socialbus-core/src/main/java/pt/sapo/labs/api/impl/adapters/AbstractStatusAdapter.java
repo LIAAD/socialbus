@@ -1,8 +1,10 @@
 package pt.sapo.labs.api.impl.adapters;
 
 
-import com.twitter.hbc.twitter4j.v3.message.DisconnectMessage;
-import com.twitter.hbc.twitter4j.v3.message.StallWarningMessage;
+//import com.twitter.hbc.twitter4j.v3.message.DisconnectMessage;
+//import com.twitter.hbc.twitter4j.v3.message.StallWarningMessage;
+import com.twitter.hbc.twitter4j.message.DisconnectMessage;
+import com.twitter.hbc.twitter4j.message.StallWarningMessage;
 import org.apache.commons.configuration.Configuration;
 import org.json.simple.JSONValue;
 import org.slf4j.Logger;
@@ -14,10 +16,14 @@ import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.TwitterException;
 import twitter4j.conf.ConfigurationBuilder;
-import twitter4j.internal.json.z_T4JInternalJSONImplFactory;
-import twitter4j.internal.org.json.JSONObject;
-import twitter4j.json.JSONObjectType;
+//import twitter4j.internal.json.z_T4JInternalJSONImplFactory;
+//import twitter4j.internal.org.json.JSONObject;
+//import twitter4j.json.JSONObjectType;
 
+//import twitter4j.JSONImplFactory;
+import twitter4j.PublicObjectFactory;
+import twitter4j.JSONObject;
+import twitter4j.JSONObjectType;
 import java.io.IOException;
 import java.io.StringWriter;
 
@@ -31,10 +37,13 @@ public abstract class AbstractStatusAdapter implements StatusAdapter {
 
     protected Configuration configuration;
 
-    private z_T4JInternalJSONImplFactory factory;
+//    private z_T4JInternalJSONImplFactory factory;
+    private PublicObjectFactory factory;
+
 
     {
-        this.factory = new z_T4JInternalJSONImplFactory(new ConfigurationBuilder().build());
+//        this.factory = new z_T4JInternalJSONImplFactory(new ConfigurationBuilder().build());
+        this.factory = new PublicObjectFactory(new ConfigurationBuilder().build());
     }
 
     protected boolean enabled;
@@ -58,8 +67,11 @@ public abstract class AbstractStatusAdapter implements StatusAdapter {
     protected Status parseJsonStatus(JSONObject json){
         try {
 
-            JSONObjectType type = JSONObjectType.determine(json);
-            if (type == JSONObjectType.STATUS) {
+//            JSONObjectType type = JSONObjectType.determine(json);
+            JSONObjectType.Type type = JSONObjectType.determine(json);
+//            if (type == JSONObjectType.STATUS) {
+                if (type == JSONObjectType.Type.STATUS) {
+
                 Status status = factory.createStatus(json);
 
                 return status;

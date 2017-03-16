@@ -1,6 +1,7 @@
 package pt.sapo.labs.crawl.twitter.streaming;
 
 import twitter4j.FilterQuery;
+//import twitter4j.Query;
 import twitter4j.TwitterException;
 
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public class KeywordStreamConsumer extends BaseStreamConsumer {
 	
 	public void startConsuming() throws TwitterException {
 		super.startConsuming();
-		
+
 		FilterQuery tQuery = new FilterQuery();
 		tQuery.track(wordsToMonitor);
 		

@@ -25,8 +25,10 @@ SOFTWARE.
 */
 
 
-import twitter4j.internal.org.json.JSONException;
-import twitter4j.internal.org.json.JSONObject;
+//import twitter4j.internal.org.json.JSONException;
+//import twitter4j.internal.org.json.JSONObject;
+import twitter4j.JSONException;
+import twitter4j.JSONObject;
 
 import java.util.Enumeration;
 import java.util.Iterator;

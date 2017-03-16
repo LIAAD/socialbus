@@ -1,6 +1,7 @@
 package pt.sapo.labs;
 
-import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
+//import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
+import com.twitter.hbc.twitter4j.Twitter4jStatusClient;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.Configuration;
 import org.slf4j.Logger;

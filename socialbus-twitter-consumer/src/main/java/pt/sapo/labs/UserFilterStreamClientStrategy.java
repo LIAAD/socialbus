@@ -9,7 +9,8 @@ import com.twitter.hbc.httpclient.BasicClient;
 
 import com.twitter.hbc.httpclient.auth.Authentication;
 import com.twitter.hbc.httpclient.auth.OAuth1;
-import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
+//import com.twitter.hbc.twitter4j.v3.Twitter4jStatusClient;
+import com.twitter.hbc.twitter4j.Twitter4jStatusClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.sapo.labs.api.services.StatusAdapter;

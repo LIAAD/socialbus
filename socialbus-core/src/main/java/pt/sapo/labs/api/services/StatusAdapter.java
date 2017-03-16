@@ -1,10 +1,12 @@
 package pt.sapo.labs.api.services;
 
 // import com.twitter.hbc.twitter4j.v3.RawJsonStatusListener;
-import com.twitter.hbc.twitter4j.v3.handler.StatusStreamHandler;
+//import com.twitter.hbc.twitter4j.v3.handler.StatusStreamHandler;
+import com.twitter.hbc.twitter4j.handler.StatusStreamHandler;
 import org.apache.commons.configuration.Configuration;
 // import org.json.simple.JSONObject;
-import twitter4j.internal.org.json.JSONObject;
+//import twitter4j.internal.org.json.JSONObject;
+import twitter4j.JSONObject;
 // import twitter4j.internal.org.json.JSONObject;
 
 /**

@@ -7,7 +7,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import twitter4j.internal.org.json.JSONException;
+//import twitter4j.internal.org.json.JSONException;
+import twitter4j.JSONException;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -78,7 +79,8 @@ public class MessageBrokerStatusAdapter extends AbstractStatusAdapter{
         }
 
         @Override
-        public void onStatus(twitter4j.internal.org.json.JSONObject twitterJson) {
+//        public void onStatus(twitter4j.internal.org.json.JSONObject twitterJson) {
+        public void onStatus(twitter4j.JSONObject twitterJson) {
 
             if(!this.isEnabled()) {
                 return;

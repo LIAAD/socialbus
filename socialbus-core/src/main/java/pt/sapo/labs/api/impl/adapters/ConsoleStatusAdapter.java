@@ -4,7 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.Status;
 import twitter4j.User;
-import twitter4j.internal.org.json.JSONObject;
+//import twitter4j.internal.org.json.JSONObject;
+import twitter4j.JSONObject;
 
 public class ConsoleStatusAdapter extends AbstractStatusAdapter {
 
