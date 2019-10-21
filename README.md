@@ -7,4 +7,12 @@ Additional modules can be easily implemented and extended.
 
 Documentation
 ===========
-http://reaction.fe.up.pt/socialbus/
+
+In order to generate documentation:
+
+```
+pip install -U Sphinx
+cd socialbus-guide
+make html
+open build/html/index.html
+```
