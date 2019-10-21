@@ -9,10 +9,18 @@ Documentation
 ===========
 
 In order to generate documentation:
-
+1. Make sure you have Sphinx installed on your Python environment
 ```
 pip install -U Sphinx
+```
+
+2. Go to socialbus-guide folder and run `make html` 
+```
 cd socialbus-guide
 make html
+```
+
+3. If everything works you should have a documentation html website ready. Open file `build/html/index.html`.
+```
 open build/html/index.html
 ```
